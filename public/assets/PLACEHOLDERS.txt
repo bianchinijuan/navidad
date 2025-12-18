@@ -1,0 +1,22 @@
+PLACEHOLDER IMAGES - Generate these with AI
+
+This file lists all required assets. Placeholders are temporary colored rectangles.
+Replace with real AI-generated images following the prompts in AI_PROMPTS.md
+
+Structure:
+/public/assets/
+  /backgrounds/
+    - wallpaper.png (1920x1080)
+  /hub/
+    - christmas-tree.png
+    - fireplace.png
+    - gift.png
+    - stockings.png
+    - chair.png (optional)
+  /dog/
+    - white-dog.png
+    - food-jar.png
+    - bowl.png
+    - photo-frame.png
+  /shared/
+    - floor.png (optional)

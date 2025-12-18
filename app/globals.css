@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #2d1810;
+  --foreground: #f5e6d3;
+  --christmas-gold: #d4af37;
+  --christmas-red: #c41e3a;
+  --christmas-green: #1a5d1a;
+  --warm-brown: #8b6f47;
+  --wallpaper-gold: #b8984e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Georgia, serif;
+}
+
+/* Prevent text selection for game elements */
+.game-element {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Smooth transitions for all interactive elements */
+.interactive {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.interactive:hover {
+  transform: scale(1.05);
+}
+
+.interactive:active {
+  transform: scale(0.98);
+}
+
+/* Christmas background gradient animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 3D Flip Effect */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
