@@ -41,9 +41,10 @@ export default function DogRoom() {
   };
 
   const handleDogClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     // If room is already completed, just show the card again
     if (isRoomCompleted) {
+      audioManager.play('achievement');
       setShowCard(true);
       return;
     }
@@ -59,6 +60,7 @@ export default function DogRoom() {
 
     // Show card
     setTimeout(() => {
+      audioManager.play('achievement'); // Play achievement when showing reward
       setShowCard(true);
     }, 300);
   };
@@ -68,7 +70,7 @@ export default function DogRoom() {
   };
 
   const handleCardClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowCard(false);
   };
 
@@ -141,7 +143,7 @@ export default function DogRoom() {
               backgroundColor: 'transparent',
             }}
             whileTap={{ scale: 0.98 }}
-            title={isRoomCompleted ? "View card" : "Click to play memory game"}
+            title={isRoomCompleted ? "Ver Recompensa" : "Jugar memoria"}
           />
         </motion.div>
 
@@ -203,7 +205,7 @@ export default function DogRoom() {
                 }}
               />
               <p className="text-center text-white mt-4 text-sm">
-                Card Unlocked! Click to close
+                ¡Carta desbloqueada! Click para cerrar
               </p>
             </motion.div>
           </motion.div>

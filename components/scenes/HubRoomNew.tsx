@@ -24,31 +24,25 @@ export default function HubRoom() {
   } = useGameStore();
 
   const [showLock, setShowLock] = useState(false);
-
-  useEffect(() => {
-    audioManager.play('hub-ambient', true);
-  }, []);
+  const [showUnlockMessage, setShowUnlockMessage] = useState(false);
 
   const navigateToRoom = (room: 'dog' | 'taylor' | 'bedroom' | 'kitchen' | 'brother' | 'airbag' | 'tarot' | 'boardgames' | 'personal') => {
     if (roomsUnlocked[room]) {
       audioManager.play('door-open');
-      audioManager.stop('hub-ambient', true);
       setScene(room);
     }
   };
 
   const handleTreeClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
 
     if (giftOpened) {
       // Third state: Already taken key, go to door room
-      audioManager.stop('hub-ambient', true);
       audioManager.play('door-open');
       setScene('door');
     } else if (mainGiftUnlocked) {
       // Second state: Key visible, take it and go to door room
       openGift();
-      audioManager.stop('hub-ambient', true);
       audioManager.play('door-open');
       setScene('door');
     } else {
@@ -58,9 +52,17 @@ export default function HubRoom() {
   };
 
   const handleLockCorrect = () => {
-    unlockGift();
     setShowLock(false);
-    // Key is now visible, stay on hub
+
+    // Show unlock message
+    setShowUnlockMessage(true);
+    audioManager.play('unlock');
+
+    // Hide message and unlock gift after animation
+    setTimeout(() => {
+      setShowUnlockMessage(false);
+      unlockGift();
+    }, 2500);
   };
 
   const handleCloseLock = () => {
@@ -134,8 +136,8 @@ export default function HubRoom() {
             onClick={handleTreeClick}
             style={{
               position: 'absolute',
-              left: '15%',
-              top: '25%',
+              left: '22%',
+              top: '28%',
               width: '30%',
               height: '50%',
               cursor: 'pointer',
@@ -143,13 +145,7 @@ export default function HubRoom() {
               backgroundColor: 'transparent',
             }}
             whileTap={{ scale: 0.98 }}
-            title={
-              giftOpened
-                ? "Ir a la puerta"
-                : mainGiftUnlocked
-                ? "Tomar la llave"
-                : "Ingresar combinación"
-            }
+            whileHover={{ scale: 1.02 }}
           />
         </motion.div>
 
@@ -171,6 +167,67 @@ export default function HubRoom() {
             onCorrect={handleLockCorrect}
             onClose={handleCloseLock}
           />
+        )}
+      </AnimatePresence>
+
+      {/* Regalo Desbloqueado Message */}
+      <AnimatePresence>
+        {showUnlockMessage && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-gradient-to-br from-green-600 via-emerald-600 to-green-700 rounded-2xl p-10 border-4 border-green-300"
+              style={{
+                boxShadow: '0 0 60px rgba(34, 197, 94, 0.8)',
+                maxWidth: '450px',
+              }}
+              initial={{ scale: 0.5, rotateY: -90 }}
+              animate={{ scale: 1, rotateY: 0 }}
+              exit={{ scale: 0.5, rotateY: 90 }}
+              transition={{ type: "spring", bounce: 0.4 }}
+            >
+              <div className="text-center">
+                <motion.div
+                  className="text-6xl mb-4"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 10, -10, 0],
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: Infinity,
+                    repeatDelay: 0.5,
+                  }}
+                >
+                  🎁
+                </motion.div>
+
+                <h3
+                  className="text-4xl font-bold text-white mb-4"
+                  style={{
+                    textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+                    fontFamily: 'Georgia, serif'
+                  }}
+                >
+                  ¡Regalo Desbloqueado!
+                </h3>
+
+                <p
+                  className="text-lg text-green-100"
+                  style={{ fontFamily: 'Georgia, serif' }}
+                >
+                  La llave ahora está visible
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

@@ -56,6 +56,25 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
   const INGREDIENTS_NEEDED = 6; // Total ingredients needed for pan dulce
   const MAX_ERRORS = 3;
 
+  // Music management
+  useEffect(() => {
+    if (!showInstructions) {
+      // Game is active - play kitchen music
+      audioManager.pause('christmas-music');
+      audioManager.play('kitchen-music', true);
+
+      // Cleanup only when game is actually active
+      return () => {
+        audioManager.stop('kitchen-music', true);
+        audioManager.resume('christmas-music');
+      };
+    } else {
+      // Game is not active - ensure kitchen music is stopped
+      audioManager.stop('kitchen-music', true);
+      audioManager.resume('christmas-music');
+    }
+  }, [showInstructions]);
+
   // Spawn ingredients
   useEffect(() => {
     if (gameOver || collected >= INGREDIENTS_NEEDED) return;

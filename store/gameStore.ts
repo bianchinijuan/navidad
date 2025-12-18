@@ -69,7 +69,7 @@ interface GameState {
   // Gift state (door unlock)
   mainGiftUnlocked: boolean;
   giftOpened: boolean; // True when user clicks on opened gift to see key
-  giftCombination: number[]; // 3-digit combination revealed by completing rooms
+  giftCombination: number[]; // 6-digit combination revealed by completing rooms
 
   // Dog room state
   dogFed: boolean;
@@ -164,7 +164,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   mainGiftUnlocked: false,
   giftOpened: false,
-  giftCombination: [3, 5, 7, 2], // 4-digit combination (airbag, bedroom, kitchen, mother)
+  giftCombination: [1, 2, 3, 5, 7, 9], // 6-digit combination (future-room, mother, airbag, bedroom, kitchen, brother)
 
   dogFed: false,
   dogFoodInBowl: false,

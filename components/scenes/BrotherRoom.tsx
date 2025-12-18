@@ -20,6 +20,9 @@ export default function BrotherRoom() {
 
   const isRoomCompleted = roomsCompleted.brother;
 
+  // Brother room revela el número 9
+  const roomNumber = 9;
+
   useEffect(() => {
     audioManager.play('hub-ambient', true);
 
@@ -43,13 +46,14 @@ export default function BrotherRoom() {
   const handleBabyClick = () => {
     // If room is already completed, just show the card again
     if (isRoomCompleted) {
-      audioManager.play('click');
+      audioManager.play('mouse-click');
+      audioManager.play('achievement');
       setShowCard(true);
       return;
     }
 
     // Otherwise, start the game
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowGame(true);
   };
 
@@ -59,10 +63,18 @@ export default function BrotherRoom() {
     // Mark room as completed
     completeRoom('brother');
 
-    // Show card
+    // Show number reveal animation
     setTimeout(() => {
-      setShowCard(true);
+      audioManager.play('unlock');
+      setShowNumberReveal(true);
     }, 300);
+
+    // Then show card
+    setTimeout(() => {
+      setShowNumberReveal(false);
+      audioManager.play('achievement'); // Play achievement when showing reward
+      setShowCard(true);
+    }, 3500);
   };
 
   const handleCloseGame = () => {
@@ -70,7 +82,7 @@ export default function BrotherRoom() {
   };
 
   const handleCardClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowCard(false);
   };
 
@@ -174,7 +186,7 @@ export default function BrotherRoom() {
                     fontWeight: '600',
                   }}
                 >
-                  {isRoomCompleted ? "Ver carta" : "Arma el tapiz"}
+                  {isRoomCompleted ? "Ver Recompensa" : "Arma el tapiz"}
                 </div>
               </div>
               {/* Arrow decorativo */}
@@ -209,6 +221,77 @@ export default function BrotherRoom() {
             onComplete={handleGameComplete}
             onClose={handleCloseGame}
           />
+        )}
+      </AnimatePresence>
+
+      {/* Number Reveal - Compact Notification */}
+      <AnimatePresence>
+        {showNumberReveal && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-gradient-to-br from-amber-600 via-amber-500 to-yellow-500 rounded-2xl p-8 border-4 border-amber-300"
+              style={{
+                boxShadow: '0 0 60px rgba(251, 191, 36, 0.8)',
+                maxWidth: '400px',
+              }}
+              initial={{ scale: 0.5, rotateY: -90 }}
+              animate={{ scale: 1, rotateY: 0 }}
+              exit={{ scale: 0.5, rotateY: 90 }}
+              transition={{ type: "spring", bounce: 0.3 }}
+            >
+              <div className="text-center">
+                <motion.div
+                  className="text-4xl mb-3"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: Infinity,
+                    repeatDelay: 0.8,
+                  }}
+                >
+                  ✨
+                </motion.div>
+
+                <h3 className="text-2xl font-bold text-white mb-4" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'Georgia, serif' }}>
+                  Número Revelado
+                </h3>
+
+                {/* Number display */}
+                <motion.div
+                  className="w-24 h-32 rounded-xl border-4 flex items-center justify-center bg-amber-500/30 border-amber-400 mx-auto mb-4"
+                  style={{
+                    boxShadow: '0 4px 20px rgba(217, 119, 6, 0.4)',
+                  }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: [0, 1.2, 1] }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <div
+                    className="text-7xl font-bold text-amber-100"
+                    style={{
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    {roomNumber}
+                  </div>
+                </motion.div>
+
+                <p className="text-sm text-amber-50" style={{ fontFamily: 'Georgia, serif' }}>
+                  Recuerda este número
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -250,7 +333,7 @@ export default function BrotherRoom() {
                 }}
               />
               <p className="text-center text-white mt-4 text-sm">
-                Tapestry Unlocked! Click to close
+                ¡Tapiz desbloqueado! Click para cerrar
               </p>
             </motion.div>
           </motion.div>

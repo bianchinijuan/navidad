@@ -19,7 +19,9 @@
       "Bash(/c/Program Files/GitHub CLI/gh.exe auth login)",
       "Bash(/c/Program Files/GitHub CLI/gh.exe repo create navidad --public --source=. --remote=origin --push)",
       "Bash(/c/Program\\\\ Files/GitHub\\\\ CLI/gh.exe repo delete:*)",
-      "Bash(/c/Program Files/GitHub CLI/gh.exe auth refresh -h github.com -s delete_repo)"
+      "Bash(/c/Program Files/GitHub CLI/gh.exe auth refresh -h github.com -s delete_repo)",
+      "Bash(git push:*)",
+      "Bash(find:*)"
     ]
   }
 }

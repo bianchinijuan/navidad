@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { audioManager } from '@/lib/audioManager';
 
@@ -58,6 +58,25 @@ export default function ZodiacElementGame({ onComplete, onClose }: ZodiacElement
   const [shuffledSigns] = useState(() => {
     return [...ZODIAC_SIGNS].sort(() => Math.random() - 0.5);
   });
+
+  // Music management
+  useEffect(() => {
+    if (!showInstructions) {
+      // Game is active - play zodiac music
+      audioManager.pause('christmas-music');
+      audioManager.play('zodiac-music', true);
+
+      // Cleanup only when game is actually active
+      return () => {
+        audioManager.stop('zodiac-music', true);
+        audioManager.resume('christmas-music');
+      };
+    } else {
+      // Game is not active - ensure zodiac music is stopped
+      audioManager.stop('zodiac-music', true);
+      audioManager.resume('christmas-music');
+    }
+  }, [showInstructions]);
 
   const handleSignClick = (sign: ZodiacSign) => {
     // Check if already placed
@@ -119,88 +138,34 @@ export default function ZodiacElementGame({ onComplete, onClose }: ZodiacElement
         className="fixed inset-0 z-50 flex items-center justify-center"
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0.9)',
-          backdropFilter: 'blur(10px)',
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        onClick={handleStartGame}
       >
         <motion.div
-          className="relative bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 rounded-2xl p-12 border-2 border-indigo-500/50 max-w-2xl"
-          style={{
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 0 60px rgba(99, 102, 241, 0.4)',
-            fontFamily: 'Georgia, serif',
-          }}
-          initial={{ scale: 0.8, y: 50 }}
-          animate={{ scale: 1, y: 0 }}
-          transition={{ type: "spring", bounce: 0.3 }}
+          className="relative max-w-full max-h-full"
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          onClick={(e) => e.stopPropagation()}
         >
+          <img
+            src="/assets/instructions/zodiac-game.png"
+            alt="Instrucciones del juego de signos zodiacales"
+            className="max-w-full max-h-[80vh] object-contain rounded-lg"
+            style={{
+              boxShadow: '0 0 40px rgba(99, 102, 241, 0.6)',
+            }}
+          />
           <button
-            onClick={onClose}
-            className="absolute top-5 right-5 text-indigo-300 hover:text-white text-2xl w-10 h-10 flex items-center justify-center rounded-lg hover:bg-indigo-800/50 transition-all"
-            style={{ fontFamily: 'system-ui' }}
+            onClick={handleStartGame}
+            className="absolute top-2 right-2 bg-indigo-700 hover:bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center border-2 border-white shadow-lg"
           >
-            ×
+            ✕
           </button>
-
-          <div className="text-center">
-            <motion.div
-              className="text-7xl mb-8"
-              style={{ filter: 'drop-shadow(0 0 20px rgba(99, 102, 241, 0.6))' }}
-              animate={{
-                rotate: [0, 360],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                scale: { duration: 2, repeat: Infinity },
-              }}
-            >
-              ☉
-            </motion.div>
-
-            <h2 className="text-4xl font-normal text-indigo-100 mb-6 tracking-wide" style={{ fontFamily: 'Georgia, serif', textShadow: '0 0 20px rgba(99, 102, 241, 0.5)' }}>
-              Elementos del Zodíaco
-            </h2>
-
-            <p className="text-indigo-200 text-base mb-10 leading-relaxed max-w-md mx-auto" style={{ fontFamily: 'Georgia, serif' }}>
-              Cada signo pertenece a uno de los cuatro elementos clásicos
-            </p>
-
-            <div className="flex justify-center gap-8 mb-10">
-              <motion.div className="text-center" whileHover={{ scale: 1.1, y: -5 }}>
-                <div className="text-3xl mb-2" style={{ filter: 'drop-shadow(0 0 10px rgba(239, 68, 68, 0.6))' }}>🔥</div>
-                <div className="text-xs text-orange-300 font-semibold" style={{ fontFamily: 'Georgia, serif' }}>Fuego</div>
-              </motion.div>
-              <motion.div className="text-center" whileHover={{ scale: 1.1, y: -5 }}>
-                <div className="text-3xl mb-2" style={{ filter: 'drop-shadow(0 0 10px rgba(217, 119, 6, 0.6))' }}>🌍</div>
-                <div className="text-xs text-amber-300 font-semibold" style={{ fontFamily: 'Georgia, serif' }}>Tierra</div>
-              </motion.div>
-              <motion.div className="text-center" whileHover={{ scale: 1.1, y: -5 }}>
-                <div className="text-3xl mb-2" style={{ filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.6))' }}>💨</div>
-                <div className="text-xs text-cyan-300 font-semibold" style={{ fontFamily: 'Georgia, serif' }}>Aire</div>
-              </motion.div>
-              <motion.div className="text-center" whileHover={{ scale: 1.1, y: -5 }}>
-                <div className="text-3xl mb-2" style={{ filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.6))' }}>💧</div>
-                <div className="text-xs text-blue-300 font-semibold" style={{ fontFamily: 'Georgia, serif' }}>Agua</div>
-              </motion.div>
-            </div>
-
-            <div className="bg-indigo-950/60 rounded-xl p-5 mb-8 border border-indigo-400/30" style={{ boxShadow: '0 0 20px rgba(99, 102, 241, 0.2)' }}>
-              <p className="text-indigo-200 text-sm leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-                Selecciona un signo y colócalo en su elemento correspondiente
-              </p>
-            </div>
-
-            <motion.button
-              onClick={handleStartGame}
-              className="px-12 py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 text-white text-lg rounded-xl font-semibold"
-              style={{ fontFamily: 'Georgia, serif', boxShadow: '0 0 30px rgba(99, 102, 241, 0.5)' }}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(99, 102, 241, 0.7)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Comenzar
-            </motion.button>
-          </div>
+          <p className="text-center text-indigo-200 mt-3 text-sm">
+            Click para comenzar
+          </p>
         </motion.div>
       </motion.div>
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { audioManager } from '@/lib/audioManager';
 
@@ -52,6 +52,25 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
   const [isComplete, setIsComplete] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
+
+  // Music management
+  useEffect(() => {
+    if (!showInstructions) {
+      // Game is active - play airbag music
+      audioManager.pause('christmas-music');
+      audioManager.play('airbag-music', true);
+
+      // Cleanup only when game is actually active
+      return () => {
+        audioManager.stop('airbag-music', true);
+        audioManager.resume('christmas-music');
+      };
+    } else {
+      // Game is not active - ensure airbag music is stopped
+      audioManager.stop('airbag-music', true);
+      audioManager.resume('christmas-music');
+    }
+  }, [showInstructions]);
 
   const handleRestart = () => {
     setCurrentQuestion(0);
@@ -292,46 +311,36 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
       <AnimatePresence>
         {showInstructions && (
           <motion.div
-            className="absolute inset-0 flex items-center justify-center bg-black/90 z-20 p-8"
+            className="absolute inset-0 flex items-center justify-center bg-black/90 z-20 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setShowInstructions(false)}
           >
             <motion.div
-              className="relative bg-gradient-to-br from-red-900 via-amber-900 to-red-900 rounded-2xl p-8 border-4 border-red-600 max-w-md"
+              className="relative max-w-full max-h-full"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
-              style={{
-                boxShadow: '0 0 60px rgba(220, 38, 38, 0.6)',
-              }}
             >
-              <h3
-                className="text-2xl text-red-300 mb-4 text-center"
-                style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: '600' }}
-              >
-                🎵 Cómo Jugar
-              </h3>
-              <div
-                className="text-amber-100 space-y-3 text-sm leading-relaxed"
-                style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-              >
-                <p>1. 📝 Lee cada pregunta sobre la banda Airbag</p>
-                <p>2. 🎯 Selecciona la respuesta correcta</p>
-                <p>3. ✅ Las respuestas correctas se marcan en verde</p>
-                <p>4. ❌ Las incorrectas en rojo</p>
-                <p>5. 🏆 Completa todas las preguntas para ganar</p>
-                <p className="text-red-300 font-semibold mt-4">⚠️ Si fallas más de 3 preguntas, pierdes!</p>
-              </div>
+              <img
+                src="/assets/instructions/airbag-game.png"
+                alt="Instrucciones del juego de Airbag"
+                className="max-w-full max-h-[80vh] object-contain rounded-lg"
+                style={{
+                  boxShadow: '0 0 40px rgba(220, 38, 38, 0.6)',
+                }}
+              />
               <button
                 onClick={() => setShowInstructions(false)}
-                className="mt-6 w-full py-2 bg-red-700 hover:bg-red-600 text-white rounded-lg border-2 border-red-500 transition-colors"
-                style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: '500' }}
+                className="absolute top-2 right-2 bg-red-700 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center border-2 border-white shadow-lg"
               >
-                ¡Entendido!
+                ✕
               </button>
+              <p className="text-center text-red-200 mt-3 text-sm">
+                Click para cerrar
+              </p>
             </motion.div>
           </motion.div>
         )}

@@ -10,11 +10,14 @@ interface CombinationLockProps {
 }
 
 export default function CombinationLock({ onCorrect, onClose, correctCombination }: CombinationLockProps) {
-  const [digits, setDigits] = useState<string[]>(['', '', '']);
+  const [digits, setDigits] = useState<string[]>(['', '', '', '', '', '']);
   const [isShaking, setIsShaking] = useState(false);
   const [error, setError] = useState(false);
 
   const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -36,12 +39,12 @@ export default function CombinationLock({ onCorrect, onClose, correctCombination
     setError(false);
 
     // Auto-focus next input
-    if (value && index < 2) {
+    if (value && index < 5) {
       inputRefs[index + 1].current?.focus();
     }
 
     // Check if all digits are filled
-    if (newDigits.every(d => d !== '') && index === 2) {
+    if (newDigits.every(d => d !== '') && index === 5) {
       checkCombination(newDigits);
     }
   };
@@ -68,7 +71,7 @@ export default function CombinationLock({ onCorrect, onClose, correctCombination
       setIsShaking(true);
       setTimeout(() => {
         setIsShaking(false);
-        setDigits(['', '', '']);
+        setDigits(['', '', '', '', '', '']); // Reset to 6 empty digits
         inputRefs[0].current?.focus();
       }, 600);
     }
@@ -120,11 +123,11 @@ export default function CombinationLock({ onCorrect, onClose, correctCombination
           <h2 className="text-4xl font-bold text-amber-100 mb-2" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
             Combination Lock
           </h2>
-          <p className="text-amber-200 text-sm">Enter the 3-digit combination</p>
+          <p className="text-amber-200 text-sm">Ingresa la combinación de 6 dígitos</p>
         </div>
 
         {/* Combination inputs */}
-        <div className="flex justify-center gap-4 mb-6">
+        <div className="flex justify-center gap-2 mb-6">
           {digits.map((digit, index) => (
             <motion.input
               key={index}
@@ -135,7 +138,7 @@ export default function CombinationLock({ onCorrect, onClose, correctCombination
               value={digit}
               onChange={(e) => handleDigitChange(index, e.target.value)}
               onKeyDown={(e) => handleKeyDown(index, e)}
-              className={`w-20 h-24 text-5xl font-bold text-center rounded-xl border-4 transition-all ${
+              className={`w-14 h-18 text-3xl font-bold text-center rounded-xl border-4 transition-all ${
                 error
                   ? 'bg-red-900/50 border-red-500 text-red-200'
                   : digit
@@ -168,7 +171,7 @@ export default function CombinationLock({ onCorrect, onClose, correctCombination
 
         {/* Hint */}
         <p className="text-center text-amber-300 text-xs mb-6 italic">
-          Complete all rooms to find the numbers
+          Completa todos los cuartos para encontrar los números
         </p>
 
         {/* Close button */}
@@ -176,7 +179,7 @@ export default function CombinationLock({ onCorrect, onClose, correctCombination
           onClick={onClose}
           className="w-full py-3 bg-amber-900/50 hover:bg-amber-900/70 text-amber-100 rounded-lg border border-amber-600/50 transition-colors"
         >
-          Close
+          Cerrar
         </button>
       </motion.div>
     </motion.div>

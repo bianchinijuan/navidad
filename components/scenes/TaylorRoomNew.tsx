@@ -41,7 +41,7 @@ export default function TaylorRoom() {
   };
 
   const handlePuzzleClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     // If room is already completed, just show the card again
     if (isRoomCompleted) {
       setShowCard(true);
@@ -68,7 +68,7 @@ export default function TaylorRoom() {
   };
 
   const handleCardClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowCard(false);
   };
 
@@ -143,7 +143,7 @@ export default function TaylorRoom() {
               backgroundColor: 'transparent',
             }}
             whileTap={{ scale: 0.98 }}
-            title={isRoomCompleted ? "View card" : "Click to start game"}
+            title={isRoomCompleted ? "Ver Recompensa" : "Comenzar juego"}
           />
         </motion.div>
 
@@ -204,7 +204,7 @@ export default function TaylorRoom() {
                 }}
               />
               <p className="text-center text-white mt-4 text-sm">
-                Card Unlocked! Click to close
+                ¡Carta desbloqueada! Click para cerrar
               </p>
             </motion.div>
           </motion.div>

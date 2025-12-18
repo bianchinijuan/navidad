@@ -22,22 +22,12 @@ export default function BedroomRoom() {
   // Bedroom room revela el número 5
   const roomNumber = 5;
 
-  useEffect(() => {
-    audioManager.play('hub-ambient', true);
-
-    return () => {
-      audioManager.stop('hub-ambient', true);
-    };
-  }, []);
-
   const handleBackToDog = () => {
-    audioManager.stop('hub-ambient', true);
     audioManager.play('door-open');
     setScene('dog');
   };
 
   const handleToAirbag = () => {
-    audioManager.stop('hub-ambient', true);
     audioManager.play('door-open');
     setScene('airbag');
   };
@@ -45,13 +35,14 @@ export default function BedroomRoom() {
   const handleRivenClick = () => {
     // If room is already completed, just show the card again
     if (isRoomCompleted) {
-      audioManager.play('click');
+      audioManager.play('mouse-click');
+      audioManager.play('achievement');
       setShowCard(true);
       return;
     }
 
     // Otherwise, start the game
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowGame(true);
   };
 
@@ -63,12 +54,14 @@ export default function BedroomRoom() {
 
     // Show number reveal animation
     setTimeout(() => {
+      audioManager.play('unlock');
       setShowNumberReveal(true);
     }, 300);
 
     // Then show card
     setTimeout(() => {
       setShowNumberReveal(false);
+      audioManager.play('achievement'); // Play achievement when showing reward
       setShowCard(true);
     }, 3500);
   };
@@ -78,7 +71,7 @@ export default function BedroomRoom() {
   };
 
   const handleCardClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowCard(false);
   };
 
@@ -180,7 +173,7 @@ export default function BedroomRoom() {
                     fontWeight: '600',
                   }}
                 >
-                  {isRoomCompleted ? "Ver carta" : "Clickea a Riven"}
+                  {isRoomCompleted ? "Ver Recompensa" : "Clickea a Riven"}
                 </div>
               </div>
               {/* Arrow decorativo */}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { audioManager } from '@/lib/audioManager';
 
 interface Card {
   id: number;
@@ -24,6 +25,25 @@ export default function MemoryCardGame({ onComplete, onClose }: MemoryCardGamePr
   const [matches, setMatches] = useState(0);
   const [isChecking, setIsChecking] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
+
+  // Music management
+  useEffect(() => {
+    if (!showInstructions) {
+      // Game is active - play taylor music
+      audioManager.pause('christmas-music');
+      audioManager.play('taylor-room', true);
+
+      // Cleanup only when game is actually active
+      return () => {
+        audioManager.stop('taylor-room', true);
+        audioManager.resume('christmas-music');
+      };
+    } else {
+      // Game is not active - ensure taylor music is stopped
+      audioManager.stop('taylor-room', true);
+      audioManager.resume('christmas-music');
+    }
+  }, [showInstructions]);
 
   // Inicializar cartas
   useEffect(() => {

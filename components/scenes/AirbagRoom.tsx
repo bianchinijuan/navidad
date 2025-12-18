@@ -39,13 +39,14 @@ export default function AirbagRoom() {
   const handleBandClick = () => {
     // Si la room ya está completa, solo muestra la carta nuevamente
     if (isRoomCompleted) {
-      audioManager.play('click');
+      audioManager.play('mouse-click');
+      audioManager.play('achievement');
       setShowCard(true);
       return;
     }
 
     // Si no, inicia el juego
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowGame(true);
   };
 
@@ -57,12 +58,14 @@ export default function AirbagRoom() {
 
     // Show number reveal animation
     setTimeout(() => {
+      audioManager.play('unlock');
       setShowNumberReveal(true);
     }, 300);
 
     // Then show card
     setTimeout(() => {
       setShowNumberReveal(false);
+      audioManager.play('achievement'); // Play achievement when showing reward
       setShowCard(true);
     }, 3500);
   };
@@ -72,7 +75,7 @@ export default function AirbagRoom() {
   };
 
   const handleCardClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowCard(false);
   };
 
@@ -174,7 +177,7 @@ export default function AirbagRoom() {
                     fontWeight: '600',
                   }}
                 >
-                  {isRoomCompleted ? "Ver mensaje" : "Jugar quiz"}
+                  {isRoomCompleted ? "Ver Recompensa" : "Tocalo a Guido"}
                 </div>
               </div>
               {/* Arrow decorativo */}

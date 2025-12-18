@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
+import { audioManager } from '@/lib/audioManager';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 
@@ -10,6 +11,19 @@ export default function FinalScene() {
   const { setScene } = useGameStore();
   const [showButton, setShowButton] = useState(false);
   const { width, height } = useWindowSize();
+
+  // Music management for final scene
+  useEffect(() => {
+    // Stop christmas music and play taylor music for celebration
+    audioManager.stop('christmas-music', true);
+    audioManager.play('taylor-room', true);
+
+    return () => {
+      // Cleanup - stop taylor music when leaving final scene
+      audioManager.stop('taylor-room', true);
+      audioManager.resume('christmas-music');
+    };
+  }, []);
 
   useEffect(() => {
     // Show button after a delay

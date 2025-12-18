@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Reorder } from 'framer-motion';
+import { audioManager } from '@/lib/audioManager';
 
 interface Album {
   id: number;
@@ -43,13 +44,42 @@ export default function TaylorAlbumSort({ onComplete, onClose }: TaylorAlbumSort
   const [albums, setAlbums] = useState<Album[]>([]);
   const [isComplete, setIsComplete] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
-  const [timeLeft, setTimeLeft] = useState(20);
+  const [timeLeft, setTimeLeft] = useState(30);
   const [gameOver, setGameOver] = useState(false);
 
   // Inicializar con álbumes mezclados
   useEffect(() => {
     setAlbums(shuffleArray([...ALBUMS]));
   }, []);
+
+  // Music management
+  useEffect(() => {
+    console.log('[TaylorAlbumSort] Music effect triggered', { showInstructions, isComplete, gameOver });
+
+    if (!showInstructions && !isComplete && !gameOver) {
+      // Game is active - play taylor music
+      console.log('[TaylorAlbumSort] Starting taylor-room music');
+      audioManager.pause('christmas-music');
+      audioManager.play('taylor-room', true);
+
+      // Cleanup only when game is actually active
+      return () => {
+        console.log('[TaylorAlbumSort] Cleanup - game was active, stopping taylor-room');
+        audioManager.stop('taylor-room', true);
+        audioManager.resume('christmas-music');
+      };
+    } else {
+      // Game is not active - ensure taylor music is stopped
+      console.log('[TaylorAlbumSort] Game not active, stopping taylor-room if playing');
+      audioManager.stop('taylor-room', true);
+      audioManager.resume('christmas-music');
+
+      // No cleanup needed when game is not active
+      return () => {
+        console.log('[TaylorAlbumSort] Cleanup - game was not active, nothing to do');
+      };
+    }
+  }, [showInstructions, isComplete, gameOver]);
 
   // Timer countdown
   useEffect(() => {
@@ -148,7 +178,7 @@ export default function TaylorAlbumSort({ onComplete, onClose }: TaylorAlbumSort
             className="text-pink-200 text-xs"
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
-            Drag albums to sort chronologically
+            Arrastra los álbumes para ordenarlos cronológicamente
           </p>
         </div>
 
@@ -214,7 +244,7 @@ export default function TaylorAlbumSort({ onComplete, onClose }: TaylorAlbumSort
             fontWeight: '500'
           }}
         >
-          Close
+          Cerrar
         </button>
 
         {/* Superposición de instrucciones */}

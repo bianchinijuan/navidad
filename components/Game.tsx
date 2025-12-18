@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useGameStore } from '@/store/gameStore';
 import { initializeAudio, audioManager } from '@/lib/audioManager';
 import SceneTransition from './SceneTransition';
+import VolumeControl from './shared/VolumeControl';
 import IntroScene from './scenes/IntroScene';
 import FinalScene from './scenes/FinalScene';
 import HubRoom from './scenes/HubRoomNew'; // Testing new coordinate system
@@ -71,6 +72,9 @@ export default function Game() {
       <SceneTransition sceneKey={currentScene} transitionType="fade" duration={0.4}>
         {renderScene()}
       </SceneTransition>
+
+      {/* Volume Control - visible on all scenes */}
+      <VolumeControl />
     </div>
   );
 }

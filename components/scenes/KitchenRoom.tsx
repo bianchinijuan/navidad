@@ -44,9 +44,10 @@ export default function KitchenRoom() {
   };
 
   const handleKitchenClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     // If room is already completed, just show the card again
     if (isRoomCompleted) {
+      audioManager.play('achievement');
       setShowCard(true);
       return;
     }
@@ -62,12 +63,14 @@ export default function KitchenRoom() {
 
     // Show number reveal animation
     setTimeout(() => {
+      audioManager.play('unlock');
       setShowNumberReveal(true);
     }, 300);
 
     // Then show card
     setTimeout(() => {
       setShowNumberReveal(false);
+      audioManager.play('achievement'); // Play achievement when showing reward
       setShowCard(true);
     }, 3500);
   };
@@ -77,7 +80,7 @@ export default function KitchenRoom() {
   };
 
   const handleCardClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowCard(false);
   };
 
@@ -182,7 +185,7 @@ export default function KitchenRoom() {
                     fontWeight: '600',
                   }}
                 >
-                  {isRoomCompleted ? "Ver carta" : "A cocinar"}
+                  {isRoomCompleted ? "Ver Recompensa" : "A cocinar"}
                 </div>
               </div>
               {/* Arrow decorativo */}

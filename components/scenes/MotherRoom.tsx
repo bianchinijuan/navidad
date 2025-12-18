@@ -39,13 +39,14 @@ export default function MotherRoom() {
   const handleAltarClick = () => {
     // If room is already completed, just show the card again
     if (isRoomCompleted) {
-      audioManager.play('click');
+      audioManager.play('mouse-click');
+      audioManager.play('achievement');
       setShowCard(true);
       return;
     }
 
     // Otherwise, start the game
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowGame(true);
   };
 
@@ -57,12 +58,14 @@ export default function MotherRoom() {
 
     // Show number reveal animation
     setTimeout(() => {
+      audioManager.play('unlock');
       setShowNumberReveal(true);
     }, 300);
 
     // Then show card
     setTimeout(() => {
       setShowNumberReveal(false);
+      audioManager.play('achievement'); // Play achievement when showing reward
       setShowCard(true);
     }, 3500);
   };
@@ -72,7 +75,7 @@ export default function MotherRoom() {
   };
 
   const handleCardClick = () => {
-    audioManager.play('click');
+    audioManager.play('mouse-click');
     setShowCard(false);
   };
 
@@ -167,7 +170,7 @@ export default function MotherRoom() {
                     fontWeight: '600',
                   }}
                 >
-                  {isRoomCompleted ? "Ver carta" : "Ordenar signos zodiacales"}
+                  {isRoomCompleted ? "Ver Recompensa" : "Ordena los signos"}
                 </div>
               </div>
               {/* Arrow decorativo */}
@@ -314,7 +317,7 @@ export default function MotherRoom() {
                 }}
               />
               <p className="text-center text-white mt-4 text-sm">
-                Card Unlocked! Click to close
+                ¡Carta desbloqueada! Click para cerrar
               </p>
             </motion.div>
           </motion.div>

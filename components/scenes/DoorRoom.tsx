@@ -44,7 +44,7 @@ export default function DoorRoom() {
 
   const handleNumberClick = (num: number) => {
     if (combination.length < 4) {
-      audioManager.play('click');
+      audioManager.play('mouse-click');
       const newCombination = [...combination, num];
       setCombination(newCombination);
 

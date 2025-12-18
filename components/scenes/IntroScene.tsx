@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
@@ -10,15 +10,28 @@ export default function IntroScene() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const setScene = useGameStore((state) => state.setScene);
 
+  // Try to start Christmas music automatically on mount
+  useEffect(() => {
+    // Attempt autoplay (may be blocked by browser)
+    audioManager.play('christmas-music', true);
+
+    // Cleanup - don't stop music, let it continue throughout the game
+    return () => {
+      // Don't stop music on unmount
+    };
+  }, []);
+
   const handleEnter = () => {
     if (isTransitioning) return;
 
     setIsTransitioning(true);
-    audioManager.play('click');
 
-    // Iniciar transición
+    // Play click sound and try to ensure music is playing
+    audioManager.play('mouse-click');
+    audioManager.play('christmas-music', true); // Ensure music starts on user interaction
+
+    // Transition to hub (keep music playing)
     setTimeout(() => {
-      audioManager.crossfade('intro-ambient', 'hub-ambient');
       setScene('hub');
     }, 1000);
   };

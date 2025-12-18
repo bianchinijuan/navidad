@@ -9,7 +9,7 @@ interface AudioTrack {
 class AudioManager {
   private tracks: Map<string, AudioTrack> = new Map();
   private enabled: boolean = true;
-  private ambientVolume: number = 0.3;
+  private ambientVolume: number = 0.4; // Ambient music volume
   private sfxVolume: number = 0.5;
 
   /**
@@ -30,23 +30,30 @@ class AudioManager {
    * Play a sound effect or ambient track
    */
   play(id: string, fadeIn: boolean = false) {
-    if (!this.enabled) return;
+    console.log(`[AudioManager] play() called for "${id}", fadeIn: ${fadeIn}, enabled: ${this.enabled}`);
+
+    if (!this.enabled) {
+      console.log(`[AudioManager] Audio disabled, not playing "${id}"`);
+      return;
+    }
 
     const track = this.tracks.get(id);
     if (!track) {
-      console.warn(`Audio track "${id}" not found`);
+      console.warn(`[AudioManager] Audio track "${id}" not found`);
+      console.log(`[AudioManager] Available tracks:`, Array.from(this.tracks.keys()));
       return;
     }
 
     const { audio } = track;
+    console.log(`[AudioManager] Playing "${id}", current paused state: ${audio.paused}, current time: ${audio.currentTime}`);
 
     if (fadeIn) {
       audio.volume = 0;
-      audio.play().catch(e => console.warn('Audio play failed:', e));
+      audio.play().catch(e => console.warn(`[AudioManager] Audio play failed for "${id}":`, e));
       this.fadeVolume(audio, track.type === 'ambient' ? this.ambientVolume : this.sfxVolume, 1000);
     } else {
       audio.volume = track.type === 'ambient' ? this.ambientVolume : this.sfxVolume;
-      audio.play().catch(e => console.warn('Audio play failed:', e));
+      audio.play().catch(e => console.warn(`[AudioManager] Audio play failed for "${id}":`, e));
     }
   }
 
@@ -54,8 +61,12 @@ class AudioManager {
    * Stop a track
    */
   stop(id: string, fadeOut: boolean = false) {
+    console.log(`[AudioManager] stop() called for "${id}", fadeOut: ${fadeOut}`);
     const track = this.tracks.get(id);
-    if (!track) return;
+    if (!track) {
+      console.log(`[AudioManager] Track "${id}" not found in stop()`);
+      return;
+    }
 
     const { audio } = track;
 
@@ -63,10 +74,12 @@ class AudioManager {
       this.fadeVolume(audio, 0, 1000, () => {
         audio.pause();
         audio.currentTime = 0;
+        console.log(`[AudioManager] "${id}" stopped after fade`);
       });
     } else {
       audio.pause();
       audio.currentTime = 0;
+      console.log(`[AudioManager] "${id}" stopped immediately`);
     }
   }
 
@@ -74,9 +87,13 @@ class AudioManager {
    * Pause a track (without resetting position)
    */
   pause(id: string) {
+    console.log(`[AudioManager] pause() called for "${id}"`);
     const track = this.tracks.get(id);
     if (track) {
       track.audio.pause();
+      console.log(`[AudioManager] "${id}" paused at ${track.audio.currentTime}`);
+    } else {
+      console.log(`[AudioManager] Track "${id}" not found in pause()`);
     }
   }
 
@@ -84,11 +101,15 @@ class AudioManager {
    * Resume a paused track
    */
   resume(id: string) {
+    console.log(`[AudioManager] resume() called for "${id}", enabled: ${this.enabled}`);
     if (!this.enabled) return;
 
     const track = this.tracks.get(id);
     if (track) {
-      track.audio.play().catch(e => console.warn('Audio play failed:', e));
+      console.log(`[AudioManager] Resuming "${id}" from ${track.audio.currentTime}`);
+      track.audio.play().catch(e => console.warn(`[AudioManager] Audio resume failed for "${id}":`, e));
+    } else {
+      console.log(`[AudioManager] Track "${id}" not found in resume()`);
     }
   }
 
@@ -195,8 +216,23 @@ export function initializeAudio() {
   audioManager.preload('dog-ambient', '/audio/dog-ambient.mp3', 'ambient', true);
   audioManager.preload('tree-lights', '/audio/tree-lights.mp3', 'ambient', false);
 
+  // Christmas background music
+  audioManager.preload('christmas-music', '/assets/christmas-music.mp3', 'ambient', true);
+
+  // Taylor Swift music
+  audioManager.preload('taylor-room', '/assets/taylor-room.mp3', 'ambient', true);
+  audioManager.preload('taylor-game', '/assets/taylor-game.mp3', 'ambient', true);
+
+  // Game-specific music
+  audioManager.preload('kitchen-music', '/assets/kitchen-room.mp3', 'ambient', true);
+  audioManager.preload('airbag-music', '/assets/aribag.mp3', 'ambient', true);
+  audioManager.preload('zodiac-music', '/assets/zodiac-room.mp3', 'ambient', true);
+
   // SFX
   audioManager.preload('click', '/audio/click.mp3', 'sfx');
+  audioManager.preload('mouse-click', '/assets/mouse-click.mp3', 'sfx');
+  audioManager.preload('achievement', '/assets/achievement.mp3', 'sfx');
+  audioManager.preload('unlock', '/assets/unlock.mp3', 'sfx');
   audioManager.preload('zoom-in', '/audio/zoom-in.mp3', 'sfx');
   audioManager.preload('zoom-out', '/audio/zoom-out.mp3', 'sfx');
   audioManager.preload('door-open', '/audio/door-open.mp3', 'sfx');
