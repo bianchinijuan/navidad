@@ -117,8 +117,9 @@ export default function MotherRoom() {
         >
           {/* Room image - changes based on completion */}
           <img
-            src={isRoomCompleted ? "/assets/mother/mother-final-op2.png" : "/assets/mother/mother-op2.png"}
+            src={isRoomCompleted ? "/assets/mother/mother-final-op2.webp" : "/assets/mother/mother-op2.webp"}
             alt="Mother Room"
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',

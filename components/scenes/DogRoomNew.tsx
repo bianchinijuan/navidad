@@ -121,6 +121,7 @@ export default function DogRoom() {
           <img
             src={isRoomCompleted ? "/assets/dog/dog-final.png" : "/assets/dog/dog.png"}
             alt="Dog Room"
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',

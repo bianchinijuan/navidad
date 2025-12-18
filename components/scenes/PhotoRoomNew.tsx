@@ -122,6 +122,7 @@ export default function BedroomRoom() {
           <img
             src={isRoomCompleted ? "/assets/bedroom/bedroom-final.png" : "/assets/bedroom/bedroom.png"}
             alt="Bedroom with Riven"
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',
@@ -310,8 +311,9 @@ export default function BedroomRoom() {
             >
               {/* Letter card image */}
               <img
-                src="/assets/bedroom/letter.png"
+                src="/assets/bedroom/letter.webp"
                 alt="Bedroom Letter Unlocked"
+                loading="lazy"
                 style={{
                   width: '100%',
                   height: 'auto',

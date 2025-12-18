@@ -121,6 +121,7 @@ export default function TaylorRoom() {
           <img
             src={isRoomCompleted ? "/assets/taylor/taylor-final.png" : "/assets/taylor/taylor.png"}
             alt="Taylor Room"
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',

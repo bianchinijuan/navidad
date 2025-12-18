@@ -120,7 +120,7 @@ export default function HubRoom() {
                 ? "/assets/hub/hub-final.png"  // Third state: Gift opened (key taken)
                 : mainGiftUnlocked
                 ? "/assets/hub/key.png"  // Second state: Key visible
-                : "/assets/hub/hub.png"  // First state: Gift locked
+                : "/assets/hub/hub.webp"  // First state: Gift locked
             }
             alt="Hub Room"
             style={{

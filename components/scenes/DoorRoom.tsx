@@ -126,6 +126,7 @@ export default function DoorRoom() {
           <img
             src="/assets/exit/door.png"
             alt={giftOpened ? "Puerta desbloqueada" : "Puerta bloqueada"}
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',

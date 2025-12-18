@@ -135,6 +135,7 @@ export default function BrotherRoom() {
           <img
             src={isRoomCompleted ? "/assets/brother/brother-final.png" : "/assets/brother/brother.jpg"}
             alt="Brother Room"
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',

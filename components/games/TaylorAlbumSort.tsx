@@ -265,7 +265,7 @@ export default function TaylorAlbumSort({ onComplete, onClose }: TaylorAlbumSort
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
-                  src="/assets/instructions/taylor-game.png"
+                  src="/assets/instructions/taylor-game.webp"
                   alt="Instrucciones del juego de Taylor Swift"
                   className="max-w-full max-h-[80vh] object-contain rounded-lg"
                   style={{

@@ -21,7 +21,13 @@
       "Bash(/c/Program\\\\ Files/GitHub\\\\ CLI/gh.exe repo delete:*)",
       "Bash(/c/Program Files/GitHub CLI/gh.exe auth refresh -h github.com -s delete_repo)",
       "Bash(git push:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(GIT_TERMINAL_PROMPT=0 /c/Program Files/GitHub CLI/gh.exe auth git-credential:*)",
+      "Bash(git config:*)",
+      "Bash(git config credential.helper \"!''/c/Program Files/GitHub CLI/gh.exe'' auth git-credential\")",
+      "Bash(cmdkey:*)",
+      "Bash(sort:*)",
+      "Bash(npx sharp-cli:*)"
     ]
   }
 }

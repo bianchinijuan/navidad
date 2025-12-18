@@ -126,6 +126,7 @@ export default function AirbagRoom() {
           <img
             src={isRoomCompleted ? "/assets/airbag/airbag-final.png" : "/assets/airbag/airbag.jpg"}
             alt="Airbag Room"
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',

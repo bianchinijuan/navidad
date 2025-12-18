@@ -131,8 +131,9 @@ export default function KitchenRoom() {
         >
           {/* Room image */}
           <img
-            src={isRoomCompleted ? "/assets/kitchen/kitchen-final.png" : "/assets/kitchen/kitchen.png"}
+            src={isRoomCompleted ? "/assets/kitchen/kitchen-final.webp" : "/assets/kitchen/kitchen.webp"}
             alt="Kitchen Room"
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',
@@ -324,6 +325,7 @@ export default function KitchenRoom() {
               <img
                 src="/assets/kitchen/mantecol.png"
                 alt="Mantecol Unlocked"
+                loading="lazy"
                 style={{
                   width: '100%',
                   height: 'auto',
