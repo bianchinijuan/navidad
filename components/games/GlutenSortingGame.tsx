@@ -310,7 +310,7 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
                 animate={{ y: window.innerHeight }}
                 exit={{ opacity: 0, scale: 0.3 }}
                 transition={{
-                  duration: 6,
+                  duration: 5.2,
                   ease: 'linear',
                 }}
                 onAnimationComplete={() => handleIngredientMissed(ingredient)}

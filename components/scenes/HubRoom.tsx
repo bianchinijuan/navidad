@@ -8,7 +8,6 @@ import InteractiveObject from '../shared/InteractiveObject';
 import ZoomView from '../shared/ZoomView';
 import NavigationArrow from '../shared/NavigationArrow';
 import WallpaperPattern from '../effects/WallpaperPattern';
-import PhotoPuzzle from '../shared/PhotoPuzzle';
 
 export default function HubRoom() {
   const {
@@ -22,14 +21,11 @@ export default function HubRoom() {
     giftCombination,
     allRoomsComplete,
     roomsUnlocked,
-    allFragmentsCollected,
-    photoFragments,
   } = useGameStore();
 
   const [giftInput, setGiftInput] = useState('');
   const [showGiftError, setShowGiftError] = useState(false);
   const [showFinalMessage, setShowFinalMessage] = useState(false);
-  const [showPhotoPuzzle, setShowPhotoPuzzle] = useState(false);
 
   useEffect(() => {
     audioManager.play('hub-ambient', true);
@@ -97,34 +93,6 @@ export default function HubRoom() {
       </motion.h1>
 
       {/* LAYER 1: Background elements (furthest from camera) */}
-
-      {/* Picture frame on wall (background) - clickable to show photo puzzle */}
-      <motion.div
-        className="absolute right-[35%] top-[22%] w-32 h-40 z-5 cursor-pointer group"
-        onClick={() => setShowPhotoPuzzle(true)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <div
-          className="w-full h-full bg-gradient-to-br from-amber-900 to-amber-950 rounded-sm shadow-2xl"
-          style={{
-            border: '8px solid #4a2516',
-            boxShadow: '0 8px 20px rgba(0,0,0,0.5)',
-          }}
-        >
-          <div className="w-full h-full bg-amber-100 flex items-center justify-center relative">
-            <span className="text-6xl">🧩</span>
-            {/* Badge showing fragments collected */}
-            <div className="absolute -top-2 -right-2 bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold border-2 border-white shadow-lg">
-              {photoFragments.filter(f => f.collected).length}/6
-            </div>
-          </div>
-        </div>
-        {/* Tooltip */}
-        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-black/80 text-white px-3 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-          Ver Fragmentos
-        </div>
-      </motion.div>
 
       {/* LAYER 2: Fireplace (mid-ground) - READY FOR REAL IMAGE */}
       <div className="absolute left-[35%] bottom-0 w-[520px] h-[470px] z-10">
@@ -402,30 +370,6 @@ export default function HubRoom() {
           </div>
         </div>
       </ZoomView>
-
-      {/* Photo Puzzle Overlay */}
-      <AnimatePresence>
-        {showPhotoPuzzle && (
-          <motion.div
-            className="fixed inset-0 z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowPhotoPuzzle(false)}
-          >
-            <div onClick={(e) => e.stopPropagation()}>
-              <PhotoPuzzle />
-            </div>
-            {/* Close button */}
-            <button
-              onClick={() => setShowPhotoPuzzle(false)}
-              className="absolute top-8 right-8 text-white bg-black/50 hover:bg-black/70 rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold transition-colors z-60"
-            >
-              ×
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

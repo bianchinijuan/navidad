@@ -43,13 +43,13 @@ export default function DoorRoom() {
   };
 
   const handleNumberClick = (num: number) => {
-    if (combination.length < 3) {
+    if (combination.length < 4) {
       audioManager.play('click');
       const newCombination = [...combination, num];
       setCombination(newCombination);
 
       // Check if complete
-      if (newCombination.length === 3) {
+      if (newCombination.length === 4) {
         // Check if correct
         const isCorrect = newCombination.every((n, i) => n === giftCombination[i]);
 
@@ -251,9 +251,9 @@ export default function DoorRoom() {
                   Ingresa la Combinación
                 </h2>
 
-                {/* Combination Display - 3 slots */}
+                {/* Combination Display - 4 slots */}
                 <div className="flex gap-3 justify-center mb-8">
-                  {[0, 1, 2].map((index) => (
+                  {[0, 1, 2, 3].map((index) => (
                     <motion.div
                       key={index}
                       className={`w-16 h-20 rounded-xl border-4 flex items-center justify-center ${

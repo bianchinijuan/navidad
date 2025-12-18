@@ -10,20 +10,18 @@ import GlutenSortingGame from '../games/GlutenSortingGame';
 export default function KitchenRoom() {
   const {
     setScene,
-    collectFragment,
-    photoFragments,
     roomsCompleted,
     roomsUnlocked,
     completeRoom,
   } = useGameStore();
   const [showGame, setShowGame] = useState(false);
   const [showCard, setShowCard] = useState(false);
-  const [showFragmentReveal, setShowFragmentReveal] = useState(false);
+  const [showNumberReveal, setShowNumberReveal] = useState(false);
 
   const isRoomCompleted = roomsCompleted.kitchen;
 
-  // Kitchen room revela el fragmento 4
-  const fragment = photoFragments.find(f => f.roomId === 'kitchen')!;
+  // Kitchen room revela el número 7
+  const roomNumber = 7;
 
   useEffect(() => {
     audioManager.play('hub-ambient', true);
@@ -59,22 +57,17 @@ export default function KitchenRoom() {
   const handleGameComplete = () => {
     setShowGame(false);
 
-    // Collect fragment if not already collected
-    if (!fragment.collected) {
-      collectFragment(fragment.id);
-    }
-
     // Mark room as completed
     completeRoom('kitchen');
 
-    // Show fragment reveal animation
+    // Show number reveal animation
     setTimeout(() => {
-      setShowFragmentReveal(true);
+      setShowNumberReveal(true);
     }, 300);
 
     // Then show card
     setTimeout(() => {
-      setShowFragmentReveal(false);
+      setShowNumberReveal(false);
       setShowCard(true);
     }, 3500);
   };
@@ -227,89 +220,72 @@ export default function KitchenRoom() {
         )}
       </AnimatePresence>
 
-      {/* Fragment Reveal Overlay */}
+      {/* Number Reveal - Compact Notification */}
       <AnimatePresence>
-        {showFragmentReveal && (
+        {showNumberReveal && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center"
             style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+              backgroundColor: 'rgba(0, 0, 0, 0.6)',
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="text-center"
-              initial={{ scale: 0.5, y: 50 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.5, y: -50 }}
-              transition={{ type: "spring", bounce: 0.4 }}
+              className="bg-gradient-to-br from-amber-600 via-amber-500 to-yellow-500 rounded-2xl p-8 border-4 border-amber-300"
+              style={{
+                boxShadow: '0 0 60px rgba(251, 191, 36, 0.8)',
+                maxWidth: '400px',
+              }}
+              initial={{ scale: 0.5, rotateY: -90 }}
+              animate={{ scale: 1, rotateY: 0 }}
+              exit={{ scale: 0.5, rotateY: 90 }}
+              transition={{ type: "spring", bounce: 0.3 }}
             >
-              <motion.div
-                className="mb-6"
-                animate={{
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 0.5,
-                  repeat: Infinity,
-                  repeatDelay: 1,
-                }}
-              >
-                <div className="text-6xl mb-4">🧩</div>
-              </motion.div>
-
-              <h2 className="text-4xl font-bold text-amber-400 mb-4" style={{ textShadow: '0 0 20px rgba(251, 191, 36, 0.5)', fontFamily: 'Georgia, serif' }}>
-                ¡Fragmento Encontrado!
-              </h2>
-
-              <p className="text-amber-200 mb-6 text-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                Fragmento #{fragment.id} revelado
-              </p>
-
-              {/* Fragment display - dorso de foto */}
-              <motion.div
-                className="rounded-lg mx-auto relative"
-                style={{
-                  background: 'linear-gradient(135deg, #f5f0e8 0%, #ebe5dc 50%, #f5f0e8 100%)',
-                  border: '1px solid #d4c5b0',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5)',
-                  maxWidth: '280px',
-                  padding: '48px 32px',
-                  backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px)`,
-                }}
-                animate={{
-                  boxShadow: [
-                    '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5)',
-                    '0 12px 40px rgba(251, 191, 36, 0.4), inset 0 1px 0 rgba(255,255,255,0.6)',
-                    '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5)',
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
+              <div className="text-center">
                 <motion.div
-                  className="text-9xl font-bold"
+                  className="text-4xl mb-3"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: Infinity,
+                    repeatDelay: 0.8,
+                  }}
+                >
+                  ✨
+                </motion.div>
+
+                <h3 className="text-2xl font-bold text-white mb-4" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'Georgia, serif' }}>
+                  Número Revelado
+                </h3>
+
+                {/* Number display */}
+                <motion.div
+                  className="w-24 h-32 rounded-xl border-4 flex items-center justify-center bg-amber-500/30 border-amber-400 mx-auto mb-4"
                   style={{
-                    fontFamily: 'Brush Script MT, cursive',
-                    color: '#2c2c2c',
-                    textShadow: '2px 2px 0px rgba(0,0,0,0.1)',
-                    transform: 'rotate(-3deg)',
+                    boxShadow: '0 4px 20px rgba(217, 119, 6, 0.4)',
                   }}
                   initial={{ scale: 0 }}
                   animate={{ scale: [0, 1.2, 1] }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  {fragment.number}
+                  <div
+                    className="text-7xl font-bold text-amber-100"
+                    style={{
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    {roomNumber}
+                  </div>
                 </motion.div>
-                <div className="absolute bottom-3 right-3 text-xs" style={{ fontFamily: 'Courier New, monospace', color: '#8a8a8a', opacity: 0.6 }}>
-                  Fragmento {fragment.id}/6
-                </div>
-              </motion.div>
 
-              <p className="text-amber-300 mt-6 text-sm italic" style={{ fontFamily: 'Georgia, serif' }}>
-                Colecciona todos los fragmentos...
-              </p>
+                <p className="text-sm text-amber-50" style={{ fontFamily: 'Georgia, serif' }}>
+                  Recuerda este número
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         )}
@@ -337,23 +313,23 @@ export default function KitchenRoom() {
               transition={{ duration: 0.5, type: "spring" }}
               whileHover={{ scale: 1.05 }}
               style={{
-                maxWidth: '400px',
-                width: '80vw',
+                maxWidth: '500px',
+                width: '85vw',
               }}
             >
-              {/* Placeholder card image */}
+              {/* Mantecol reward */}
               <img
-                src="/assets/hub/tree.png"
-                alt="Kitchen Card Unlocked"
+                src="/assets/kitchen/mantecol.png"
+                alt="Mantecol Unlocked"
                 style={{
                   width: '100%',
                   height: 'auto',
                   borderRadius: '12px',
-                  boxShadow: '0 0 40px rgba(255, 215, 0, 0.6)',
+                  boxShadow: '0 0 40px rgba(217, 119, 6, 0.6)',
                 }}
               />
-              <p className="text-center text-white mt-4 text-sm">
-                Card Unlocked! Click to close
+              <p className="text-center text-amber-200 mt-4 text-sm" style={{ fontFamily: 'Georgia, serif' }}>
+                ¡Mantecol desbloqueado! Click para cerrar
               </p>
             </motion.div>
           </motion.div>

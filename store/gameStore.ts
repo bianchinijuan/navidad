@@ -9,6 +9,7 @@ export type GameScene =
   | 'kitchen'
   | 'brother'
   | 'airbag'
+  | 'mother'
   | 'tarot'
   | 'boardgames'
   | 'personal'
@@ -21,6 +22,7 @@ export type PhotoId =
   | 'bedroom'
   | 'kitchen'
   | 'brother'
+  | 'mother'
   | 'tarot'
   | 'boardgames'
   | 'personal';
@@ -37,6 +39,7 @@ interface GameState {
     kitchen: boolean;
     brother: boolean;
     airbag: boolean;
+    mother: boolean;
     tarot: boolean;
     boardgames: boolean;
     personal: boolean;
@@ -50,6 +53,7 @@ interface GameState {
     kitchen: boolean;
     brother: boolean;
     airbag: boolean;
+    mother: boolean;
     tarot: boolean;
     boardgames: boolean;
     personal: boolean;
@@ -62,20 +66,10 @@ interface GameState {
   // Photos collected (emotional rewards from each room)
   photosCollected: PhotoId[];
 
-  // Photo puzzle state (main puzzle)
-  photoFragments: {
-    id: number; // 1-3 (TEMPORAL para testing)
-    number: number; // Dígito de la combinación
-    collected: boolean;
-    roomId: 'airbag' | 'bedroom' | 'kitchen'; // TEMPORAL - solo los 3 rooms con juegos
-  }[];
-  allFragmentsCollected: boolean;
-  photoRevealed: boolean; // True when photo is flipped to show the couple photo
-
   // Gift state (door unlock)
   mainGiftUnlocked: boolean;
   giftOpened: boolean; // True when user clicks on opened gift to see key
-  giftCombination: number[]; // 6-digit combination from photo fragments
+  giftCombination: number[]; // 3-digit combination revealed by completing rooms
 
   // Dog room state
   dogFed: boolean;
@@ -103,8 +97,6 @@ interface GameState {
   unlockRoom: (room: keyof GameState['roomsUnlocked']) => void;
   completeRoom: (room: keyof GameState['roomsCompleted']) => void;
   collectPhoto: (photoId: PhotoId) => void;
-  collectFragment: (fragmentId: number) => void;
-  revealPhoto: () => void;
   toggleTreeLights: () => void;
   toggleFireplace: () => void;
   unlockGift: () => void;
@@ -146,6 +138,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     kitchen: true,  // Start with kitchen room available (for testing)
     brother: true,  // Start with brother room available (for testing)
     airbag: true,   // Start with airbag room available (for testing)
+    mother: true,   // Start with mother room available (for testing)
     tarot: false,
     boardgames: false,
     personal: false,
@@ -154,10 +147,11 @@ export const useGameStore = create<GameState>((set, get) => ({
   roomsCompleted: {
     dog: false,
     taylor: false,
-    bedroom: true,  // FOR TESTING - set to false in production
-    kitchen: true,  // FOR TESTING - set to false in production
+    bedroom: false,
+    kitchen: false,
     brother: false,
-    airbag: true,   // FOR TESTING - set to false in production
+    airbag: false,
+    mother: false,
     tarot: false,
     boardgames: false,
     personal: false,
@@ -168,18 +162,9 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   photosCollected: [],
 
-  // Photo puzzle fragments - each room reveals one fragment
-  photoFragments: [
-    { id: 1, number: 3, collected: true, roomId: 'airbag' },
-    { id: 2, number: 5, collected: true, roomId: 'bedroom' },
-    { id: 3, number: 7, collected: true, roomId: 'kitchen' },
-  ],
-  allFragmentsCollected: true,
-  photoRevealed: false,
-
   mainGiftUnlocked: false,
   giftOpened: false,
-  giftCombination: [3, 5, 7], // 3-digit combination from photo fragments
+  giftCombination: [3, 5, 7, 2], // 4-digit combination (airbag, bedroom, kitchen, mother)
 
   dogFed: false,
   dogFoodInBowl: false,
@@ -211,21 +196,6 @@ export const useGameStore = create<GameState>((set, get) => ({
     if (state.photosCollected.includes(photoId)) return state;
     return { photosCollected: [...state.photosCollected, photoId] };
   }),
-
-  collectFragment: (fragmentId) => set((state) => {
-    const updatedFragments = state.photoFragments.map(fragment =>
-      fragment.id === fragmentId ? { ...fragment, collected: true } : fragment
-    );
-
-    const allCollected = updatedFragments.every(fragment => fragment.collected);
-
-    return {
-      photoFragments: updatedFragments,
-      allFragmentsCollected: allCollected,
-    };
-  }),
-
-  revealPhoto: () => set({ photoRevealed: true }),
 
   toggleTreeLights: () => set((state) => ({
     treeLightsOn: !state.treeLightsOn

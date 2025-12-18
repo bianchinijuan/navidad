@@ -10,19 +10,15 @@ import TapestrySlidingPuzzle from '../games/TapestrySlidingPuzzle';
 export default function BrotherRoom() {
   const {
     setScene,
-    collectFragment,
-    photoFragments,
     roomsCompleted,
+    roomsUnlocked,
     completeRoom,
   } = useGameStore();
   const [showGame, setShowGame] = useState(false);
   const [showCard, setShowCard] = useState(false);
-  const [showFragmentReveal, setShowFragmentReveal] = useState(false);
+  const [showNumberReveal, setShowNumberReveal] = useState(false);
 
   const isRoomCompleted = roomsCompleted.brother;
-
-  // Brother room revela el fragmento 5
-  const fragment = photoFragments.find(f => f.roomId === 'brother')!;
 
   useEffect(() => {
     audioManager.play('hub-ambient', true);
@@ -36,6 +32,12 @@ export default function BrotherRoom() {
     audioManager.stop('hub-ambient', true);
     audioManager.play('door-open');
     setScene('kitchen');
+  };
+
+  const handleToMother = () => {
+    audioManager.stop('hub-ambient', true);
+    audioManager.play('door-open');
+    setScene('mother');
   };
 
   const handleBabyClick = () => {
@@ -54,24 +56,13 @@ export default function BrotherRoom() {
   const handleGameComplete = () => {
     setShowGame(false);
 
-    // Collect fragment if not already collected
-    if (!fragment.collected) {
-      collectFragment(fragment.id);
-    }
-
     // Mark room as completed
     completeRoom('brother');
 
-    // Show fragment reveal animation
+    // Show card
     setTimeout(() => {
-      setShowFragmentReveal(true);
-    }, 300);
-
-    // Then show card
-    setTimeout(() => {
-      setShowFragmentReveal(false);
       setShowCard(true);
-    }, 3500);
+    }, 300);
   };
 
   const handleCloseGame = () => {
@@ -103,6 +94,15 @@ export default function BrotherRoom() {
 
       {/* Container wrapper for frame and arrows */}
       <div className="relative flex items-center justify-center gap-20">
+        {/* Left arrow - to Mother */}
+        {roomsUnlocked.mother && (
+          <NavigationArrow
+            direction="left"
+            onClick={handleToMother}
+            useAbsolutePosition={false}
+          />
+        )}
+
         {/* Frame container */}
         <motion.div
           className="relative"
@@ -212,94 +212,6 @@ export default function BrotherRoom() {
         )}
       </AnimatePresence>
 
-      {/* Fragment Reveal Overlay */}
-      <AnimatePresence>
-        {showFragmentReveal && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center"
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="text-center"
-              initial={{ scale: 0.5, y: 50 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.5, y: -50 }}
-              transition={{ type: "spring", bounce: 0.4 }}
-            >
-              <motion.div
-                className="mb-6"
-                animate={{
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 0.5,
-                  repeat: Infinity,
-                  repeatDelay: 1,
-                }}
-              >
-                <div className="text-6xl mb-4">🧩</div>
-              </motion.div>
-
-              <h2 className="text-4xl font-bold text-amber-400 mb-4" style={{ textShadow: '0 0 20px rgba(251, 191, 36, 0.5)', fontFamily: 'Georgia, serif' }}>
-                ¡Fragmento Encontrado!
-              </h2>
-
-              <p className="text-amber-200 mb-6 text-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                Fragmento #{fragment.id} revelado
-              </p>
-
-              {/* Fragment display - dorso de foto */}
-              <motion.div
-                className="rounded-lg mx-auto relative"
-                style={{
-                  background: 'linear-gradient(135deg, #f5f0e8 0%, #ebe5dc 50%, #f5f0e8 100%)',
-                  border: '1px solid #d4c5b0',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5)',
-                  maxWidth: '280px',
-                  padding: '48px 32px',
-                  backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px)`,
-                }}
-                animate={{
-                  boxShadow: [
-                    '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5)',
-                    '0 12px 40px rgba(251, 191, 36, 0.4), inset 0 1px 0 rgba(255,255,255,0.6)',
-                    '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5)',
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <motion.div
-                  className="text-9xl font-bold"
-                  style={{
-                    fontFamily: 'Brush Script MT, cursive',
-                    color: '#2c2c2c',
-                    textShadow: '2px 2px 0px rgba(0,0,0,0.1)',
-                    transform: 'rotate(-3deg)',
-                  }}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: [0, 1.2, 1] }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  {fragment.number}
-                </motion.div>
-                <div className="absolute bottom-3 right-3 text-xs" style={{ fontFamily: 'Courier New, monospace', color: '#8a8a8a', opacity: 0.6 }}>
-                  Fragmento {fragment.id}/6
-                </div>
-              </motion.div>
-
-              <p className="text-amber-300 mt-6 text-sm italic" style={{ fontFamily: 'Georgia, serif' }}>
-                Colecciona todos los fragmentos...
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Card Overlay */}
       <AnimatePresence>
         {showCard && (
@@ -326,19 +238,19 @@ export default function BrotherRoom() {
                 width: '80vw',
               }}
             >
-              {/* Placeholder card image - replace with your actual card image */}
+              {/* Tapestry card image */}
               <img
-                src="/assets/hub/tree.png"
-                alt="Brother Card Unlocked"
+                src="/assets/brother/tapestry.png"
+                alt="Tapestry Unlocked"
                 style={{
                   width: '100%',
                   height: 'auto',
                   borderRadius: '12px',
-                  boxShadow: '0 0 40px rgba(255, 215, 0, 0.6)',
+                  boxShadow: '0 0 40px rgba(168, 85, 247, 0.6)',
                 }}
               />
               <p className="text-center text-white mt-4 text-sm">
-                Card Unlocked! Click to close
+                Tapestry Unlocked! Click to close
               </p>
             </motion.div>
           </motion.div>

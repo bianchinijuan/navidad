@@ -43,11 +43,29 @@ export default function TaylorAlbumSort({ onComplete, onClose }: TaylorAlbumSort
   const [albums, setAlbums] = useState<Album[]>([]);
   const [isComplete, setIsComplete] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(20);
+  const [gameOver, setGameOver] = useState(false);
 
   // Inicializar con álbumes mezclados
   useEffect(() => {
     setAlbums(shuffleArray([...ALBUMS]));
   }, []);
+
+  // Timer countdown
+  useEffect(() => {
+    if (isComplete || gameOver || showInstructions) return;
+
+    if (timeLeft <= 0) {
+      setGameOver(true);
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft, isComplete, gameOver, showInstructions]);
 
   // Verificar si está ordenado correctamente
   useEffect(() => {
@@ -96,6 +114,25 @@ export default function TaylorAlbumSort({ onComplete, onClose }: TaylorAlbumSort
           >
             ❓
           </button>
+
+          {/* Timer */}
+          <div className="absolute right-0 top-0">
+            <motion.div
+              className={`px-3 py-1 rounded-full border-2 ${
+                timeLeft <= 5
+                  ? 'bg-red-600/70 border-red-400 text-red-100'
+                  : 'bg-pink-700/50 border-pink-400 text-pink-100'
+              }`}
+              animate={timeLeft <= 5 ? {
+                scale: [1, 1.1, 1],
+              } : {}}
+              transition={{ duration: 0.5, repeat: timeLeft <= 5 ? Infinity : 0 }}
+            >
+              <span className="text-lg font-bold" style={{ fontFamily: 'monospace' }}>
+                ⏰ {timeLeft}s
+              </span>
+            </motion.div>
+          </div>
 
           <h2
             className="text-2xl text-pink-100 mb-1"
@@ -214,6 +251,51 @@ export default function TaylorAlbumSort({ onComplete, onClose }: TaylorAlbumSort
                 <p className="text-center text-pink-200 mt-3 text-sm">
                   Click para cerrar
                 </p>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Game Over Overlay */}
+        <AnimatePresence>
+          {gameOver && (
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center bg-black/80 rounded-2xl z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div
+                className="bg-gradient-to-br from-red-600 to-red-800 px-10 py-8 rounded-2xl border-4 border-red-400"
+                initial={{ scale: 0.5, y: 50 }}
+                animate={{ scale: 1, y: 0 }}
+                transition={{ type: 'spring', bounce: 0.4 }}
+                style={{ boxShadow: '0 0 60px rgba(220, 38, 38, 0.6)' }}
+              >
+                <div className="text-center">
+                  <motion.div
+                    className="text-6xl mb-4"
+                    animate={{ rotate: [0, -10, 10, -10, 0] }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    ⏰
+                  </motion.div>
+                  <h3
+                    className="text-3xl text-white font-bold mb-3"
+                    style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+                  >
+                    ¡Tiempo agotado!
+                  </h3>
+                  <p className="text-red-100 text-base mb-6">
+                    Inténtalo de nuevo
+                  </p>
+                  <button
+                    onClick={onClose}
+                    className="px-8 py-3 bg-red-900 hover:bg-red-800 text-white rounded-lg border-2 border-red-400 transition-colors font-semibold"
+                  >
+                    Cerrar
+                  </button>
+                </div>
               </motion.div>
             </motion.div>
           )}
