@@ -171,22 +171,12 @@ export default function MusicEmojiGame({ onComplete, onClose }: MusicEmojiGamePr
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center"
       style={{
-        backgroundColor: 'rgba(0, 0, 0, 0.65)',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Background image from Sister Room */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'url(/assets/sister/sister.webp)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.4,
-        }}
-      />
       {/* Compact Header - Upper left corner */}
       <div className="fixed top-4 left-4 z-30">
         <motion.div

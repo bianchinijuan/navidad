@@ -14,13 +14,13 @@ export default function FinalScene() {
 
   // Music management for final scene
   useEffect(() => {
-    // Stop christmas music and play taylor music for celebration
+    // Stop christmas music and play final music for celebration
     audioManager.stop('christmas-music', true);
-    audioManager.play('taylor-room', true);
+    audioManager.play('final-music', true);
 
     return () => {
-      // Cleanup - stop taylor music when leaving final scene
-      audioManager.stop('taylor-room', true);
+      // Cleanup - stop final music when leaving final scene
+      audioManager.stop('final-music', true);
       audioManager.resume('christmas-music');
     };
   }, []);
@@ -102,28 +102,63 @@ export default function FinalScene() {
           </motion.p>
         </motion.div>
 
-        {/* Gift message */}
+        {/* Decorative Hearts Animation */}
         <motion.div
-          className="bg-black/40 backdrop-blur-sm rounded-2xl p-8 max-w-2xl border-4 border-amber-500"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2 }}
+          className="flex justify-center items-center gap-6 mb-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 2.2, duration: 0.6 }}
         >
-          <p className="text-xl md:text-2xl text-amber-200 mb-4 font-serif italic">
-            {'"Tu regalo te está esperando..."'}
-          </p>
-          <p className="text-lg text-amber-300">
-            🎁 Busca bajo el árbol de Navidad 🎄
-          </p>
+          <motion.div
+            animate={{
+              y: [0, -10, 0],
+              rotate: [0, -5, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{ fontSize: '3rem' }}
+          >
+            ✨
+          </motion.div>
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{ fontSize: '4rem' }}
+          >
+            💝
+          </motion.div>
+          <motion.div
+            animate={{
+              y: [0, -10, 0],
+              rotate: [0, 5, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5,
+            }}
+            style={{ fontSize: '3rem' }}
+          >
+            ✨
+          </motion.div>
         </motion.div>
-
 
         {/* Galería de fotos estilo polaroid */}
         <motion.div
           className="max-w-4xl w-full px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 3.5 }}
+          transition={{ delay: 2.8 }}
         >
           <h2
             className="text-4xl md:text-5xl font-serif text-center mb-12 text-amber-300"
