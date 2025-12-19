@@ -9,7 +9,7 @@ interface AudioTrack {
 class AudioManager {
   private tracks: Map<string, AudioTrack> = new Map();
   private enabled: boolean = true;
-  private ambientVolume: number = 0.4; // Ambient music volume
+  private ambientVolume: number = 0.18; // Ambient music volume - reduced from 0.25
   private sfxVolume: number = 0.5;
 
   /**

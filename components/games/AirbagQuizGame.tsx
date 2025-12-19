@@ -169,12 +169,12 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
         }}
       />
 
-      {/* Compact Header */}
-      <div className="absolute top-4 left-0 right-0 px-6 z-10">
-        <div className="flex items-center justify-between gap-4">
-          {/* Left: Stats */}
+      {/* Compact Header - Moved lower to avoid overlap */}
+      <div className="absolute top-4 left-4 right-4 z-10">
+        <div className="flex items-start justify-between gap-3">
+          {/* Left Column: Stats stacked */}
           <motion.div
-            className="flex items-center gap-3"
+            className="flex flex-col gap-2"
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.4 }}
@@ -185,14 +185,14 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
                 backdropFilter: 'blur(8px)',
                 border: '2px solid rgba(239, 68, 68, 0.6)',
                 borderRadius: '10px',
-                padding: '8px 14px',
+                padding: '6px 12px',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
               }}
             >
               <span style={{
                 color: '#fecaca',
                 fontFamily: 'system-ui, -apple-system, sans-serif',
-                fontSize: '14px',
+                fontSize: '13px',
                 fontWeight: '700',
                 textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
               }}>
@@ -206,14 +206,14 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
                 backdropFilter: 'blur(8px)',
                 border: '2px solid rgba(251, 191, 36, 0.6)',
                 borderRadius: '10px',
-                padding: '8px 14px',
+                padding: '6px 12px',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
               }}
             >
               <span style={{
                 color: '#fef3c7',
                 fontFamily: 'system-ui, -apple-system, sans-serif',
-                fontSize: '14px',
+                fontSize: '13px',
                 fontWeight: '700',
                 textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
               }}>
@@ -229,14 +229,14 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
                 backdropFilter: 'blur(8px)',
                 border: errors >= 2 ? '2px solid rgba(239, 68, 68, 0.7)' : '2px solid rgba(156, 163, 175, 0.6)',
                 borderRadius: '10px',
-                padding: '8px 14px',
+                padding: '6px 12px',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
               }}
             >
               <span style={{
                 color: errors >= 2 ? '#fecaca' : '#d1d5db',
                 fontFamily: 'system-ui, -apple-system, sans-serif',
-                fontSize: '14px',
+                fontSize: '13px',
                 fontWeight: '700',
                 textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
               }}>
@@ -255,7 +255,7 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
               backdropFilter: 'blur(8px)',
               border: '2px solid rgba(239, 68, 68, 0.6)',
               borderRadius: '10px',
-              padding: '8px 20px',
+              padding: '8px 18px',
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
             }}
           >
@@ -272,9 +272,9 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
             </p>
           </motion.div>
 
-          {/* Right: Controls */}
+          {/* Right Column: Controls stacked */}
           <motion.div
-            className="flex items-center gap-2"
+            className="flex flex-col gap-2"
             initial={{ x: 20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.4 }}
@@ -286,10 +286,10 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
                 backdropFilter: 'blur(8px)',
                 border: '2px solid rgba(239, 68, 68, 0.6)',
                 borderRadius: '10px',
-                padding: '8px 14px',
+                padding: '6px 12px',
                 color: '#fecaca',
                 fontWeight: 'bold',
-                fontSize: '16px',
+                fontSize: '15px',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                 cursor: 'pointer',
               }}
@@ -307,10 +307,10 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
                 backdropFilter: 'blur(8px)',
                 border: '2px solid rgba(156, 163, 175, 0.6)',
                 borderRadius: '10px',
-                padding: '8px 16px',
+                padding: '6px 14px',
                 color: '#f3f4f6',
                 fontWeight: '600',
-                fontSize: '13px',
+                fontSize: '12px',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
                 cursor: 'pointer',
               }}
@@ -341,44 +341,55 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
         {/* Pregunta actual */}
         <motion.div
           key={currentQuestion}
-          className="bg-gradient-to-br from-red-900/95 to-amber-900/95 rounded-xl p-6 border-2 border-red-600/60 w-full"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          style={{
-            boxShadow: '0 8px 32px rgba(220, 38, 38, 0.4)',
-            backdropFilter: 'blur(10px)',
-          }}
+          className="w-full"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.3 }}
         >
-          <h3
-            className="text-lg text-amber-100 mb-5 text-center"
+          {/* Question card */}
+          <div
+            className="bg-gradient-to-br from-red-900/90 to-red-800/90 rounded-2xl p-6 mb-4 border border-red-600/40"
             style={{
-              fontFamily: 'system-ui, -apple-system, sans-serif',
-              fontWeight: '600',
-              textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
+              boxShadow: '0 4px 20px rgba(220, 38, 38, 0.3)',
+              backdropFilter: 'blur(12px)',
             }}
           >
-            {currentQ.question}
-          </h3>
+            <h3
+              className="text-xl text-amber-100 text-center leading-relaxed"
+              style={{
+                fontFamily: 'Georgia, serif',
+                fontWeight: '600',
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.6)',
+              }}
+            >
+              {currentQ.question}
+            </h3>
+          </div>
 
           {/* Opciones */}
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             {currentQ.options.map((option, index) => {
               const isSelected = selectedAnswer === index;
               const isCorrect = index === currentQ.correctIndex;
               const showCorrectAnswer = selectedAnswer !== null;
 
-              let bgColor = 'from-gray-700 to-gray-800';
-              let borderColor = 'border-gray-600';
-              let textColor = 'text-white';
+              let bgColor = 'from-gray-800/80 to-gray-900/80';
+              let borderColor = 'border-gray-600/50';
+              let textColor = 'text-gray-100';
+              let shadowColor = '0 2px 8px rgba(0, 0, 0, 0.3)';
 
               if (showCorrectAnswer) {
                 if (isCorrect) {
-                  bgColor = 'from-green-600 to-green-700';
-                  borderColor = 'border-green-400';
+                  bgColor = 'from-green-600/90 to-green-700/90';
+                  borderColor = 'border-green-400/70';
+                  textColor = 'text-white';
+                  shadowColor = '0 4px 16px rgba(34, 197, 94, 0.4)';
                 } else if (isSelected && !isCorrect) {
-                  bgColor = 'from-red-600 to-red-700';
-                  borderColor = 'border-red-400';
+                  bgColor = 'from-red-600/90 to-red-700/90';
+                  borderColor = 'border-red-400/70';
+                  textColor = 'text-white';
+                  shadowColor = '0 4px 16px rgba(220, 38, 38, 0.4)';
                 }
               }
 
@@ -386,16 +397,21 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
                 <motion.button
                   key={index}
                   onClick={() => handleAnswerClick(index)}
-                  className={`w-full p-3.5 bg-gradient-to-r ${bgColor} rounded-lg border-2 ${borderColor} ${textColor} text-left transition-all`}
+                  className={`w-full p-4 bg-gradient-to-r ${bgColor} rounded-xl border-2 ${borderColor} ${textColor} text-left`}
                   style={{
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontWeight: '500',
-                    fontSize: '15px',
+                    fontSize: '16px',
                     cursor: selectedAnswer !== null ? 'not-allowed' : 'pointer',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+                    boxShadow: shadowColor,
+                    backdropFilter: 'blur(8px)',
                   }}
-                  whileHover={selectedAnswer === null ? { scale: 1.015, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)' } : {}}
-                  whileTap={selectedAnswer === null ? { scale: 0.985 } : {}}
+                  whileHover={selectedAnswer === null ? {
+                    scale: 1.02,
+                    boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)',
+                    borderColor: 'rgba(239, 68, 68, 0.6)',
+                  } : {}}
+                  whileTap={selectedAnswer === null ? { scale: 0.98 } : {}}
                   disabled={selectedAnswer !== null}
                 >
                   <div className="flex items-center justify-between">
