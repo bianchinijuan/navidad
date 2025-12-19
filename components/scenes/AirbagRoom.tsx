@@ -11,6 +11,7 @@ export default function AirbagRoom() {
   const {
     setScene,
     roomsCompleted,
+    roomsUnlocked,
     completeRoom,
     revealNumber,
   } = useGameStore();
@@ -31,6 +32,12 @@ export default function AirbagRoom() {
       audioManager.stop('hub-ambient', true);
     };
   }, []);
+
+  const handleToBedroom = () => {
+    audioManager.stop('hub-ambient', true);
+    audioManager.play('door-open');
+    setScene('bedroom');
+  };
 
   const handleToSister = () => {
     audioManager.stop('hub-ambient', true);
@@ -102,8 +109,14 @@ export default function AirbagRoom() {
 
       {/* Contenedor wrapper para frame y flechas */}
       <div className="relative flex items-center justify-center gap-20">
-        {/* Flecha izquierda - invisible para centrar */}
-        <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
+        {/* Flecha izquierda - back to Bedroom */}
+        {roomsUnlocked.bedroom && (
+          <NavigationArrow
+            direction="left"
+            onClick={handleToBedroom}
+            useAbsolutePosition={false}
+          />
+        )}
 
         {/* Contenedor del marco */}
         <motion.div

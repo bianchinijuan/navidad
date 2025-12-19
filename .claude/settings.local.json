@@ -28,7 +28,8 @@
       "Bash(cmdkey:*)",
       "Bash(sort:*)",
       "Bash(npx sharp-cli:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)"
     ]
   }
 }

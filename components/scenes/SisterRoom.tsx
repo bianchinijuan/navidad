@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
-import PopMusicQuizGame from '../games/PopMusicQuizGame';
+import BeatMatchGame from '../games/BeatMatchGame';
 
 export default function SisterRoom() {
   const {
@@ -33,10 +33,10 @@ export default function SisterRoom() {
     };
   }, []);
 
-  const handleToMother = () => {
+  const handleToAirbag = () => {
     audioManager.stop('hub-ambient', true);
     audioManager.play('door-open');
-    setScene('mother');
+    setScene('airbag');
   };
 
   const handleSistersClick = () => {
@@ -87,7 +87,7 @@ export default function SisterRoom() {
     <div
       className="relative w-full h-full flex items-center justify-center"
       style={{
-        background: 'linear-gradient(135deg, #7E22CE 0%, #A855F7 25%, #EC4899 50%, #A855F7 75%, #7E22CE 100%)',
+        background: 'linear-gradient(135deg, #8B1538 0%, #A52A2A 25%, #C41E3A 50%, #A52A2A 75%, #8B1538 100%)',
         backgroundSize: '400% 400%',
         animation: 'gradientShift 15s ease infinite',
       }}
@@ -103,8 +103,12 @@ export default function SisterRoom() {
 
       {/* Container wrapper for frame and arrows */}
       <div className="relative flex items-center justify-center gap-20">
-        {/* Left arrow - invisible for centering */}
-        <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
+        {/* Left arrow - back to Airbag */}
+        <NavigationArrow
+          direction="left"
+          onClick={handleToAirbag}
+          useAbsolutePosition={false}
+        />
 
         {/* Frame container */}
         <motion.div
@@ -181,7 +185,7 @@ export default function SisterRoom() {
                     fontWeight: '600',
                   }}
                 >
-                  {isRoomCompleted ? "Ver Recompensa" : "Quiz de música pop"}
+                  {isRoomCompleted ? "Ver Recompensa" : "Juego de ritmo"}
                 </div>
               </div>
               {/* Arrow decorativo */}
@@ -205,20 +209,10 @@ export default function SisterRoom() {
         <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
       </div>
 
-      {/* Navigation arrow - absolute positioned */}
-      {roomsUnlocked.mother && (
-        <NavigationArrow
-          direction="right"
-          onClick={handleToMother}
-          position="middle-right"
-          useAbsolutePosition={true}
-        />
-      )}
-
-      {/* Pop Music Quiz Game */}
+      {/* Beat Match Game */}
       <AnimatePresence>
         {showGame && !isRoomCompleted && (
-          <PopMusicQuizGame
+          <BeatMatchGame
             onComplete={handleGameComplete}
             onClose={handleCloseGame}
           />
