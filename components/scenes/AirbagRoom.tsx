@@ -132,6 +132,7 @@ export default function AirbagRoom() {
               height: 'auto',
               display: 'block',
               borderRadius: '4px',
+              objectFit: 'contain',
             }}
           />
 
@@ -213,7 +214,7 @@ export default function AirbagRoom() {
       <AnimatePresence>
         {showNumberReveal && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center"
+            className="absolute inset-0 z-50 flex items-center justify-center"
             style={{
               backgroundColor: 'rgba(0, 0, 0, 0.6)',
             }}
@@ -284,7 +285,7 @@ export default function AirbagRoom() {
       <AnimatePresence>
         {showCard && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center"
+            className="absolute inset-0 z-50 flex items-center justify-center"
             style={{
               backgroundColor: 'rgba(0, 0, 0, 0.85)',
             }}

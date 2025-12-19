@@ -40,6 +40,21 @@ const QUESTIONS: Question[] = [
     question: "¿Cuál es el instrumento principal de Gastón Sardelli?",
     options: ["Bajo", "Guitarra", "Batería", "Teclados"],
     correctIndex: 1
+  },
+  {
+    question: "¿Cuál fue el primer álbum de estudio de Airbag?",
+    options: ["Airbag", "Identidad", "Blanco y Negro", "Al Parecer Todo Ha Sido una Trampa"],
+    correctIndex: 0
+  },
+  {
+    question: "¿Qué canción de Airbag incluye la letra 'Todo está guardado en la memoria'?",
+    options: ["Colombina", "Diez Días Después", "Cae el Sol", "Nunca lo Olvides"],
+    correctIndex: 1
+  },
+  {
+    question: "¿Quién es el bajista de Airbag?",
+    options: ["Patricio Sardelli", "Gastón Sardelli", "Guido Sardelli", "Martín Ruiz Díaz"],
+    correctIndex: 2
   }
 ];
 
@@ -97,10 +112,14 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
       const newErrors = errors + 1;
       setErrors(newErrors);
 
-      // Verificar si perdió (más de 3 errores)
-      if (newErrors > 3) {
+      // Verificar si perdió (3 errores = Game Over)
+      if (newErrors >= 3) {
         setTimeout(() => {
           setIsGameOver(true);
+          // Auto-close after showing game over screen
+          setTimeout(() => {
+            onClose();
+          }, 3000);
         }, 1500);
         return;
       }
