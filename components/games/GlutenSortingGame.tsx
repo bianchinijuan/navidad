@@ -257,30 +257,6 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
               </div>
             </div>
 
-            {/* Instructions */}
-            <div
-              style={{
-                background: 'linear-gradient(135deg, rgba(146, 64, 14, 0.98) 0%, rgba(120, 53, 15, 0.98) 100%)',
-                backdropFilter: 'blur(8px)',
-                border: '2px solid rgba(251, 191, 36, 0.6)',
-                borderRadius: '10px',
-                padding: '6px 16px',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-              }}
-            >
-              <p style={{
-                color: '#fef3c7',
-                fontFamily: 'Georgia, serif',
-                fontSize: '12px',
-                fontWeight: '600',
-                textShadow: '0 1px 3px rgba(0, 0, 0, 0.6)',
-                margin: 0,
-                whiteSpace: 'nowrap',
-              }}>
-                ✨ Clickea solo los ingredientes necesarios ✨
-              </p>
-            </div>
-
             {/* Controls */}
             <div className="flex items-center gap-2">
               <motion.button
@@ -326,6 +302,35 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
             </div>
           </motion.div>
         </div>
+
+      {/* Centered Instructions Message */}
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-30">
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          style={{
+            background: 'linear-gradient(135deg, rgba(146, 64, 14, 0.98) 0%, rgba(120, 53, 15, 0.98) 100%)',
+            backdropFilter: 'blur(8px)',
+            border: '2px solid rgba(251, 191, 36, 0.6)',
+            borderRadius: '10px',
+            padding: '8px 20px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+          }}
+        >
+          <p style={{
+            color: '#fef3c7',
+            fontFamily: 'Georgia, serif',
+            fontSize: '14px',
+            fontWeight: '600',
+            textShadow: '0 1px 3px rgba(0, 0, 0, 0.6)',
+            margin: 0,
+            whiteSpace: 'nowrap',
+          }}>
+            ✨ Clickea solo los ingredientes necesarios ✨
+          </p>
+        </motion.div>
+      </div>
 
       {/* Game container */}
       <div className="relative w-full h-full max-w-4xl mx-auto">

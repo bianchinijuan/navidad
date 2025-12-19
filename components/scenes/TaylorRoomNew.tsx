@@ -17,6 +17,7 @@ export default function TaylorRoom() {
   const [showGame, setShowGame] = useState(false);
   const [showCard, setShowCard] = useState(false);
   const [showNumberReveal, setShowNumberReveal] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const isRoomCompleted = roomsCompleted.taylor;
 
@@ -90,6 +91,73 @@ export default function TaylorRoom() {
         }}
       />
 
+      {/* Container wrapper for frame and arrows */}
+      <div className="relative flex items-center justify-center gap-20">
+        {/* Left arrow - to Kitchen */}
+        {roomsUnlocked.kitchen && (
+          <NavigationArrow
+            direction="left"
+            onClick={handleToKitchen}
+            useAbsolutePosition={false}
+          />
+        )}
+
+        {/* Frame container */}
+        <motion.div
+          className="relative"
+          style={{
+            width: '42vw',
+            maxWidth: '630px',
+            border: '20px solid #4A2511',
+            borderRadius: '8px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.3)',
+            background: 'linear-gradient(135deg, #5C3317 0%, #4A2511 100%)',
+            padding: '8px',
+          }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Room image */}
+          <img
+            src={isRoomCompleted ? "/assets/taylor/taylor-final.webp" : "/assets/taylor/taylor.webp"}
+            alt="Taylor Room"
+            onLoad={() => setImageLoaded(true)}
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              borderRadius: '4px',
+              opacity: imageLoaded ? 1 : 0,
+              transition: 'opacity 0.3s ease-in-out',
+            }}
+          />
+
+          {/* Clickable area */}
+          <motion.div
+            onClick={handlePuzzleClick}
+            style={{
+              position: 'absolute',
+              left: '30%',
+              top: '50%',
+              width: '40%',
+              height: '35%',
+              cursor: 'pointer',
+              borderRadius: '8px',
+              backgroundColor: 'transparent',
+            }}
+            whileTap={{ scale: 0.98 }}
+            title={isRoomCompleted ? "Ver Recompensa" : "Comenzar juego"}
+          />
+        </motion.div>
+
+        {/* Right arrow - to Hub */}
+        <NavigationArrow
+          direction="right"
+          onClick={handleToHub}
+          useAbsolutePosition={false}
+        />
+      </div>
 
       {/* Sliding Puzzle Game */}
       <AnimatePresence>

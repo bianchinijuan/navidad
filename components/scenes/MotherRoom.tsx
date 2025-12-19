@@ -17,6 +17,7 @@ export default function MotherRoom() {
   const [showGame, setShowGame] = useState(false);
   const [showCard, setShowCard] = useState(false);
   const [showNumberReveal, setShowNumberReveal] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const isRoomCompleted = roomsCompleted.mother;
 
@@ -54,11 +55,9 @@ export default function MotherRoom() {
   const handleGameComplete = () => {
     setShowGame(false);
 
-    // Mark room as completed
+    // Mark room as completed and reveal number
     completeRoom('mother');
-    
-    // Reveal number
-    revealNumber('Zodíaco', roomNumber);
+    revealNumber('mother', roomNumber);
 
     // Show number reveal animation
     setTimeout(() => {
@@ -101,6 +100,109 @@ export default function MotherRoom() {
         }}
       />
 
+      {/* Container wrapper for frame and arrows */}
+      <div className="relative flex items-center justify-center gap-20">
+        {/* Frame container */}
+        <motion.div
+          className="relative"
+          style={{
+            width: '42vw',
+            maxWidth: '630px',
+            border: '20px solid #4A2511',
+            borderRadius: '8px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.3)',
+            background: 'linear-gradient(135deg, #5C3317 0%, #4A2511 100%)',
+            padding: '8px',
+          }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Room image - changes based on completion */}
+          <img
+            src={isRoomCompleted ? "/assets/mother/mother-final-op2.webp" : "/assets/mother/mother-op2.webp"}
+            alt="Mother Room"
+            onLoad={() => setImageLoaded(true)}
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              borderRadius: '4px',
+              opacity: imageLoaded ? 1 : 0,
+              transition: 'opacity 0.3s ease-in-out',
+            }}
+          />
+
+          {/* Clickable altar area - center of image */}
+          <motion.div
+            onClick={handleAltarClick}
+            className="group"
+            style={{
+              position: 'absolute',
+              left: '35%',
+              top: '40%',
+              width: '30%',
+              height: '30%',
+              cursor: 'pointer',
+              borderRadius: '8px',
+              backgroundColor: 'transparent',
+            }}
+            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.05 }}
+          >
+            {/* Tooltip personalizado */}
+            <motion.div
+              className="absolute -top-12 pointer-events-none opacity-0 group-hover:opacity-100"
+              initial={{ y: 10, scale: 0.9 }}
+              whileHover={{ y: 0, scale: 1 }}
+              transition={{ duration: 0.3, type: "spring" }}
+              style={{
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.95), rgba(79, 70, 229, 0.95))',
+                border: '2px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '8px',
+                boxShadow: '0 0 25px rgba(168, 85, 247, 0.5), 0 8px 32px rgba(0, 0, 0, 0.6)',
+                backdropFilter: 'blur(10px)',
+                padding: '6px 16px',
+              }}
+            >
+              <div className="text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <div
+                  className="text-xs whitespace-nowrap"
+                  style={{
+                    color: '#FFFFFF',
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)',
+                    fontWeight: '600',
+                  }}
+                >
+                  {isRoomCompleted ? "Ver Recompensa" : "Ordena los signos"}
+                </div>
+              </div>
+              {/* Arrow decorativo */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1">
+                <div
+                  className="w-0 h-0 border-l-6 border-r-6 border-t-6 border-transparent"
+                  style={{
+                    borderTopColor: 'rgba(79, 70, 229, 0.95)',
+                    borderLeftWidth: '6px',
+                    borderRightWidth: '6px',
+                    borderTopWidth: '6px',
+                    filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))',
+                  }}
+                ></div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Right arrow - to Brother */}
+        <NavigationArrow
+          direction="right"
+          onClick={handleToBrother}
+          useAbsolutePosition={false}
+        />
+      </div>
 
       {/* Zodiac Element Game */}
       <AnimatePresence>
@@ -136,7 +238,21 @@ export default function MotherRoom() {
               transition={{ type: "spring", bounce: 0.3 }}
             >
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-white mb-6" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'Georgia, serif' }}>
+                <motion.div
+                  className="text-4xl mb-3"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: Infinity,
+                    repeatDelay: 0.8,
+                  }}
+                >
+                  ✨
+                </motion.div>
+
+                <h3 className="text-2xl font-bold text-white mb-4" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'Georgia, serif' }}>
                   Número Revelado
                 </h3>
 
@@ -195,11 +311,10 @@ export default function MotherRoom() {
                 width: '80vw',
               }}
             >
-              {/* Pasionaria card image */}
+              {/* Placeholder card image - replace with your actual card image */}
               <img
-                src="/assets/mother/pasionaria.webp"
-                alt="Pasionaria Unlocked"
-                loading="lazy"
+                src="/assets/hub/tree.png"
+                alt="Mother Card Unlocked"
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -208,7 +323,7 @@ export default function MotherRoom() {
                 }}
               />
               <p className="text-center text-white mt-4 text-sm">
-                ¡Pasionaria desbloqueada! Click para cerrar
+                ¡Carta desbloqueada! Click para cerrar
               </p>
             </motion.div>
           </motion.div>

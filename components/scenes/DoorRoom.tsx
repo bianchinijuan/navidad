@@ -11,6 +11,7 @@ export default function DoorRoom() {
   const [showLock, setShowLock] = useState(false);
   const [combination, setCombination] = useState<number[]>([]);
   const [error, setError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     audioManager.play('hub-ambient', true);
@@ -97,6 +98,110 @@ export default function DoorRoom() {
         }}
       />
 
+      {/* Container wrapper for frame and arrows */}
+      <div className="relative flex items-center justify-center gap-20">
+        {/* Left arrow - back to Hub */}
+        <NavigationArrow
+          direction="left"
+          onClick={handleBackToHub}
+          useAbsolutePosition={false}
+        />
+
+        {/* Frame container */}
+        <motion.div
+          className="relative"
+          style={{
+            width: '42vw',
+            maxWidth: '630px',
+            border: '20px solid #4A2511',
+            borderRadius: '8px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.3)',
+            background: 'linear-gradient(135deg, #5C3317 0%, #4A2511 100%)',
+            padding: '8px',
+          }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Door image */}
+          <img
+            src="/assets/exit/door.webp"
+            alt={giftOpened ? "Puerta desbloqueada" : "Puerta bloqueada"}
+            onLoad={() => setImageLoaded(true)}
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              borderRadius: '4px',
+              opacity: imageLoaded ? 1 : 0,
+              transition: 'opacity 0.3s ease-in-out',
+            }}
+          />
+
+          {/* Clickable door area */}
+          <motion.div
+            onClick={handleDoorClick}
+            className="group"
+            style={{
+              position: 'absolute',
+              left: '30%',
+              top: '20%',
+              width: '40%',
+              height: '60%',
+              cursor: 'pointer',
+              borderRadius: '8px',
+              backgroundColor: 'transparent',
+            }}
+            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.02 }}
+            title={giftOpened ? "Abrir puerta" : "Puerta bloqueada - necesitas la llave"}
+          >
+            {/* Tooltip - only show when locked */}
+            {!giftOpened && (
+              <motion.div
+                className="absolute -top-20 left-1/2 -translate-x-1/2 px-6 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white font-bold rounded-xl shadow-2xl border-2 border-red-300/50 whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100"
+                initial={{ y: 10 }}
+                whileHover={{ y: 0 }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  boxShadow: '0 0 30px rgba(220, 38, 38, 0.6)',
+                }}
+              >
+                <div className="text-center">
+                  <div className="text-lg">🔒 Puerta bloqueada</div>
+                  <div className="text-xs text-white/80 mt-1">Necesitas la llave del regalo</div>
+                </div>
+                {/* Arrow */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1">
+                  <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-red-900"></div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Tooltip - when unlocked */}
+            {giftOpened && (
+              <motion.div
+                className="absolute -top-20 left-1/2 -translate-x-1/2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-xl shadow-2xl border-2 border-green-300/50 whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100"
+                initial={{ y: 10 }}
+                whileHover={{ y: 0 }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  boxShadow: '0 0 30px rgba(34, 197, 94, 0.6)',
+                }}
+              >
+                <div className="text-center">
+                  <div className="text-lg">✨ Puerta desbloqueada</div>
+                  <div className="text-xs text-white/80 mt-1">Click para abrir</div>
+                </div>
+                {/* Arrow */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1">
+                  <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-emerald-600"></div>
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
+        </motion.div>
+      </div>
 
       {/* Lock Interface Overlay */}
       <AnimatePresence>

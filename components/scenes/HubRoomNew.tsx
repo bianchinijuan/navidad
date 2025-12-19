@@ -25,6 +25,7 @@ export default function HubRoom() {
 
   const [showLock, setShowLock] = useState(false);
   const [showUnlockMessage, setShowUnlockMessage] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const navigateToRoom = (room: 'dog' | 'taylor' | 'bedroom' | 'kitchen' | 'brother' | 'airbag' | 'tarot' | 'boardgames' | 'personal') => {
     if (roomsUnlocked[room]) {
@@ -126,11 +127,14 @@ export default function HubRoom() {
             }
             alt="Hub Room"
             loading="lazy"
+            onLoad={() => setImageLoaded(true)}
             style={{
               width: '100%',
               height: 'auto',
               display: 'block',
               borderRadius: '4px',
+              opacity: imageLoaded ? 1 : 0,
+              transition: 'opacity 0.3s ease-in-out',
             }}
           />
 
