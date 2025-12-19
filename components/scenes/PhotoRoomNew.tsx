@@ -24,9 +24,9 @@ export default function BedroomRoom() {
   // Bedroom room revela el número 5
   const roomNumber = 5;
 
-  const handleBackToDog = () => {
+  const handleBackToHub = () => {
     audioManager.play('door-open');
-    setScene('dog');
+    setScene('hub');
   };
 
   const handleToAirbag = () => {
@@ -98,10 +98,10 @@ export default function BedroomRoom() {
 
       {/* Container wrapper for frame and arrows */}
       <div className="relative flex items-center justify-center gap-20">
-        {/* Left arrow - back to Dog */}
+        {/* Left arrow - back to Hub */}
         <NavigationArrow
           direction="left"
-          onClick={handleBackToDog}
+          onClick={handleBackToHub}
           useAbsolutePosition={false}
         />
 

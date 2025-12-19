@@ -203,11 +203,11 @@ export default function HubRoom() {
           </motion.div>
         </motion.div>
 
-        {/* Right arrow - to Dog */}
-        {roomsUnlocked.dog && (
+        {/* Right arrow - to Bedroom */}
+        {roomsUnlocked.bedroom && (
           <NavigationArrow
             direction="right"
-            onClick={() => navigateToRoom('dog')}
+            onClick={() => navigateToRoom('bedroom')}
             useAbsolutePosition={false}
           />
         )}

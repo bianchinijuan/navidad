@@ -45,6 +45,7 @@ export default function TaylorRoom() {
     audioManager.play('mouse-click');
     // If room is already completed, just show the card again
     if (isRoomCompleted) {
+      audioManager.play('achievement');
       setShowCard(true);
       return;
     }
@@ -60,6 +61,7 @@ export default function TaylorRoom() {
 
     // Show card
     setTimeout(() => {
+      audioManager.play('achievement');
       setShowCard(true);
     }, 300);
   };

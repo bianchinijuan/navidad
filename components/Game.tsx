@@ -10,7 +10,6 @@ import NumbersLog from './shared/NumbersLog';
 import IntroScene from './scenes/IntroScene';
 import FinalScene from './scenes/FinalScene';
 import HubRoom from './scenes/HubRoomNew'; // Testing new coordinate system
-import DogRoom from './scenes/DogRoomNew'; // Testing new coordinate system
 import TaylorRoom from './scenes/TaylorRoomNew'; // Placeholder
 import BedroomRoom from './scenes/PhotoRoomNew'; // Bedroom with Taylor game
 import KitchenRoom from './scenes/KitchenRoom'; // Kitchen with gluten sorting game
@@ -43,8 +42,6 @@ export default function Game() {
         return <FinalScene />;
       case 'hub':
         return <HubRoom />;
-      case 'dog':
-        return <DogRoom />;
       case 'taylor':
         return <TaylorRoom />;
       case 'bedroom':
