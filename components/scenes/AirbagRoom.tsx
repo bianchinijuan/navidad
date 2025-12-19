@@ -93,7 +93,7 @@ export default function AirbagRoom() {
     <div
       className="relative w-full h-full flex items-center justify-center"
       style={{
-        background: 'linear-gradient(135deg, #7C2D12 0%, #991B1B 25%, #B91C1C 50%, #991B1B 75%, #7C2D12 100%)',
+        background: 'linear-gradient(135deg, #8B1538 0%, #A52A2A 25%, #C41E3A 50%, #A52A2A 75%, #8B1538 100%)',
         backgroundSize: '400% 400%',
         animation: 'gradientShift 15s ease infinite',
       }}
