@@ -49,7 +49,7 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
   const [collected, setCollected] = useState(0); // Correct ingredients collected
   const [errors, setErrors] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [spawnInterval, setSpawnInterval] = useState(2000);
+  const [spawnInterval, setSpawnInterval] = useState(1000); // Reduced from 2000 to spawn more frequently
   const processedIdsRef = useRef<Set<string>>(new Set()); // Track clicked/processed ingredients
   const [showInstructions, setShowInstructions] = useState(true);
 
@@ -92,9 +92,9 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
         },
       ]);
 
-      // Increase difficulty
-      if (collected > 3) {
-        setSpawnInterval(prev => Math.max(1200, prev - 100));
+      // Increase difficulty - spawn even faster
+      if (collected > 2) {
+        setSpawnInterval(prev => Math.max(600, prev - 80));
       }
     }, spawnInterval);
 
@@ -176,7 +176,7 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
     setCollected(0);
     setErrors(0);
     setGameOver(false);
-    setSpawnInterval(2000);
+    setSpawnInterval(1000);
     processedIdsRef.current.clear(); // Clear processed IDs
   };
 
@@ -192,130 +192,150 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
     >
       {/* Game container */}
       <div className="relative w-full h-full max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="absolute top-4 left-0 right-0 flex justify-between items-center px-8 z-10">
-          <div className="flex gap-6">
-            {/* Pan Dulce Counter */}
-            <div
-              className="relative"
+        {/* Instructions Banner - Top Priority */}
+        <div className="absolute top-4 left-0 right-0 flex justify-center z-20 px-4">
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              background: 'linear-gradient(135deg, rgba(146, 64, 14, 0.95) 0%, rgba(120, 53, 15, 0.95) 100%)',
+              border: '3px solid rgba(251, 191, 36, 0.8)',
+              borderRadius: '12px',
+              padding: '12px 32px',
+              boxShadow: '0 8px 24px rgba(217, 119, 6, 0.5), inset 0 2px 8px rgba(255, 237, 213, 0.2)',
+              maxWidth: '600px',
+            }}
+          >
+            <p
+              className="text-center font-semibold"
               style={{
-                background: 'rgba(146, 64, 14, 0.9)',
-                border: '2px solid rgba(217, 119, 6, 0.6)',
-                borderRadius: '8px',
-                padding: '6px 14px',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                color: '#fef3c7',
+                fontFamily: 'Georgia, serif',
+                fontSize: '15px',
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(251, 191, 36, 0.3)',
+                letterSpacing: '0.3px',
+              }}
+            >
+              ✨ Clickea solo los ingredientes necesarios para hacer pan dulce ✨
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Header - Stats and Controls */}
+        <div className="absolute top-24 left-0 right-0 flex justify-between items-center px-8 z-10">
+          <div className="flex gap-4">
+            {/* Pan Dulce Counter - Improved Design */}
+            <motion.div
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              style={{
+                background: 'linear-gradient(135deg, rgba(180, 83, 9, 0.95) 0%, rgba(146, 64, 14, 0.95) 100%)',
+                border: '3px solid rgba(251, 191, 36, 0.7)',
+                borderRadius: '12px',
+                padding: '10px 18px',
+                boxShadow: '0 6px 20px rgba(217, 119, 6, 0.4), inset 0 2px 6px rgba(254, 243, 199, 0.15)',
               }}
             >
               <span
-                className="text-amber-100 font-medium text-sm"
+                className="font-bold"
                 style={{
+                  color: '#fef3c7',
                   fontFamily: 'system-ui, -apple-system, sans-serif',
-                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)'
+                  fontSize: '16px',
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.6)',
+                  letterSpacing: '0.5px',
                 }}
               >
                 🍞 Pan Dulce: {collected}/{INGREDIENTS_NEEDED}
               </span>
-            </div>
+            </motion.div>
 
-            {/* Errors Counter */}
-            <div
-              className="relative"
+            {/* Errors Counter - Improved Design */}
+            <motion.div
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               style={{
-                background: 'rgba(127, 29, 29, 0.9)',
-                border: '2px solid rgba(220, 38, 38, 0.6)',
-                borderRadius: '8px',
-                padding: '6px 14px',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                background: 'linear-gradient(135deg, rgba(153, 27, 27, 0.95) 0%, rgba(127, 29, 29, 0.95) 100%)',
+                border: '3px solid rgba(239, 68, 68, 0.7)',
+                borderRadius: '12px',
+                padding: '10px 18px',
+                boxShadow: '0 6px 20px rgba(220, 38, 38, 0.4), inset 0 2px 6px rgba(254, 202, 202, 0.15)',
               }}
             >
               <span
-                className="text-red-100 font-medium text-sm"
+                className="font-bold"
                 style={{
+                  color: '#fecaca',
                   fontFamily: 'system-ui, -apple-system, sans-serif',
-                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)'
+                  fontSize: '16px',
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.6)',
+                  letterSpacing: '0.5px',
                 }}
               >
                 ❌ Errores: {errors}/{MAX_ERRORS}
               </span>
-            </div>
+            </motion.div>
           </div>
 
           <div className="flex gap-3">
-            {/* Instructions Button */}
+            {/* Instructions Button - Improved */}
             <motion.button
               onClick={() => setShowInstructions(true)}
-              className="relative"
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               style={{
-                background: 'linear-gradient(135deg, #92400e 0%, #78350f 100%)',
-                border: '3px solid #d97706',
-                borderRadius: '10px',
-                padding: '10px 20px',
+                background: 'linear-gradient(135deg, rgba(180, 83, 9, 0.95) 0%, rgba(120, 53, 15, 0.95) 100%)',
+                border: '3px solid rgba(251, 191, 36, 0.8)',
+                borderRadius: '12px',
+                padding: '10px 18px',
                 color: '#fef3c7',
                 fontWeight: 'bold',
-                boxShadow: '0 4px 16px rgba(217, 119, 6, 0.4), inset 0 1px 4px rgba(255, 255, 255, 0.1)',
+                fontSize: '18px',
+                boxShadow: '0 6px 20px rgba(217, 119, 6, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.15)',
               }}
               whileHover={{
-                scale: 1.05,
-                boxShadow: '0 6px 24px rgba(217, 119, 6, 0.6), inset 0 1px 4px rgba(255, 255, 255, 0.2)',
+                scale: 1.08,
+                boxShadow: '0 8px 28px rgba(217, 119, 6, 0.7), inset 0 2px 8px rgba(255, 255, 255, 0.25)',
               }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.92 }}
               title="Ver instrucciones"
             >
               ❓
             </motion.button>
 
-            {/* Close Button - Ornate Style */}
+            {/* Close Button - Improved */}
             <motion.button
               onClick={onClose}
-              className="relative"
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               style={{
-                background: 'linear-gradient(135deg, #374151 0%, #1f2937 100%)',
-                border: '3px solid #6b7280',
-                borderRadius: '10px',
-                padding: '10px 24px',
-                color: '#e5e7eb',
+                background: 'linear-gradient(135deg, rgba(55, 65, 81, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%)',
+                border: '3px solid rgba(156, 163, 175, 0.7)',
+                borderRadius: '12px',
+                padding: '10px 20px',
+                color: '#f3f4f6',
                 fontWeight: 'bold',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 4px rgba(255, 255, 255, 0.1)',
+                fontSize: '15px',
+                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.6), inset 0 2px 6px rgba(255, 255, 255, 0.1)',
               }}
               whileHover={{
-                scale: 1.05,
-                boxShadow: '0 6px 24px rgba(0, 0, 0, 0.6), inset 0 1px 4px rgba(255, 255, 255, 0.2)',
+                scale: 1.08,
+                boxShadow: '0 8px 28px rgba(0, 0, 0, 0.7), inset 0 2px 8px rgba(255, 255, 255, 0.2)',
               }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.92 }}
             >
               ✕ Cerrar
             </motion.button>
           </div>
         </div>
 
-        {/* Instructions Banner */}
-        <div className="absolute top-20 left-0 right-0 flex justify-center z-10 px-4">
-          <div
-            style={{
-              background: 'rgba(120, 53, 15, 0.85)',
-              border: '2px solid rgba(217, 119, 6, 0.5)',
-              borderRadius: '8px',
-              padding: '8px 20px',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-              maxWidth: '500px',
-            }}
-          >
-            <p
-              className="text-center text-sm"
-              style={{
-                color: '#fef3c7',
-                fontFamily: 'system-ui, -apple-system, sans-serif',
-                textShadow: '0 1px 2px rgba(0, 0, 0, 0.7)',
-                fontWeight: '500',
-              }}
-            >
-              ✨ Clickea solo los ingredientes necesarios para hacer pan dulce ✨
-            </p>
-          </div>
-        </div>
-
         {/* Falling area */}
-        <div className="absolute inset-0 top-32 bottom-8 overflow-hidden">
+        <div className="absolute inset-0 top-44 bottom-8 overflow-hidden">
           <AnimatePresence>
             {fallingIngredients.map((ingredient) => (
               <motion.div
@@ -327,9 +347,14 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
                 }}
                 initial={{ y: -100 }}
                 animate={{ y: window.innerHeight }}
-                exit={{ opacity: 0, scale: 0.3 }}
+                exit={{
+                  opacity: 0,
+                  scale: 0,
+                  rotate: 360,
+                  transition: { duration: 0.4, ease: 'easeOut' }
+                }}
                 transition={{
-                  duration: 5.2,
+                  duration: 4.5,
                   ease: 'linear',
                 }}
                 onAnimationComplete={() => handleIngredientMissed(ingredient)}
