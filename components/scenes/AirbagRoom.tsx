@@ -213,17 +213,13 @@ export default function AirbagRoom() {
           </motion.div>
         </motion.div>
 
-        {/* Flecha derecha - invisible para centrar */}
-        <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
+        {/* Flecha derecha - to Sister */}
+        <NavigationArrow
+          direction="right"
+          onClick={handleToSister}
+          useAbsolutePosition={false}
+        />
       </div>
-
-      {/* Navigation arrow - absolute positioned */}
-      <NavigationArrow
-        direction="right"
-        onClick={handleToSister}
-        position="middle-right"
-        useAbsolutePosition={true}
-      />
 
       {/* Quiz de Airbag - Solo mostrar si no está completo */}
       <AnimatePresence>

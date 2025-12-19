@@ -213,19 +213,20 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center"
       style={{
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        backgroundColor: 'rgba(0, 0, 0, 0.65)',
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Imagen de fondo */}
+      {/* Background image from Airbag Room */}
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0"
         style={{
-          backgroundImage: 'url(/assets/airbag/airbag.jpg)',
+          backgroundImage: 'url(/assets/airbag/airbag.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          opacity: 0.4,
         }}
       />
 

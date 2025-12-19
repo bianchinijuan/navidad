@@ -227,12 +227,17 @@ export function initializeAudio() {
   audioManager.preload('kitchen-music', '/assets/kitchen-room.mp3', 'ambient', true);
   audioManager.preload('airbag-music', '/assets/airbag-room.mp3', 'ambient', true);
   audioManager.preload('zodiac-music', '/assets/zodiac-room.mp3', 'ambient', true);
+  audioManager.preload('sister-room', '/assets/sister-room.mp3', 'ambient', true);
+  audioManager.preload('brother-room', '/assets/brother-room.mp3', 'ambient', true);
+  audioManager.preload('final-music', '/assets/final.mp3', 'ambient', true);
 
   // SFX
   audioManager.preload('click', '/audio/click.mp3', 'sfx');
   audioManager.preload('mouse-click', '/assets/mouse-click.mp3', 'sfx');
   audioManager.preload('achievement', '/assets/achievement.mp3', 'sfx');
   audioManager.preload('unlock', '/assets/unlock.mp3', 'sfx');
+  audioManager.preload('success', '/assets/achievement.mp3', 'sfx'); // Reuse achievement sound for correct answers
+  audioManager.preload('wrong', '/assets/mouse-click.mp3', 'sfx'); // Reuse click sound for wrong answers
   audioManager.preload('zoom-in', '/audio/zoom-in.mp3', 'sfx');
   audioManager.preload('zoom-out', '/audio/zoom-out.mp3', 'sfx');
   audioManager.preload('door-open', '/audio/door-open.mp3', 'sfx');
