@@ -16,6 +16,7 @@ import BedroomRoom from './scenes/PhotoRoomNew'; // Bedroom with Taylor game
 import KitchenRoom from './scenes/KitchenRoom'; // Kitchen with gluten sorting game
 import BrotherRoom from './scenes/BrotherRoom'; // Brother room with tapestry puzzle
 import AirbagRoom from './scenes/AirbagRoom'; // Airbag room with rhythm game
+import SisterRoom from './scenes/SisterRoom'; // Sister room with pop music quiz
 import MotherRoom from './scenes/MotherRoom'; // Mother room with chakra matching game
 import DoorRoom from './scenes/DoorRoom'; // Final door before victory
 
@@ -54,6 +55,8 @@ export default function Game() {
         return <BrotherRoom />;
       case 'airbag':
         return <AirbagRoom />;
+      case 'sister':
+        return <SisterRoom />;
       case 'mother':
         return <MotherRoom />;
       case 'door':

@@ -172,8 +172,8 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
       const newErrors = errors + 1;
       setErrors(newErrors);
 
-      // Verificar si perdió (3 errores = Game Over)
-      if (newErrors >= 3) {
+      // Verificar si perdió (5 errores = Game Over)
+      if (newErrors >= 5) {
         setTimeout(() => {
           setIsGameOver(true);
           // Auto-close after showing game over screen

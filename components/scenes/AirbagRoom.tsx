@@ -32,10 +32,10 @@ export default function AirbagRoom() {
     };
   }, []);
 
-  const handleToBedroom = () => {
+  const handleToSister = () => {
     audioManager.stop('hub-ambient', true);
     audioManager.play('door-open');
-    setScene('bedroom');
+    setScene('sister');
   };
 
   const handleBandClick = () => {
@@ -203,6 +203,14 @@ export default function AirbagRoom() {
         {/* Flecha derecha - invisible para centrar */}
         <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
       </div>
+
+      {/* Navigation arrow - absolute positioned */}
+      <NavigationArrow
+        direction="right"
+        onClick={handleToSister}
+        position="middle-right"
+        useAbsolutePosition={true}
+      />
 
       {/* Quiz de Airbag - Solo mostrar si no está completo */}
       <AnimatePresence>

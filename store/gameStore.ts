@@ -9,6 +9,7 @@ export type GameScene =
   | 'kitchen'
   | 'brother'
   | 'airbag'
+  | 'sister'
   | 'mother'
   | 'tarot'
   | 'boardgames'
@@ -39,6 +40,7 @@ interface GameState {
     kitchen: boolean;
     brother: boolean;
     airbag: boolean;
+    sister: boolean;
     mother: boolean;
     tarot: boolean;
     boardgames: boolean;
@@ -53,6 +55,7 @@ interface GameState {
     kitchen: boolean;
     brother: boolean;
     airbag: boolean;
+    sister: boolean;
     mother: boolean;
     tarot: boolean;
     boardgames: boolean;
@@ -140,6 +143,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     kitchen: true,  // Start with kitchen room available (for testing)
     brother: true,  // Start with brother room available (for testing)
     airbag: true,   // Start with airbag room available (for testing)
+    sister: true,   // Start with sister room available (for testing)
     mother: true,   // Start with mother room available (for testing)
     tarot: false,
     boardgames: false,
@@ -153,6 +157,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     kitchen: false,
     brother: false,
     airbag: false,
+    sister: false,
     mother: false,
     tarot: false,
     boardgames: false,
