@@ -227,8 +227,8 @@ export function initializeAudio() {
   audioManager.preload('kitchen-music', '/assets/kitchen-room.mp3', 'ambient', true);
   audioManager.preload('airbag-music', '/assets/airbag-room.mp3', 'ambient', true);
   audioManager.preload('zodiac-music', '/assets/zodiac-room.mp3', 'ambient', true);
-  audioManager.preload('sister-room', '/assets/sister-room.mp3', 'ambient', true);
-  audioManager.preload('brother-room', '/assets/brotherx-room.mp3', 'ambient', true);
+  audioManager.preload('sister-music', '/assets/sister-room.mp3', 'ambient', true);
+  audioManager.preload('brother-music', '/assets/brotherx-room.mp3', 'ambient', true);
   audioManager.preload('final-music', '/assets/final.mp3', 'ambient', true);
 
   // SFX

@@ -26,15 +26,15 @@ export default function SisterRoom() {
   const roomNumber = 4;
 
   useEffect(() => {
-    audioManager.play('hub-ambient', true);
+    audioManager.play('sister-music', true);
 
     return () => {
-      audioManager.stop('hub-ambient', true);
+      audioManager.stop('sister-music', true);
     };
   }, []);
 
   const handleToAirbag = () => {
-    audioManager.stop('hub-ambient', true);
+    audioManager.stop('sister-music', true);
     audioManager.play('door-open');
     setScene('airbag');
   };

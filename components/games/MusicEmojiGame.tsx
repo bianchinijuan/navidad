@@ -108,14 +108,14 @@ export default function MusicEmojiGame({ onComplete, onClose }: MusicEmojiGamePr
   useEffect(() => {
     if (!showInstructions) {
       audioManager.pause('christmas-music');
-      audioManager.play('sister-room', true);
+      audioManager.play('sister-music', true);
 
       return () => {
-        audioManager.stop('sister-room', true);
+        audioManager.stop('sister-music', true);
         audioManager.resume('christmas-music');
       };
     } else {
-      audioManager.stop('sister-room', true);
+      audioManager.stop('sister-music', true);
       audioManager.resume('christmas-music');
     }
   }, [showInstructions]);
