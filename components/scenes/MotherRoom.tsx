@@ -101,7 +101,13 @@ export default function MotherRoom() {
       />
 
       {/* Container wrapper for frame and arrows */}
-      <div className="relative flex items-center justify-center gap-20">
+      <div
+        className="relative flex items-center justify-center gap-20"
+        style={{
+          opacity: imageLoaded ? 1 : 0,
+          transition: 'opacity 0.5s ease-in-out',
+        }}
+      >
         {/* Flecha izquierda - invisible para centrar */}
         <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
 

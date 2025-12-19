@@ -94,7 +94,13 @@ export default function TaylorRoom() {
       />
 
       {/* Container wrapper for frame and arrows */}
-      <div className="relative flex items-center justify-center gap-20">
+      <div
+        className="relative flex items-center justify-center gap-20"
+        style={{
+          opacity: imageLoaded ? 1 : 0,
+          transition: 'opacity 0.5s ease-in-out',
+        }}
+      >
         {/* Left arrow - to Kitchen */}
         {roomsUnlocked.kitchen && (
           <NavigationArrow
