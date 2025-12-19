@@ -294,63 +294,32 @@ export default function AirbagRoom() {
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="relative cursor-pointer max-w-2xl mx-auto px-8"
+              className="relative cursor-pointer"
               onClick={handleCardClick}
               initial={{ scale: 0.5, rotateY: 90 }}
               animate={{ scale: 1, rotateY: 0 }}
               exit={{ scale: 0.5, rotateY: 90 }}
               transition={{ duration: 0.5, type: "spring" }}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.05 }}
+              style={{
+                maxWidth: '400px',
+                width: '80vw',
+              }}
             >
-              {/* Carta de felicitación */}
-              <div
-                className="bg-gradient-to-br from-red-900 via-amber-900 to-red-900 rounded-2xl p-10 border-4 border-amber-500"
+              {/* Disk reward image */}
+              <img
+                src="/assets/airbag/disk.webp"
+                alt="Airbag Disk Unlocked"
+                loading="lazy"
                 style={{
-                  boxShadow: '0 0 60px rgba(251, 191, 36, 0.6)',
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '12px',
+                  boxShadow: '0 0 40px rgba(251, 191, 36, 0.6)',
                 }}
-              >
-                <div className="text-center">
-                  <motion.div
-                    className="text-6xl mb-6"
-                    animate={{
-                      rotate: [0, 10, -10, 0],
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      repeat: Infinity,
-                      repeatDelay: 1,
-                    }}
-                  >
-                    🎸
-                  </motion.div>
-                  <h2
-                    className="text-4xl mb-6 text-amber-300"
-                    style={{
-                      textShadow: '0 0 20px rgba(251, 191, 36, 0.5)',
-                      fontFamily: 'Georgia, serif',
-                    }}
-                  >
-                    ¡Ritmo Perfecto!
-                  </h2>
-                  <p
-                    className="text-xl text-amber-100 leading-relaxed mb-4"
-                    style={{ fontFamily: 'Georgia, serif' }}
-                  >
-                    Como nuestra banda favorita, encontramos armonía en cada momento juntos.
-                  </p>
-                  <p
-                    className="text-lg text-amber-200 italic"
-                    style={{ fontFamily: 'Georgia, serif' }}
-                  >
-                    Cada canción es más bella cuando la compartimos 💕
-                  </p>
-                </div>
-              </div>
-              <p
-                className="text-center text-amber-300 mt-4 text-sm"
-                style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-              >
-                Click para cerrar
+              />
+              <p className="text-center text-amber-200 mt-4 text-sm" style={{ fontFamily: 'Georgia, serif' }}>
+                ¡Disco desbloqueado! Click para cerrar
               </p>
             </motion.div>
           </motion.div>
