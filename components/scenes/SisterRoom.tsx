@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
-import BeatMatchGame from '../games/BeatMatchGame';
+import MusicEmojiGame from '../games/MusicEmojiGame';
 
 export default function SisterRoom() {
   const {
@@ -185,7 +185,7 @@ export default function SisterRoom() {
                     fontWeight: '600',
                   }}
                 >
-                  {isRoomCompleted ? "Ver Recompensa" : "Juego de ritmo"}
+                  {isRoomCompleted ? "Ver Recompensa" : "Adivina con emojis"}
                 </div>
               </div>
               {/* Arrow decorativo */}
@@ -209,10 +209,10 @@ export default function SisterRoom() {
         <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
       </div>
 
-      {/* Beat Match Game */}
+      {/* Music Emoji Game */}
       <AnimatePresence>
         {showGame && !isRoomCompleted && (
-          <BeatMatchGame
+          <MusicEmojiGame
             onComplete={handleGameComplete}
             onClose={handleCloseGame}
           />
