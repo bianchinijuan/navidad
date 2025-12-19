@@ -55,6 +55,66 @@ const QUESTIONS: Question[] = [
     question: "¿Quién es el bajista de Airbag?",
     options: ["Patricio Sardelli", "Gastón Sardelli", "Guido Sardelli", "Martín Ruiz Díaz"],
     correctIndex: 2
+  },
+  {
+    question: "¿Cuál es el nombre del álbum lanzado en 2016?",
+    options: ["Vivamos el Momento", "Una Hora a Tokyo", "Libertad o Miedo", "Vorágine"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Qué canción incluye la frase 'No quiero verte caer'?",
+    options: ["Cae el Sol", "Colombina", "Será por Ti", "Nunca lo Olvides"],
+    correctIndex: 2
+  },
+  {
+    question: "¿En qué ciudad se formó Airbag?",
+    options: ["Buenos Aires", "Rosario", "Córdoba", "Mendoza"],
+    correctIndex: 0
+  },
+  {
+    question: "¿Quién es el baterista de Airbag?",
+    options: ["Gastón Sardelli", "Patricio Sardelli", "Guido Sardelli", "Cristian Prat"],
+    correctIndex: 1
+  },
+  {
+    question: "¿Qué álbum incluye la canción 'Colombina'?",
+    options: ["Airbag", "Identidad", "Al Parecer Todo Ha Sido una Trampa", "Una Hora a Tokyo"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Cuál fue el álbum lanzado en 2020?",
+    options: ["Vorágine", "Libertad o Miedo", "Vivamos el Momento", "Abismo de Ilusión"],
+    correctIndex: 3
+  },
+  {
+    question: "¿Qué influencia musical principal tiene Airbag?",
+    options: ["The Beatles", "Pink Floyd", "Led Zeppelin", "The Rolling Stones"],
+    correctIndex: 1
+  },
+  {
+    question: "¿Cuántos álbumes de estudio ha lanzado Airbag hasta 2020?",
+    options: ["5", "6", "7", "8"],
+    correctIndex: 3
+  },
+  {
+    question: "¿Qué canción de Airbag fue usada en una película argentina?",
+    options: ["Diez Días Después", "Colombina", "Cae el Sol", "Nunca lo Olvides"],
+    correctIndex: 1
+  },
+  {
+    question: "¿En qué año lanzaron el álbum 'Identidad'?",
+    options: ["2007", "2009", "2011", "2013"],
+    correctIndex: 1
+  },
+  {
+    question: "¿Qué hermanos conforman Airbag?",
+    options: ["Los Gieco", "Los Sardelli", "Los Calamaro", "Los Ciro"],
+    correctIndex: 1
+  },
+  {
+    question: "¿Cuál es una característica del sonido de Airbag?",
+    options: ["Guitarras distorsionadas", "Sonidos atmosféricos y progresivos", "Ritmos latinos", "Voces operísticas"],
+    correctIndex: 1
   }
 ];
 
@@ -153,7 +213,7 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center"
       style={{
-        backgroundColor: 'rgba(0, 0, 0, 0.95)',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

@@ -196,9 +196,9 @@ export default function TaylorRoom() {
                 width: '80vw',
               }}
             >
-              {/* Placeholder card image */}
+              {/* Couple photo reward */}
               <img
-                src="/assets/hub/tree.png"
+                src="/assets/hub/couple.webp"
                 alt="Test Room Card Unlocked"
                 style={{
                   width: '100%',

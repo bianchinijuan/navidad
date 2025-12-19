@@ -254,20 +254,6 @@ export default function BrotherRoom() {
               transition={{ type: "spring", bounce: 0.3 }}
             >
               <div className="text-center">
-                <motion.div
-                  className="text-4xl mb-3"
-                  animate={{
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    repeat: Infinity,
-                    repeatDelay: 0.8,
-                  }}
-                >
-                  ✨
-                </motion.div>
-
                 <h3 className="text-2xl font-bold text-white mb-4" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'Georgia, serif' }}>
                   Número Revelado
                 </h3>
@@ -329,7 +315,7 @@ export default function BrotherRoom() {
             >
               {/* Tapestry card image */}
               <img
-                src="/assets/brother/tapestry.png"
+                src="/assets/brother/tapestry.webp"
                 alt="Tapestry Unlocked"
                 style={{
                   width: '100%',

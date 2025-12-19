@@ -102,6 +102,9 @@ export default function MotherRoom() {
 
       {/* Container wrapper for frame and arrows */}
       <div className="relative flex items-center justify-center gap-20">
+        {/* Flecha izquierda - invisible para centrar */}
+        <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
+
         {/* Frame container */}
         <motion.div
           className="relative"
@@ -238,20 +241,6 @@ export default function MotherRoom() {
               transition={{ type: "spring", bounce: 0.3 }}
             >
               <div className="text-center">
-                <motion.div
-                  className="text-4xl mb-3"
-                  animate={{
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    repeat: Infinity,
-                    repeatDelay: 0.8,
-                  }}
-                >
-                  ✨
-                </motion.div>
-
                 <h3 className="text-2xl font-bold text-white mb-4" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'Georgia, serif' }}>
                   Número Revelado
                 </h3>
@@ -311,9 +300,9 @@ export default function MotherRoom() {
                 width: '80vw',
               }}
             >
-              {/* Placeholder card image - replace with your actual card image */}
+              {/* Pasionaria reward */}
               <img
-                src="/assets/hub/tree.png"
+                src="/assets/mother/pasionaria.webp"
                 alt="Mother Card Unlocked"
                 style={{
                   width: '100%',

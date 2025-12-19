@@ -136,40 +136,104 @@ export default function TapestrySlidingPuzzle({ onComplete, onClose }: TapestryS
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Encabezado */}
-      <div className="absolute top-4 left-0 right-0 flex justify-between items-center px-8 z-10">
-        <div className="flex gap-6">
-          <div
-            className="bg-purple-900/90 border-2 border-purple-600 px-3 py-1.5 rounded-lg"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-          >
-            <span className="text-purple-200 font-semibold text-sm">Movimientos: {moves}</span>
+      {/* Compact Header - Upper Left Corner */}
+      <div className="fixed top-4 left-4 z-30">
+        <motion.div
+          className="flex flex-col gap-2"
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.4 }}
+        >
+          {/* Stats */}
+          <div className="flex items-center gap-2">
+            <div
+              style={{
+                background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.98) 0%, rgba(126, 34, 206, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: '2px solid rgba(168, 85, 247, 0.6)',
+                borderRadius: '10px',
+                padding: '6px 12px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <span style={{
+                color: '#e9d5ff',
+                fontFamily: 'Georgia, serif',
+                fontSize: '13px',
+                fontWeight: '600',
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
+              }}>
+                Movimientos: {moves}
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="flex gap-4">
-          <button
-            onClick={() => setShowInstructions(true)}
-            className="bg-purple-700/90 hover:bg-purple-600/90 border-2 border-purple-500 px-3 py-1.5 rounded-lg text-purple-100 transition-colors text-sm"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: '500' }}
-            title="Ver instrucciones"
-          >
-            ❓
-          </button>
-          <button
-            onClick={handleReset}
-            className="bg-amber-800/90 border-2 border-amber-600 px-3 py-1.5 rounded-lg text-amber-200 hover:bg-amber-700 transition-colors text-sm"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: '500' }}
-          >
-            Reiniciar
-          </button>
-          <button
-            onClick={onClose}
-            className="bg-gray-800/90 border-2 border-gray-600 px-3 py-1.5 rounded-lg text-gray-200 hover:bg-gray-700 transition-colors text-sm"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: '500' }}
-          >
-            Cerrar
-          </button>
-        </div>
+
+          {/* Controls */}
+          <div className="flex items-center gap-2">
+            <motion.button
+              onClick={() => setShowInstructions(true)}
+              style={{
+                background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.98) 0%, rgba(126, 34, 206, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: '2px solid rgba(168, 85, 247, 0.6)',
+                borderRadius: '10px',
+                padding: '6px 12px',
+                color: '#e9d5ff',
+                fontWeight: 'bold',
+                fontSize: '15px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                cursor: 'pointer',
+              }}
+              whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(168, 85, 247, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              title="Ver instrucciones"
+            >
+              ❓
+            </motion.button>
+
+            <motion.button
+              onClick={handleReset}
+              style={{
+                background: 'linear-gradient(135deg, rgba(180, 83, 9, 0.98) 0%, rgba(146, 64, 14, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: '2px solid rgba(251, 191, 36, 0.6)',
+                borderRadius: '10px',
+                padding: '6px 12px',
+                color: '#fef3c7',
+                fontWeight: '600',
+                fontSize: '13px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                cursor: 'pointer',
+                fontFamily: 'system-ui, -apple-system, sans-serif',
+              }}
+              whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(217, 119, 6, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              title="Reiniciar puzzle"
+            >
+              ↻
+            </motion.button>
+
+            <motion.button
+              onClick={onClose}
+              style={{
+                background: 'linear-gradient(135deg, rgba(55, 65, 81, 0.98) 0%, rgba(31, 41, 55, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: '2px solid rgba(156, 163, 175, 0.6)',
+                borderRadius: '10px',
+                padding: '6px 12px',
+                color: '#f3f4f6',
+                fontWeight: '600',
+                fontSize: '13px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+                cursor: 'pointer',
+              }}
+              whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(0, 0, 0, 0.6)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              ✕
+            </motion.button>
+          </div>
+        </motion.div>
       </div>
 
       {/* Contenedor del rompecabezas */}
@@ -227,7 +291,7 @@ export default function TapestrySlidingPuzzle({ onComplete, onClose }: TapestryS
                   key={tile}
                   className="relative rounded-lg overflow-hidden cursor-pointer"
                   style={{
-                    backgroundImage: `url('/assets/brother/tapestry.png')`,
+                    backgroundImage: `url('/assets/brother/tapestry.webp')`,
                     backgroundPosition: `${(tileCol * 100) / (GRID_SIZE - 1)}% ${(tileRow * 100) / (GRID_SIZE - 1)}%`,
                     backgroundSize: `${GRID_SIZE * 100}% ${GRID_SIZE * 100}%`,
                     backgroundRepeat: 'no-repeat',

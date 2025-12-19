@@ -197,9 +197,9 @@ export default function DogRoom() {
                 width: '80vw',
               }}
             >
-              {/* Placeholder card image - replace with your actual card image */}
+              {/* Couple with dog photo reward */}
               <img
-                src="/assets/hub/tree.png"
+                src="/assets/hub/couple.webp"
                 alt="Dog Room Card Unlocked"
                 style={{
                   width: '100%',

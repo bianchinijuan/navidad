@@ -102,12 +102,8 @@ export default function AirbagRoom() {
 
       {/* Contenedor wrapper para frame y flechas */}
       <div className="relative flex items-center justify-center gap-20">
-        {/* Flecha izquierda - volver a Bedroom */}
-        <NavigationArrow
-          direction="left"
-          onClick={handleToBedroom}
-          useAbsolutePosition={false}
-        />
+        {/* Flecha izquierda - invisible para centrar */}
+        <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
 
         {/* Contenedor del marco */}
         <motion.div
@@ -203,6 +199,9 @@ export default function AirbagRoom() {
             </motion.div>
           </motion.div>
         </motion.div>
+
+        {/* Flecha derecha - invisible para centrar */}
+        <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
       </div>
 
       {/* Quiz de Airbag - Solo mostrar si no está completo */}
@@ -239,20 +238,6 @@ export default function AirbagRoom() {
               transition={{ type: "spring", bounce: 0.3 }}
             >
               <div className="text-center">
-                <motion.div
-                  className="text-4xl mb-3"
-                  animate={{
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    repeat: Infinity,
-                    repeatDelay: 0.8,
-                  }}
-                >
-                  ✨
-                </motion.div>
-
                 <h3 className="text-2xl font-bold text-white mb-4" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'Georgia, serif' }}>
                   Número Revelado
                 </h3>
