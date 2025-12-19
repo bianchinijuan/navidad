@@ -169,97 +169,200 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
         }}
       />
 
-      {/* Encabezado */}
-      <div className="absolute top-4 left-0 right-0 flex justify-between items-center px-8 z-10">
-        <div className="flex gap-6">
-          <div
-            className="bg-red-900/90 border-2 border-red-600 px-3 py-1.5 rounded-lg"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+      {/* Compact Header */}
+      <div className="absolute top-4 left-0 right-0 px-6 z-10">
+        <div className="flex items-center justify-between gap-4">
+          {/* Left: Stats */}
+          <motion.div
+            className="flex items-center gap-3"
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
           >
-            <span className="text-red-200 font-semibold text-sm">Pregunta {currentQuestion + 1}/{QUESTIONS.length}</span>
-          </div>
-          <div
-            className="bg-amber-900/90 border-2 border-amber-600 px-3 py-1.5 rounded-lg"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+            <div
+              style={{
+                background: 'linear-gradient(135deg, rgba(153, 27, 27, 0.98) 0%, rgba(127, 29, 29, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: '2px solid rgba(239, 68, 68, 0.6)',
+                borderRadius: '10px',
+                padding: '8px 14px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <span style={{
+                color: '#fecaca',
+                fontFamily: 'system-ui, -apple-system, sans-serif',
+                fontSize: '14px',
+                fontWeight: '700',
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
+              }}>
+                📝 {currentQuestion + 1}/{QUESTIONS.length}
+              </span>
+            </div>
+
+            <div
+              style={{
+                background: 'linear-gradient(135deg, rgba(180, 83, 9, 0.98) 0%, rgba(146, 64, 14, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: '2px solid rgba(251, 191, 36, 0.6)',
+                borderRadius: '10px',
+                padding: '8px 14px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <span style={{
+                color: '#fef3c7',
+                fontFamily: 'system-ui, -apple-system, sans-serif',
+                fontSize: '14px',
+                fontWeight: '700',
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
+              }}>
+                ⭐ {score}/{QUESTIONS.length}
+              </span>
+            </div>
+
+            <div
+              style={{
+                background: errors >= 2
+                  ? 'linear-gradient(135deg, rgba(185, 28, 28, 0.98) 0%, rgba(153, 27, 27, 0.98) 100%)'
+                  : 'linear-gradient(135deg, rgba(55, 65, 81, 0.98) 0%, rgba(31, 41, 55, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: errors >= 2 ? '2px solid rgba(239, 68, 68, 0.7)' : '2px solid rgba(156, 163, 175, 0.6)',
+                borderRadius: '10px',
+                padding: '8px 14px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <span style={{
+                color: errors >= 2 ? '#fecaca' : '#d1d5db',
+                fontFamily: 'system-ui, -apple-system, sans-serif',
+                fontSize: '14px',
+                fontWeight: '700',
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
+              }}>
+                ❌ {errors}/3
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Center: Title */}
+          <motion.div
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            style={{
+              background: 'linear-gradient(135deg, rgba(153, 27, 27, 0.98) 0%, rgba(127, 29, 29, 0.98) 100%)',
+              backdropFilter: 'blur(8px)',
+              border: '2px solid rgba(239, 68, 68, 0.6)',
+              borderRadius: '10px',
+              padding: '8px 20px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+            }}
           >
-            <span className="text-amber-200 font-semibold text-sm">Puntaje: {score}/{QUESTIONS.length}</span>
-          </div>
-          <div
-            className={`border-2 px-3 py-1.5 rounded-lg ${
-              errors >= 3 ? 'bg-red-700/90 border-red-500' : 'bg-gray-800/90 border-gray-600'
-            }`}
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+            <p style={{
+              color: '#fecaca',
+              fontFamily: 'Georgia, serif',
+              fontSize: '14px',
+              fontWeight: '600',
+              textShadow: '0 1px 3px rgba(0, 0, 0, 0.6)',
+              margin: 0,
+              whiteSpace: 'nowrap',
+            }}>
+              🎸 Quiz de Airbag 🎵
+            </p>
+          </motion.div>
+
+          {/* Right: Controls */}
+          <motion.div
+            className="flex items-center gap-2"
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
           >
-            <span className={`font-semibold text-sm ${errors >= 3 ? 'text-red-200' : 'text-gray-200'}`}>
-              Errores: {errors}/3
-            </span>
-          </div>
-        </div>
-        <div className="flex gap-4">
-          <button
-            onClick={() => setShowInstructions(true)}
-            className="bg-red-700/90 hover:bg-red-600/90 border-2 border-red-500 px-3 py-1.5 rounded-lg text-red-100 transition-colors text-sm"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: '500' }}
-            title="Ver instrucciones"
-          >
-            ❓
-          </button>
-          <button
-            onClick={onClose}
-            className="bg-gray-800/90 border-2 border-gray-600 px-3 py-1.5 rounded-lg text-gray-200 hover:bg-gray-700 transition-colors text-sm"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: '500' }}
-          >
-            Cerrar
-          </button>
+            <motion.button
+              onClick={() => setShowInstructions(true)}
+              style={{
+                background: 'linear-gradient(135deg, rgba(153, 27, 27, 0.98) 0%, rgba(127, 29, 29, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: '2px solid rgba(239, 68, 68, 0.6)',
+                borderRadius: '10px',
+                padding: '8px 14px',
+                color: '#fecaca',
+                fontWeight: 'bold',
+                fontSize: '16px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                cursor: 'pointer',
+              }}
+              whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(220, 38, 38, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              title="Ver instrucciones"
+            >
+              ❓
+            </motion.button>
+
+            <motion.button
+              onClick={onClose}
+              style={{
+                background: 'linear-gradient(135deg, rgba(55, 65, 81, 0.98) 0%, rgba(31, 41, 55, 0.98) 100%)',
+                backdropFilter: 'blur(8px)',
+                border: '2px solid rgba(156, 163, 175, 0.6)',
+                borderRadius: '10px',
+                padding: '8px 16px',
+                color: '#f3f4f6',
+                fontWeight: '600',
+                fontSize: '13px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+                cursor: 'pointer',
+              }}
+              whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(0, 0, 0, 0.6)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              ✕ Cerrar
+            </motion.button>
+          </motion.div>
         </div>
       </div>
 
       {/* Contenedor del quiz */}
       <div className="relative z-10 flex flex-col items-center justify-center max-w-2xl w-full px-8">
-        <motion.h2
-          className="text-3xl text-red-400 mb-8"
-          style={{
-            textShadow: '0 0 20px rgba(248, 113, 113, 0.5)',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
-            fontWeight: '600'
-          }}
-        >
-          🎸 Quiz de Airbag 🎵
-        </motion.h2>
-
-        {/* Barra de progreso */}
-        <div className="w-full bg-gray-800 rounded-full h-2 mb-8">
+        {/* Barra de progreso compacta */}
+        <div className="w-full bg-gray-800/50 backdrop-blur-sm rounded-full h-1.5 mb-6 border border-gray-700/50">
           <motion.div
-            className="bg-gradient-to-r from-red-600 to-red-400 h-2 rounded-full"
+            className="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.5 }}
+            style={{
+              boxShadow: '0 0 8px rgba(220, 38, 38, 0.6)',
+            }}
           />
         </div>
 
         {/* Pregunta actual */}
         <motion.div
           key={currentQuestion}
-          className="bg-gradient-to-br from-red-900/90 to-amber-900/90 rounded-2xl p-8 border-4 border-red-600 w-full"
+          className="bg-gradient-to-br from-red-900/95 to-amber-900/95 rounded-xl p-6 border-2 border-red-600/60 w-full"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -50 }}
           style={{
-            boxShadow: '0 0 60px rgba(220, 38, 38, 0.6)',
+            boxShadow: '0 8px 32px rgba(220, 38, 38, 0.4)',
+            backdropFilter: 'blur(10px)',
           }}
         >
           <h3
-            className="text-xl text-amber-100 mb-6 text-center"
+            className="text-lg text-amber-100 mb-5 text-center"
             style={{
               fontFamily: 'system-ui, -apple-system, sans-serif',
-              fontWeight: '600'
+              fontWeight: '600',
+              textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
             }}
           >
             {currentQ.question}
           </h3>
 
           {/* Opciones */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {currentQ.options.map((option, index) => {
               const isSelected = selectedAnswer === index;
               const isCorrect = index === currentQ.correctIndex;
@@ -283,14 +386,16 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
                 <motion.button
                   key={index}
                   onClick={() => handleAnswerClick(index)}
-                  className={`w-full p-4 bg-gradient-to-r ${bgColor} rounded-lg border-2 ${borderColor} ${textColor} text-left transition-all`}
+                  className={`w-full p-3.5 bg-gradient-to-r ${bgColor} rounded-lg border-2 ${borderColor} ${textColor} text-left transition-all`}
                   style={{
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontWeight: '500',
+                    fontSize: '15px',
                     cursor: selectedAnswer !== null ? 'not-allowed' : 'pointer',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
                   }}
-                  whileHover={selectedAnswer === null ? { scale: 1.02 } : {}}
-                  whileTap={selectedAnswer === null ? { scale: 0.98 } : {}}
+                  whileHover={selectedAnswer === null ? { scale: 1.015, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)' } : {}}
+                  whileTap={selectedAnswer === null ? { scale: 0.985 } : {}}
                   disabled={selectedAnswer !== null}
                 >
                   <div className="flex items-center justify-between">
@@ -307,16 +412,19 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
           <AnimatePresence>
             {showResult && (
               <motion.div
-                className="mt-6 text-center"
+                className="mt-4 text-center"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
               >
                 <p
-                  className={`text-lg font-semibold ${
+                  className={`text-base font-semibold ${
                     selectedAnswer === currentQ.correctIndex ? 'text-green-300' : 'text-red-300'
                   }`}
-                  style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+                  style={{
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
+                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
+                  }}
                 >
                   {selectedAnswer === currentQ.correctIndex ? '¡Correcto! 🎉' : 'Incorrecto 😔'}
                 </p>
