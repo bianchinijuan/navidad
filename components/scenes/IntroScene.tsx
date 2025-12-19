@@ -42,7 +42,7 @@ export default function IntroScene() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: 'url(/assets/init/init.png)',
+          backgroundImage: 'url(/assets/init/init.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

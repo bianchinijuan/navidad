@@ -6,6 +6,7 @@ import { initializeAudio, audioManager } from '@/lib/audioManager';
 import SceneTransition from './SceneTransition';
 import VolumeControl from './shared/VolumeControl';
 import FullscreenControl from './shared/FullscreenControl';
+import NumbersLog from './shared/NumbersLog';
 import IntroScene from './scenes/IntroScene';
 import FinalScene from './scenes/FinalScene';
 import HubRoom from './scenes/HubRoomNew'; // Testing new coordinate system
@@ -77,6 +78,7 @@ export default function Game() {
       {/* Controls - visible on all scenes */}
       <FullscreenControl />
       <VolumeControl />
+      <NumbersLog />
     </div>
   );
 }

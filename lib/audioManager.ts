@@ -9,7 +9,7 @@ interface AudioTrack {
 class AudioManager {
   private tracks: Map<string, AudioTrack> = new Map();
   private enabled: boolean = true;
-  private ambientVolume: number = 0.18; // Ambient music volume - reduced from 0.25
+  private ambientVolume: number = 0.05; // Ambient music volume - 5% (reduced from 0.1)
   private sfxVolume: number = 0.5;
 
   /**
@@ -225,7 +225,7 @@ export function initializeAudio() {
 
   // Game-specific music
   audioManager.preload('kitchen-music', '/assets/kitchen-room.mp3', 'ambient', true);
-  audioManager.preload('airbag-music', '/assets/aribag.mp3', 'ambient', true);
+  audioManager.preload('airbag-music', '/assets/airbag-room.mp3', 'ambient', true);
   audioManager.preload('zodiac-music', '/assets/zodiac-room.mp3', 'ambient', true);
 
   // SFX

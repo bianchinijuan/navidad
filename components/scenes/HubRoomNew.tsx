@@ -86,6 +86,8 @@ export default function HubRoom() {
           backgroundSize: '100px 100px',
         }}
       />
+
+
       {/* Container wrapper for frame and arrows */}
       <div className="relative flex items-center justify-center gap-20">
         {/* Left arrow - to Kitchen */}
@@ -117,12 +119,13 @@ export default function HubRoom() {
           <img
             src={
               giftOpened
-                ? "/assets/hub/hub-final.png"  // Third state: Gift opened (key taken)
+                ? "/assets/hub/hub-final.webp"  // Third state: Gift opened (key taken)
                 : mainGiftUnlocked
-                ? "/assets/hub/key.png"  // Second state: Key visible
+                ? "/assets/hub/key.webp"  // Second state: Key visible
                 : "/assets/hub/hub.webp"  // First state: Gift locked
             }
             alt="Hub Room"
+            loading="lazy"
             style={{
               width: '100%',
               height: 'auto',
@@ -134,6 +137,7 @@ export default function HubRoom() {
           {/* Clickable tree/gift area */}
           <motion.div
             onClick={handleTreeClick}
+            className="group"
             style={{
               position: 'absolute',
               left: '22%',
@@ -146,7 +150,53 @@ export default function HubRoom() {
             }}
             whileTap={{ scale: 0.98 }}
             whileHover={{ scale: 1.02 }}
-          />
+          >
+            {/* Tooltip personalizado - solo mostrar cuando está bloqueado */}
+            {!mainGiftUnlocked && !giftOpened && (
+              <motion.div
+                className="absolute -top-12 pointer-events-none opacity-0 group-hover:opacity-100"
+                initial={{ y: 10, scale: 0.9 }}
+                whileHover={{ y: 0, scale: 1 }}
+                transition={{ duration: 0.3, type: "spring" }}
+                style={{
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.92), rgba(234, 179, 8, 0.92))',
+                  border: '2px solid rgba(255, 255, 255, 0.4)',
+                  borderRadius: '8px',
+                  boxShadow: '0 0 20px rgba(34, 197, 94, 0.4), 0 8px 24px rgba(0, 0, 0, 0.5)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '6px 16px',
+                }}
+              >
+                <div className="text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  <div
+                    className="text-xs whitespace-nowrap"
+                    style={{
+                      color: '#FFFFFF',
+                      textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)',
+                      fontWeight: '600',
+                    }}
+                  >
+                    Ingresa la combinación
+                  </div>
+                </div>
+                {/* Arrow decorativo */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1">
+                  <div
+                    className="w-0 h-0 border-l-6 border-r-6 border-t-6 border-transparent"
+                    style={{
+                      borderTopColor: 'rgba(234, 179, 8, 0.92)',
+                      borderLeftWidth: '6px',
+                      borderRightWidth: '6px',
+                      borderTopWidth: '6px',
+                      filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))',
+                    }}
+                  ></div>
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
         </motion.div>
 
         {/* Right arrow - to Dog */}

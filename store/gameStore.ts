@@ -70,6 +70,7 @@ interface GameState {
   mainGiftUnlocked: boolean;
   giftOpened: boolean; // True when user clicks on opened gift to see key
   giftCombination: number[]; // 6-digit combination revealed by completing rooms
+  revealedNumbers: { room: string; number: number }[]; // Track which numbers have been revealed
 
   // Dog room state
   dogFed: boolean;
@@ -101,6 +102,7 @@ interface GameState {
   toggleFireplace: () => void;
   unlockGift: () => void;
   openGift: () => void;
+  revealNumber: (room: string, number: number) => void;
 
   // Dog room actions
   feedDog: () => void;
@@ -165,6 +167,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   mainGiftUnlocked: false,
   giftOpened: false,
   giftCombination: [1, 2, 3, 5, 7, 9], // 6-digit combination (future-room, mother, airbag, bedroom, kitchen, brother)
+  revealedNumbers: [],
 
   dogFed: false,
   dogFoodInBowl: false,
@@ -208,6 +211,12 @@ export const useGameStore = create<GameState>((set, get) => ({
   unlockGift: () => set({ mainGiftUnlocked: true }),
 
   openGift: () => set({ giftOpened: true }),
+
+  revealNumber: (room, number) => set((state) => {
+    const alreadyRevealed = state.revealedNumbers.some(r => r.room === room);
+    if (alreadyRevealed) return state;
+    return { revealedNumbers: [...state.revealedNumbers, { room, number }] };
+  }),
 
   // Dog room
   feedDog: () => set({ dogFed: true }),

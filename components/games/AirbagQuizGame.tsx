@@ -171,14 +171,15 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
 
       {/* Compact Header - Moved lower to avoid overlap */}
       <div className="absolute top-4 left-4 right-4 z-10">
-        <div className="flex items-start justify-between gap-3">
-          {/* Left Column: Stats stacked */}
+        <div className="flex items-start justify-center gap-3">
+          {/* Left Column: Stats and Controls stacked */}
           <motion.div
-            className="flex flex-col gap-2"
+            className="absolute left-4 top-0 flex flex-col gap-2"
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
+            {/* Stats */}
             <div
               style={{
                 background: 'linear-gradient(135deg, rgba(153, 27, 27, 0.98) 0%, rgba(127, 29, 29, 0.98) 100%)',
@@ -191,9 +192,9 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
             >
               <span style={{
                 color: '#fecaca',
-                fontFamily: 'system-ui, -apple-system, sans-serif',
+                fontFamily: 'Georgia, serif',
                 fontSize: '13px',
-                fontWeight: '700',
+                fontWeight: '600',
                 textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
               }}>
                 📝 {currentQuestion + 1}/{QUESTIONS.length}
@@ -212,9 +213,9 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
             >
               <span style={{
                 color: '#fef3c7',
-                fontFamily: 'system-ui, -apple-system, sans-serif',
+                fontFamily: 'Georgia, serif',
                 fontSize: '13px',
-                fontWeight: '700',
+                fontWeight: '600',
                 textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
               }}>
                 ⭐ {score}/{QUESTIONS.length}
@@ -235,13 +236,57 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
             >
               <span style={{
                 color: errors >= 2 ? '#fecaca' : '#d1d5db',
-                fontFamily: 'system-ui, -apple-system, sans-serif',
+                fontFamily: 'Georgia, serif',
                 fontSize: '13px',
-                fontWeight: '700',
+                fontWeight: '600',
                 textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
               }}>
                 ❌ {errors}/3
               </span>
+            </div>
+
+            {/* Controls */}
+            <div className="flex items-center gap-2 mt-1">
+              <motion.button
+                onClick={() => setShowInstructions(true)}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(153, 27, 27, 0.98) 0%, rgba(127, 29, 29, 0.98) 100%)',
+                  backdropFilter: 'blur(8px)',
+                  border: '2px solid rgba(239, 68, 68, 0.6)',
+                  borderRadius: '10px',
+                  padding: '6px 12px',
+                  color: '#fecaca',
+                  fontWeight: 'bold',
+                  fontSize: '15px',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                  cursor: 'pointer',
+                }}
+                whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(220, 38, 38, 0.5)' }}
+                whileTap={{ scale: 0.95 }}
+                title="Ver instrucciones"
+              >
+                ❓
+              </motion.button>
+
+              <motion.button
+                onClick={onClose}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(55, 65, 81, 0.98) 0%, rgba(31, 41, 55, 0.98) 100%)',
+                  backdropFilter: 'blur(8px)',
+                  border: '2px solid rgba(156, 163, 175, 0.6)',
+                  borderRadius: '10px',
+                padding: '6px 14px',
+                color: '#f3f4f6',
+                fontWeight: '600',
+                fontSize: '12px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+                cursor: 'pointer',
+              }}
+              whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(0, 0, 0, 0.6)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              ✕
+            </motion.button>
             </div>
           </motion.div>
 
@@ -270,55 +315,6 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
             }}>
               🎸 Quiz de Airbag 🎵
             </p>
-          </motion.div>
-
-          {/* Right Column: Controls stacked */}
-          <motion.div
-            className="flex flex-col gap-2"
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.4 }}
-          >
-            <motion.button
-              onClick={() => setShowInstructions(true)}
-              style={{
-                background: 'linear-gradient(135deg, rgba(153, 27, 27, 0.98) 0%, rgba(127, 29, 29, 0.98) 100%)',
-                backdropFilter: 'blur(8px)',
-                border: '2px solid rgba(239, 68, 68, 0.6)',
-                borderRadius: '10px',
-                padding: '6px 12px',
-                color: '#fecaca',
-                fontWeight: 'bold',
-                fontSize: '15px',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-                cursor: 'pointer',
-              }}
-              whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(220, 38, 38, 0.5)' }}
-              whileTap={{ scale: 0.95 }}
-              title="Ver instrucciones"
-            >
-              ❓
-            </motion.button>
-
-            <motion.button
-              onClick={onClose}
-              style={{
-                background: 'linear-gradient(135deg, rgba(55, 65, 81, 0.98) 0%, rgba(31, 41, 55, 0.98) 100%)',
-                backdropFilter: 'blur(8px)',
-                border: '2px solid rgba(156, 163, 175, 0.6)',
-                borderRadius: '10px',
-                padding: '6px 14px',
-                color: '#f3f4f6',
-                fontWeight: '600',
-                fontSize: '12px',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
-                cursor: 'pointer',
-              }}
-              whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(0, 0, 0, 0.6)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              ✕ Cerrar
-            </motion.button>
           </motion.div>
         </div>
       </div>
@@ -399,7 +395,7 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
                   onClick={() => handleAnswerClick(index)}
                   className={`w-full p-4 bg-gradient-to-r ${bgColor} rounded-xl border-2 ${borderColor} ${textColor} text-left`}
                   style={{
-                    fontFamily: 'system-ui, -apple-system, sans-serif',
+                    fontFamily: 'Georgia, serif',
                     fontWeight: '500',
                     fontSize: '16px',
                     cursor: selectedAnswer !== null ? 'not-allowed' : 'pointer',
@@ -468,7 +464,7 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src="/assets/instructions/airbag-game.png"
+                src="/assets/instructions/airbag-game.webp"
                 alt="Instrucciones del juego de Airbag"
                 className="max-w-full max-h-[80vh] object-contain rounded-lg"
                 style={{

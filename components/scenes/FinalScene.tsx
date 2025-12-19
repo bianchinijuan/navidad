@@ -117,41 +117,6 @@ export default function FinalScene() {
           </p>
         </motion.div>
 
-        {/* Memory sections - scrolleable content */}
-        <motion.div
-          className="max-w-3xl space-y-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 3 }}
-        >
-          {/* Memory 1 */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-8 border-2 border-amber-400/30">
-            <h3 className="text-3xl font-serif text-amber-300 mb-4">✨ Nuestro Viaje</h3>
-            <p className="text-amber-100 text-lg leading-relaxed">
-              Cada desafío que completaste representa un momento especial que hemos compartido.
-              Desde las pequeñas aventuras hasta los grandes sueños, todo forma parte de nuestra historia.
-            </p>
-          </div>
-
-          {/* Memory 2 */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-8 border-2 border-amber-400/30">
-            <h3 className="text-3xl font-serif text-amber-300 mb-4">💝 Lo que significas</h3>
-            <p className="text-amber-100 text-lg leading-relaxed">
-              Cada rompecabezas resuelto, cada código descifrado, es solo una pequeña muestra
-              de la alegría y el amor que traes a mi vida cada día.
-            </p>
-          </div>
-
-          {/* Memory 3 */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-8 border-2 border-amber-400/30">
-            <h3 className="text-3xl font-serif text-amber-300 mb-4">🌟 Hacia adelante</h3>
-            <p className="text-amber-100 text-lg leading-relaxed">
-              Este es solo el comienzo. Hay infinitos momentos más por vivir,
-              infinitas sonrisas por compartir, e infinitas razones para celebrar
-              cada día juntos.
-            </p>
-          </div>
-        </motion.div>
 
         {/* Galería de fotos estilo polaroid */}
         <motion.div
@@ -164,7 +129,7 @@ export default function FinalScene() {
             className="text-4xl md:text-5xl font-serif text-center mb-12 text-amber-300"
             style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
           >
-            💕 Nuestros Momentos
+            💕 Te amo
           </h2>
 
           {/* Fotos estilo polaroid esparcidas */}

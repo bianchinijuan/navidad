@@ -54,8 +54,8 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
   const processedIdsRef = useRef<Set<string>>(new Set()); // Track clicked/processed ingredients
   const [showInstructions, setShowInstructions] = useState(true);
 
-  const INGREDIENTS_NEEDED = 6; // Total ingredients needed for pan dulce
-  const MAX_ERRORS = 3;
+  const INGREDIENTS_NEEDED = 25; // Total ingredients needed for pan dulce (increased for longer gameplay)
+  const MAX_ERRORS = 5; // Maximum errors allowed
 
   // Music management
   useEffect(() => {
@@ -204,33 +204,31 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Game container */}
-      <div className="relative w-full h-full max-w-4xl mx-auto">
-        {/* Compact Header */}
-        <div className="absolute top-4 left-0 right-0 px-6 z-20">
-          <div className="flex items-center justify-between gap-4">
-            {/* Left: Stats */}
-            <motion.div
-              className="flex items-center gap-3"
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4 }}
-            >
+      {/* Compact Header - Upper Left Corner */}
+      <div className="fixed top-4 left-4 z-30">
+          <motion.div
+            className="flex flex-col gap-2"
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            {/* Stats */}
+            <div className="flex items-center gap-2">
               <div
                 style={{
                   background: 'linear-gradient(135deg, rgba(180, 83, 9, 0.98) 0%, rgba(146, 64, 14, 0.98) 100%)',
                   backdropFilter: 'blur(8px)',
                   border: '2px solid rgba(251, 191, 36, 0.6)',
                   borderRadius: '10px',
-                  padding: '8px 14px',
+                  padding: '6px 12px',
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                 }}
               >
                 <span style={{
                   color: '#fef3c7',
-                  fontFamily: 'system-ui, -apple-system, sans-serif',
-                  fontSize: '14px',
-                  fontWeight: '700',
+                  fontFamily: 'Georgia, serif',
+                  fontSize: '13px',
+                  fontWeight: '600',
                   textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
                 }}>
                   🍞 {collected}/{INGREDIENTS_NEEDED}
@@ -243,40 +241,37 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
                   backdropFilter: 'blur(8px)',
                   border: '2px solid rgba(239, 68, 68, 0.6)',
                   borderRadius: '10px',
-                  padding: '8px 14px',
+                  padding: '6px 12px',
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                 }}
               >
                 <span style={{
                   color: '#fecaca',
-                  fontFamily: 'system-ui, -apple-system, sans-serif',
-                  fontSize: '14px',
-                  fontWeight: '700',
+                  fontFamily: 'Georgia, serif',
+                  fontSize: '13px',
+                  fontWeight: '600',
                   textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
                 }}>
                   ❌ {errors}/{MAX_ERRORS}
                 </span>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Center: Instructions */}
-            <motion.div
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
+            {/* Instructions */}
+            <div
               style={{
                 background: 'linear-gradient(135deg, rgba(146, 64, 14, 0.98) 0%, rgba(120, 53, 15, 0.98) 100%)',
                 backdropFilter: 'blur(8px)',
                 border: '2px solid rgba(251, 191, 36, 0.6)',
                 borderRadius: '10px',
-                padding: '8px 20px',
+                padding: '6px 16px',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
               }}
             >
               <p style={{
                 color: '#fef3c7',
                 fontFamily: 'Georgia, serif',
-                fontSize: '13px',
+                fontSize: '12px',
                 fontWeight: '600',
                 textShadow: '0 1px 3px rgba(0, 0, 0, 0.6)',
                 margin: 0,
@@ -284,15 +279,10 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
               }}>
                 ✨ Clickea solo los ingredientes necesarios ✨
               </p>
-            </motion.div>
+            </div>
 
-            {/* Right: Controls */}
-            <motion.div
-              className="flex items-center gap-2"
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4 }}
-            >
+            {/* Controls */}
+            <div className="flex items-center gap-2">
               <motion.button
                 onClick={() => setShowInstructions(true)}
                 style={{
@@ -300,10 +290,10 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
                   backdropFilter: 'blur(8px)',
                   border: '2px solid rgba(251, 191, 36, 0.6)',
                   borderRadius: '10px',
-                  padding: '8px 14px',
+                  padding: '6px 12px',
                   color: '#fef3c7',
                   fontWeight: 'bold',
-                  fontSize: '16px',
+                  fontSize: '15px',
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                   cursor: 'pointer',
                 }}
@@ -321,7 +311,7 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
                   backdropFilter: 'blur(8px)',
                   border: '2px solid rgba(156, 163, 175, 0.6)',
                   borderRadius: '10px',
-                  padding: '8px 16px',
+                  padding: '6px 12px',
                   color: '#f3f4f6',
                   fontWeight: '600',
                   fontSize: '13px',
@@ -331,12 +321,14 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
                 whileHover={{ scale: 1.05, boxShadow: '0 6px 16px rgba(0, 0, 0, 0.6)' }}
                 whileTap={{ scale: 0.95 }}
               >
-                ✕ Cerrar
+                ✕
               </motion.button>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
 
+      {/* Game container */}
+      <div className="relative w-full h-full max-w-4xl mx-auto">
         {/* Falling area */}
         <div className="absolute inset-0 top-20 bottom-8 overflow-hidden">
           <AnimatePresence>
@@ -425,7 +417,7 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
-                  src="/assets/instructions/pan-dulce-game.jpg"
+                  src="/assets/instructions/pan-dulce-game.webp"
                   alt="Instrucciones del juego de pan dulce"
                   className="max-w-full max-h-[85vh] object-contain rounded-lg"
                   style={{
@@ -467,8 +459,6 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
                 }}
               >
                 <div className="text-center">
-                  <div className="text-4xl mb-3">😞</div>
-
                   <h2
                     className="text-xl font-semibold mb-2"
                     style={{

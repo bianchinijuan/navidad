@@ -150,7 +150,7 @@ export default function ZodiacElementGame({ onComplete, onClose }: ZodiacElement
           onClick={(e) => e.stopPropagation()}
         >
           <img
-            src="/assets/instructions/zodiac-game.png"
+            src="/assets/instructions/zodiac-game.webp"
             alt="Instrucciones del juego de signos zodiacales"
             className="max-w-full max-h-[80vh] object-contain rounded-lg"
             style={{

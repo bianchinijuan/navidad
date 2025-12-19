@@ -272,7 +272,7 @@ export default function TapestrySlidingPuzzle({ onComplete, onClose }: TapestryS
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src="/assets/instructions/tapestry-game.png"
+                src="/assets/instructions/tapestry-game.webp"
                 alt="Instrucciones del juego del tapiz"
                 className="max-w-full max-h-[85vh] object-contain rounded-lg"
                 style={{

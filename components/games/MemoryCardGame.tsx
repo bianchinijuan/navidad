@@ -284,7 +284,7 @@ export default function MemoryCardGame({ onComplete, onClose }: MemoryCardGamePr
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
-                  src="/assets/instructions/memory-game.png"
+                  src="/assets/instructions/memory-game.webp"
                   alt="Instrucciones del Memory Game"
                   className="max-w-full max-h-[80vh] object-contain rounded-lg"
                   style={{
