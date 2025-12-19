@@ -26,21 +26,21 @@ export default function BrotherRoom() {
   const roomNumber = 9;
 
   useEffect(() => {
-    audioManager.play('hub-ambient', true);
+    audioManager.play('brother-room', true);
 
     return () => {
-      audioManager.stop('hub-ambient', true);
+      audioManager.stop('brother-room', true);
     };
   }, []);
 
   const handleToKitchen = () => {
-    audioManager.stop('hub-ambient', true);
+    audioManager.stop('brother-room', true);
     audioManager.play('door-open');
     setScene('kitchen');
   };
 
   const handleToMother = () => {
-    audioManager.stop('hub-ambient', true);
+    audioManager.stop('brother-room', true);
     audioManager.play('door-open');
     setScene('mother');
   };
