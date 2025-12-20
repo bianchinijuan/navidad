@@ -102,10 +102,6 @@ export default function AirbagRoom() {
       {/* Contenedor wrapper para frame y flechas */}
       <div
         className="relative flex items-center justify-center gap-20 z-10"
-        style={{
-          opacity: imageLoaded ? 1 : 0,
-          transition: 'opacity 0.5s ease-in-out',
-        }}
       >
         {/* Flecha izquierda - back to Bedroom */}
         {roomsUnlocked.bedroom && (

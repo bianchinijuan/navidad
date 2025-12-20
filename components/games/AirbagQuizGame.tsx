@@ -17,103 +17,78 @@ interface Question {
 
 const QUESTIONS: Question[] = [
   {
-    question: "¿En qué año se formó la banda Airbag?",
-    options: ["1995", "1999", "2002", "2004", "2006"],
-    correctIndex: 1
-  },
-  {
-    question: "¿De qué localidad de Buenos Aires provienen los hermanos Sardelli, integrantes de Airbag?",
-    options: ["La Plata", "Don Torcuato", "Mar del Plata", "Rosario", "Córdoba"],
-    correctIndex: 1
-  },
-  {
-    question: "¿Cuántos hermanos conforman el núcleo principal de Airbag?",
-    options: ["2", "3", "4", "5", "1"],
-    correctIndex: 1
-  },
-  {
-    question: "¿Cuál fue el título del álbum debut de Airbag?",
-    options: ["Blanco y Negro", "Libertad", "Airbag", "Vorágine", "Una hora a Tokyo"],
+    question: "¿Qué vínculo une a los integrantes de Airbag?",
+    options: ["Son amigos de la secundaria", "Son primos", "Son hermanos", "Son ex compañeros de banda", "Son vecinos de infancia"],
     correctIndex: 2
   },
   {
-    question: "¿En qué año se lanzó el álbum Blanco y Negro?",
-    options: ["2002", "2006", "2008", "2010", "2012"],
-    correctIndex: 2
-  },
-  {
-    question: "¿Qué instrumento toca principalmente Gastón Sardelli?",
-    options: ["Guitarra", "Teclados", "Batería", "Bajo", "Saxofón"],
-    correctIndex: 1
-  },
-  {
-    question: "¿Cuál de estos no es un álbum de estudio de Airbag?",
-    options: ["Blanco y Negro", "Samsara", "Libertad", "Una hora a Tokyo", "Airbag"],
-    correctIndex: 3
-  },
-  {
-    question: "¿Cuál de estos fue un álbum que marcó una evolución más profunda en su sonido?",
-    options: ["Airbag", "Blanco y Negro", "Libertad", "Vorágine", "Mentira la Verdad"],
-    correctIndex: 3
-  },
-  {
-    question: "¿Cuál fue el primer sencillo de difusión del álbum Mentira la Verdad?",
-    options: ["Vivamos el Momento", "Solo Aquí", "Ya No Recuerdo", "Y Tú"],
-    correctIndex: 0
-  },
-  {
-    question: "¿Qué género describe mejor el estilo de Airbag?",
-    options: ["Jazz", "Reggaetón", "Rock / Hard rock", "Folklore", "Trap"],
+    question: "¿Cuál es el apellido de los integrantes de Airbag?",
+    options: ["González", "Romero", "Sardelli", "Martínez", "Suárez"],
     correctIndex: 2
   },
   {
     question: "¿Cuál de estos roles cumple Patricio Sardelli en la banda?",
-    options: ["Bajista principal", "Solo manager", "Baterista de gira", "Guitarra principal y voz", "Tecladista exclusivo"],
-    correctIndex: 3
-  },
-  {
-    question: "¿En qué estudio grabaron su álbum debut Airbag?",
-    options: ["Abbey Road", "Estudio El Santito", "La Fabrique", "Estudios ION", "Estudio Panda"],
-    correctIndex: 3
-  },
-  {
-    question: "¿Qué hacían los hermanos Sardelli antes de convertirse en Airbag?",
-    options: ["Estudiaban medicina", "Participaban en competencias de skate", "Ensayaban covers en el garage familiar", "Fueron bailarines de tango profesional", "Tocaban folklore argentino"],
-    correctIndex: 2
-  },
-  {
-    question: "¿Qué actividad musical tuvo Patricio Sardelli cuando era niño?",
-    options: ["Tocaba piano clásico", "Participó en el programa 'Grandes Valores del Tango'", "Era DJ en una radio escolar", "Fue percusionista de folklore", "Estudió ópera"],
+    options: ["Solo guitarrista", "Cantante y guitarrista", "Bajista", "Baterista", "Tecladista principal"],
     correctIndex: 1
   },
   {
-    question: "¿Qué sello discográfico ha acompañado a Airbag?",
-    options: ["Universal", "Sony", "Warner", "EMI", "Sony BMG"],
-    correctIndex: 4
+    question: "¿Qué instrumento toca Guido Sardelli en Airbag?",
+    options: ["Bajo", "Teclados", "Batería", "Saxo", "Piano"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Qué función cumple Gastón Sardelli?",
+    options: ["Guitarra líder", "Batería", "Bajo", "Teclados", "Producción musical"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Cuál es el género principal con el que se identifica Airbag?",
+    options: ["Pop electrónico", "Punk rock", "Hard rock", "Metal extremo", "Reggaetón"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Cuál de estos discos pertenece a Airbag?",
+    options: ["El amor después del amor", "Libertad", "Luz roja", "Civilización", "Bocanada"],
+    correctIndex: 1
+  },
+  {
+    question: "¿Cuál de estas canciones es de Airbag?",
+    options: ["Gran encuentro", "Crimen", "Misterios", "Persiana americana", "Vasos vacios"],
+    correctIndex: 0
+  },
+  {
+    question: "¿A qué canción de Airbag pertenece este fragmento de letra?\n\"Y empecé a gritar tu nombre, sin sentir las balas pasar\"",
+    options: ["Vivamos el momento", "Cae el sol", "Kalashnikov", "Pensamientos", "Por mil noches"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Cuál es el último álbum de estudio publicado por Airbag hasta la fecha?",
+    options: ["Libertad", "Mentira la Verdad", "Al parecer todo ha sido una trampa", "El club de la pelea", "Vorágine"],
+    correctIndex: 3
   },
   {
     question: "¿Cuál de los hermanos de Airbag tiene hijos?",
     options: ["Patricio Sardelli", "Guido Sardelli", "Gastón Sardelli", "Ninguno de ellos", "Los tres hermanos"],
-    correctIndex: 0
-  },
-  {
-    question: "¿Cuál de estos álbumes fue grabado fuera de Argentina?",
-    options: ["Airbag", "Libertad", "Vorágine", "Al parecer todo ha sido una trampa", "Blanco y Negro"],
-    correctIndex: 3
-  },
-  {
-    question: "¿Qué canción de Airbag fue versionada en Lollapalooza Argentina por Ana Mena?",
-    options: ["Por mil noches", "Vivamos el Momento", "Solo Aquí", "Cae el Sol"],
-    correctIndex: 3
-  },
-  {
-    question: "¿Dónde practicaban los hermanos Sardelli al principio antes de ser conocidos?",
-    options: ["En el sótano de un estudio profesional", "En clubes nocturnos", "En el garage de su casa familiar", "En salas de ensayo pagas", "En el jardín de una escuela secundaria"],
     correctIndex: 2
   },
   {
-    question: "¿Cuál de estos conciertos fue un hito importante para Airbag en Argentina?",
-    options: ["Teatro Cervantes", "Estadio Obras Sanitarias", "Gran Rex varias veces", "Luna Park solamente", "Estadio Monumental único"],
+    question: "¿Dónde practicaban los hermanos Sardelli al principio antes de ser conocidos?",
+    options: ["En el sótano de un estudio profesional", "En clubes nocturnos", "En el garage de su casa familiar", "En salas de ensayo", "En el jardín de una escuela secundaria"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Qué actividad musical tuvo Patricio Sardelli cuando era niño?",
+    options: ["Tocaba piano clásico", "Participó en el programa 'Grandes Valores del Tango'", "Era DJ", "Fue percusionista de folklore", "Estudió ópera"],
+    correctIndex: 1
+  },
+  {
+    question: "¿Qué hacían los hermanos Sardelli antes de convertirse en Airbag?",
+    options: ["Estudiaban medicina", "Participaban en competencias de skate", "Ensayaban covers de Los Beatles", "Fueron bailarines de tango profesional", "Tocaban folklore argentino"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Cuál fue el título del álbum debut de Airbag?",
+    options: ["Blanco y Negro", "Libertad", "Airbag", "Vorágine", "Una hora a Tokyo"],
     correctIndex: 2
   }
 ];

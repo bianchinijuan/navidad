@@ -106,7 +106,7 @@ export default function HubRoom() {
         {/* Frame container - 42% of viewport (30% reduction from 60%) */}
         <motion.div
           className="relative"
-          style={{
+          style={{ display: "none" }}
             width: '42vw',
             maxWidth: '630px',
             border: '20px solid #4A2511',
@@ -131,12 +131,11 @@ export default function HubRoom() {
             alt="Hub Room"
             loading="lazy"
             onLoad={() => setImageLoaded(true)}
-            style={{
+            style={{ display: "none" }}
               width: '100%',
               height: 'auto',
               display: 'block',
               borderRadius: '4px',
-              opacity: imageLoaded ? 1 : 0,
               transition: 'opacity 0.3s ease-in-out',
             }}
           />
@@ -145,7 +144,7 @@ export default function HubRoom() {
           <motion.div
             onClick={handleTreeClick}
             className="group"
-            style={{
+            style={{ display: "none" }}
               position: 'absolute',
               left: '22%',
               top: '28%',
@@ -165,7 +164,7 @@ export default function HubRoom() {
                 initial={{ y: 10, scale: 0.9 }}
                 whileHover={{ y: 0, scale: 1 }}
                 transition={{ duration: 0.3, type: "spring" }}
-                style={{
+                style={{ display: "none" }}
                   left: '50%',
                   transform: 'translateX(-50%)',
                   background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.92), rgba(234, 179, 8, 0.92))',
@@ -179,7 +178,7 @@ export default function HubRoom() {
                 <div className="text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   <div
                     className="text-xs whitespace-nowrap"
-                    style={{
+                    style={{ display: "none" }}
                       color: '#FFFFFF',
                       textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)',
                       fontWeight: '600',
@@ -192,7 +191,7 @@ export default function HubRoom() {
                 <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1">
                   <div
                     className="w-0 h-0 border-l-6 border-r-6 border-t-6 border-transparent"
-                    style={{
+                    style={{ display: "none" }}
                       borderTopColor: 'rgba(234, 179, 8, 0.92)',
                       borderLeftWidth: '6px',
                       borderRightWidth: '6px',
@@ -232,7 +231,7 @@ export default function HubRoom() {
         {showUnlockMessage && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center"
-            style={{
+            style={{ display: "none" }}
               backgroundColor: 'rgba(0, 0, 0, 0.7)',
             }}
             initial={{ opacity: 0 }}
@@ -241,7 +240,7 @@ export default function HubRoom() {
           >
             <motion.div
               className="bg-gradient-to-br from-green-600 via-emerald-600 to-green-700 rounded-2xl p-10 border-4 border-green-300"
-              style={{
+              style={{ display: "none" }}
                 boxShadow: '0 0 60px rgba(34, 197, 94, 0.8)',
                 maxWidth: '450px',
               }}
@@ -268,7 +267,7 @@ export default function HubRoom() {
 
                 <h3
                   className="text-4xl font-bold text-white mb-4"
-                  style={{
+                  style={{ display: "none" }}
                     textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
                     fontFamily: 'Georgia, serif'
                   }}
