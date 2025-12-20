@@ -111,23 +111,6 @@ export default function LyricsFillGame({ onComplete, onClose }: LyricsFillGamePr
     setShuffledPuzzles(shuffled);
   }, []);
 
-  // Timer
-  useEffect(() => {
-    if (showInstructions || showResult || gameWon || gameLost) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          handleTimeOut();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [showInstructions, showResult, gameWon, gameLost, currentPuzzle, handleTimeOut]);
-
   const handleTimeOut = useCallback(() => {
     audioManager.play('wrong');
     setIsCorrect(false);
@@ -151,6 +134,23 @@ export default function LyricsFillGame({ onComplete, onClose }: LyricsFillGamePr
       }
     }, 2000);
   }, [currentPuzzle, shuffledPuzzles.length, score, onComplete]);
+
+  // Timer
+  useEffect(() => {
+    if (showInstructions || showResult || gameWon || gameLost) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          handleTimeOut();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [showInstructions, showResult, gameWon, gameLost, currentPuzzle, handleTimeOut]);
 
   const normalizeString = (str: string) => {
     return str
