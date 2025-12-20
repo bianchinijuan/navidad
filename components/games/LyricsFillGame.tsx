@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { audioManager } from '@/lib/audioManager';
 
@@ -126,9 +126,9 @@ export default function LyricsFillGame({ onComplete, onClose }: LyricsFillGamePr
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [showInstructions, showResult, gameWon, gameLost, currentPuzzle]);
+  }, [showInstructions, showResult, gameWon, gameLost, currentPuzzle, handleTimeOut]);
 
-  const handleTimeOut = () => {
+  const handleTimeOut = useCallback(() => {
     audioManager.play('wrong');
     setIsCorrect(false);
     setShowResult(true);
@@ -150,7 +150,7 @@ export default function LyricsFillGame({ onComplete, onClose }: LyricsFillGamePr
         }
       }
     }, 2000);
-  };
+  }, [currentPuzzle, shuffledPuzzles.length, score, onComplete]);
 
   const normalizeString = (str: string) => {
     return str
@@ -432,7 +432,7 @@ export default function LyricsFillGame({ onComplete, onClose }: LyricsFillGamePr
             }}
           >
             <div className="text-center text-lg text-pink-100 leading-relaxed whitespace-pre-line font-serif italic">
-              "{puzzle.lyric}"
+              &ldquo;{puzzle.lyric}&rdquo;
             </div>
           </div>
         </motion.div>
