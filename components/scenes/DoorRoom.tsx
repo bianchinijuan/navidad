@@ -14,15 +14,15 @@ export default function DoorRoom() {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    audioManager.play('hub-ambient', true);
+    audioManager.play('hub-ambient');
 
     return () => {
-      audioManager.stop('hub-ambient', true);
+      audioManager.stop('hub-ambient');
     };
   }, []);
 
   const handleBackToHub = () => {
-    audioManager.stop('hub-ambient', true);
+    audioManager.stop('hub-ambient');
     audioManager.play('door-open');
     setScene('hub');
   };
@@ -33,7 +33,7 @@ export default function DoorRoom() {
     if (giftOpened) {
       // Door is unlocked, can proceed to final scene
       audioManager.play('door-open');
-      audioManager.stop('hub-ambient', true);
+      audioManager.stop('hub-ambient');
       setScene('final');
     } else {
       // Show lock interface
