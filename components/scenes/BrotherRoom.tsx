@@ -6,6 +6,7 @@ import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
 import TapestrySlidingPuzzle from '../games/TapestrySlidingPuzzle';
+import Snowfall from '../effects/Snowfall';
 
 export default function BrotherRoom() {
   const {
@@ -25,23 +26,11 @@ export default function BrotherRoom() {
   // Brother room revela el número 9
   const roomNumber = 9;
 
-  useEffect(() => {
-    audioManager.play('brother-music', true);
-
-    return () => {
-      audioManager.stop('brother-music', true);
-    };
-  }, []);
-
   const handleToKitchen = () => {
-    audioManager.stop('brother-music', true);
-    audioManager.play('door-open');
     setScene('kitchen');
   };
 
   const handleToMother = () => {
-    audioManager.stop('brother-music', true);
-    audioManager.play('door-open');
     setScene('mother');
   };
 
@@ -107,9 +96,12 @@ export default function BrotherRoom() {
         }}
       />
 
+      {/* Falling snow in background */}
+      <Snowfall count={70} />
+
       {/* Container wrapper for frame and arrows */}
       <div
-        className="relative flex items-center justify-center gap-20"
+        className="relative flex items-center justify-center gap-20 z-10"
         style={{
           opacity: imageLoaded ? 1 : 0,
           transition: 'opacity 0.5s ease-in-out',

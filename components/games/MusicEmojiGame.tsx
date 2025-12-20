@@ -107,16 +107,17 @@ export default function MusicEmojiGame({ onComplete, onClose }: MusicEmojiGamePr
   // Music management
   useEffect(() => {
     if (!showInstructions) {
+      // Game is active - pause christmas-music and play sister-room
       audioManager.pause('christmas-music');
-      audioManager.play('sister-music', true);
+      audioManager.play('sister-room');
 
       return () => {
-        audioManager.stop('sister-music', true);
+        audioManager.stop('sister-room');
         audioManager.resume('christmas-music');
       };
     } else {
-      audioManager.stop('sister-music', true);
-      audioManager.resume('christmas-music');
+      // Ensure sister music is stopped when instructions are showing
+      audioManager.stop('sister-room');
     }
   }, [showInstructions]);
 

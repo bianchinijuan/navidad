@@ -13,7 +13,7 @@ export default function IntroScene() {
   // Try to start Christmas music automatically on mount
   useEffect(() => {
     // Attempt autoplay (may be blocked by browser)
-    audioManager.play('christmas-music', true);
+    audioManager.play('christmas-music');
 
     // Cleanup - don't stop music, let it continue throughout the game
     return () => {
@@ -26,9 +26,9 @@ export default function IntroScene() {
 
     setIsTransitioning(true);
 
-    // Play click sound and try to ensure music is playing
+    // Play click sound and ensure music is playing
     audioManager.play('mouse-click');
-    audioManager.play('christmas-music', true); // Ensure music starts on user interaction
+    audioManager.play('christmas-music'); // Ensure music starts on user interaction
 
     // Transition to hub (keep music playing)
     setTimeout(() => {

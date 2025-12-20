@@ -14,10 +14,10 @@ export default function VolumeControl() {
 
     if (newMutedState) {
       // Mute all music
-      audioManager.setAmbientVolume(0);
+      audioManager.setMusicVolume(0);
     } else {
-      // Restore music volume
-      audioManager.setAmbientVolume(0.4);
+      // Restore music volume to 15%
+      audioManager.setMusicVolume(0.15);
     }
   };
 

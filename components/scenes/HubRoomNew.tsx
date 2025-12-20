@@ -6,6 +6,7 @@ import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
 import CombinationLock from '../shared/CombinationLock';
+import Snowfall from '../effects/Snowfall';
 
 /**
  * HUB ROOM - Sistema de Coordenadas Proporcional
@@ -88,9 +89,11 @@ export default function HubRoom() {
         }}
       />
 
+      {/* Falling snow in background */}
+      <Snowfall count={70} />
 
       {/* Container wrapper for frame and arrows */}
-      <div className="relative flex items-center justify-center gap-20">
+      <div className="relative flex items-center justify-center gap-20 z-10">
         {/* Left arrow - to Kitchen */}
         {roomsUnlocked.kitchen && (
           <NavigationArrow

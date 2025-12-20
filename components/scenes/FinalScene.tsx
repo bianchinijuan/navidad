@@ -15,12 +15,12 @@ export default function FinalScene() {
   // Music management for final scene
   useEffect(() => {
     // Stop christmas music and play final music for celebration
-    audioManager.stop('christmas-music', true);
-    audioManager.play('final-music', true);
+    audioManager.stop('christmas-music');
+    audioManager.play('final');
 
     return () => {
       // Cleanup - stop final music when leaving final scene
-      audioManager.stop('final-music', true);
+      audioManager.stop('final');
       audioManager.resume('christmas-music');
     };
   }, []);
@@ -65,7 +65,7 @@ export default function FinalScene() {
       />
 
       {/* Scrollable Content */}
-      <div className="relative z-10 min-h-full flex flex-col items-center justify-start py-20 px-8 space-y-16">
+      <div className="relative z-10 min-h-full flex flex-col items-center justify-start py-28 px-8 space-y-24">
         {/* Main message */}
         <motion.div
           className="text-center"
@@ -92,7 +92,7 @@ export default function FinalScene() {
           </motion.div>
 
           <motion.p
-            className="text-2xl md:text-3xl text-amber-100 mb-6"
+            className="text-2xl md:text-3xl text-amber-100 mb-8"
             style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -102,55 +102,138 @@ export default function FinalScene() {
           </motion.p>
         </motion.div>
 
-        {/* Decorative Hearts Animation */}
+        {/* Tarjeta elegante de regalos */}
         <motion.div
-          className="flex justify-center items-center gap-6 mb-8"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2.2, duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.2, duration: 0.8, type: "spring" }}
+          style={{
+            background: 'linear-gradient(135deg, rgba(139, 21, 56, 0.98) 0%, rgba(127, 29, 29, 0.98) 50%, rgba(153, 27, 27, 0.98) 100%)',
+            backdropFilter: 'blur(16px)',
+            border: '2px solid rgba(255, 215, 0, 0.4)',
+            borderRadius: '24px',
+            padding: '40px 60px',
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            maxWidth: '600px',
+            margin: '0 auto',
+            position: 'relative',
+          }}
         >
+          {/* Decorative corner accents */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '12px',
+              left: '12px',
+              width: '40px',
+              height: '40px',
+              border: '2px solid rgba(255, 215, 0, 0.5)',
+              borderRight: 'none',
+              borderBottom: 'none',
+              borderRadius: '8px 0 0 0',
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              top: '12px',
+              right: '12px',
+              width: '40px',
+              height: '40px',
+              border: '2px solid rgba(255, 215, 0, 0.5)',
+              borderLeft: 'none',
+              borderBottom: 'none',
+              borderRadius: '0 8px 0 0',
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '12px',
+              left: '12px',
+              width: '40px',
+              height: '40px',
+              border: '2px solid rgba(255, 215, 0, 0.5)',
+              borderRight: 'none',
+              borderTop: 'none',
+              borderRadius: '0 0 0 8px',
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '12px',
+              right: '12px',
+              width: '40px',
+              height: '40px',
+              border: '2px solid rgba(255, 215, 0, 0.5)',
+              borderLeft: 'none',
+              borderTop: 'none',
+              borderRadius: '0 0 8px 0',
+            }}
+          />
+
+          {/* Icon */}
           <motion.div
+            className="text-center mb-4"
             animate={{
-              y: [0, -10, 0],
-              rotate: [0, -5, 0],
+              scale: [1, 1.1, 1],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            style={{ fontSize: '3rem' }}
           >
-            ✨
+            <span
+              style={{
+                fontSize: '48px',
+                filter: 'drop-shadow(0 4px 12px rgba(255, 215, 0, 0.6))',
+              }}
+            >
+              🎁
+            </span>
           </motion.div>
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
+
+          {/* Main title */}
+          <h2
+            className="text-4xl font-bold text-center mb-3"
+            style={{
+              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontFamily: 'Georgia, serif',
+              letterSpacing: '2px',
+              textShadow: 'none',
             }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{ fontSize: '4rem' }}
           >
-            💝
-          </motion.div>
-          <motion.div
-            animate={{
-              y: [0, -10, 0],
-              rotate: [0, 5, 0],
+            Reclama tus Regalos
+          </h2>
+
+          {/* Subtitle */}
+          <p
+            className="text-center text-amber-100"
+            style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: '16px',
+              fontStyle: 'italic',
+              opacity: 0.9,
+              letterSpacing: '0.5px',
+              lineHeight: '1.6',
             }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.5,
-            }}
-            style={{ fontSize: '3rem' }}
           >
-            ✨
-          </motion.div>
+            ¡Feliz Navidad Amor!
+          </p>
+
+          {/* Decorative divider */}
+          <div
+            style={{
+              width: '60px',
+              height: '2px',
+              background: 'linear-gradient(to right, transparent, rgba(255, 215, 0, 0.6), transparent)',
+              margin: '20px auto 0',
+            }}
+          />
         </motion.div>
 
         {/* Galería de fotos estilo polaroid */}
@@ -161,14 +244,14 @@ export default function FinalScene() {
           transition={{ delay: 2.8 }}
         >
           <h2
-            className="text-4xl md:text-5xl font-serif text-center mb-12 text-amber-300"
+            className="text-4xl md:text-5xl font-serif text-center mb-16 text-amber-300"
             style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
           >
-            💕 Te amo
+            💕 Te amo 💕
           </h2>
 
           {/* Fotos estilo polaroid esparcidas */}
-          <div className="relative flex flex-wrap justify-center items-center gap-8 min-h-[600px]">
+          <div className="relative flex flex-wrap justify-center items-center gap-10 min-h-[600px]">
             {/* Foto 1 - Inclinada a la izquierda */}
             <motion.div
               className="relative bg-white p-3 shadow-2xl"
@@ -329,7 +412,7 @@ export default function FinalScene() {
         {showButton && (
           <motion.button
             onClick={handleBackToHub}
-            className="px-12 py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-xl font-bold rounded-full shadow-2xl border-4 border-amber-300 transition-all mb-20"
+            className="px-12 py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-xl font-bold rounded-full shadow-2xl border-4 border-amber-300 transition-all mb-24"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}

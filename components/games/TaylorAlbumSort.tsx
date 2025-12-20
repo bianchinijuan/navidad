@@ -57,22 +57,17 @@ export default function TaylorAlbumSort({ onComplete, onClose }: TaylorAlbumSort
     console.log('[TaylorAlbumSort] Music effect triggered', { showInstructions, isComplete, gameOver });
 
     if (!showInstructions && !isComplete && !gameOver) {
-      // Game is active - play taylor music
-      console.log('[TaylorAlbumSort] Starting taylor-room music');
+      // Game is active - pause christmas-music and play taylor-room
       audioManager.pause('christmas-music');
-      audioManager.play('taylor-room', true);
+      audioManager.play('taylor-room');
 
-      // Cleanup only when game is actually active
       return () => {
-        console.log('[TaylorAlbumSort] Cleanup - game was active, stopping taylor-room');
-        audioManager.stop('taylor-room', true);
+        audioManager.stop('taylor-room');
         audioManager.resume('christmas-music');
       };
     } else {
-      // Game is not active - ensure taylor music is stopped
-      console.log('[TaylorAlbumSort] Game not active, stopping taylor-room if playing');
-      audioManager.stop('taylor-room', true);
-      audioManager.resume('christmas-music');
+      // Ensure taylor music is stopped when game is not active
+      audioManager.stop('taylor-room');
 
       // No cleanup needed when game is not active
       return () => {

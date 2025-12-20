@@ -29,7 +29,8 @@
       "Bash(sort:*)",
       "Bash(npx sharp-cli:*)",
       "Bash(git checkout:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(curl:*)"
     ]
   }
 }

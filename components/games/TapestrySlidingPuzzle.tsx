@@ -54,22 +54,20 @@ export default function TapestrySlidingPuzzle({ onComplete, onClose }: TapestryS
   const [isComplete, setIsComplete] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
 
-  // Music management
+  // Music management - brother-room-v2 plays after instructions close
   useEffect(() => {
     if (!showInstructions) {
-      // Game is active - play taylor music
+      // Game is active - pause christmas-music and play brother-room-v2
       audioManager.pause('christmas-music');
-      audioManager.play('taylor-room', true);
+      audioManager.play('brother-room-v2');
 
-      // Cleanup only when game is actually active
       return () => {
-        audioManager.stop('taylor-room', true);
+        audioManager.stop('brother-room-v2');
         audioManager.resume('christmas-music');
       };
     } else {
-      // Game is not active - ensure taylor music is stopped
-      audioManager.stop('taylor-room', true);
-      audioManager.resume('christmas-music');
+      // Ensure brother music is stopped when instructions are showing
+      audioManager.stop('brother-room-v2');
     }
   }, [showInstructions]);
 

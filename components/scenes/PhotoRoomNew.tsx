@@ -6,6 +6,7 @@ import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
 import TaylorAlbumSort from '../games/TaylorAlbumSort';
+import Snowfall from '../effects/Snowfall';
 
 export default function BedroomRoom() {
   const {
@@ -96,9 +97,12 @@ export default function BedroomRoom() {
         }}
       />
 
+      {/* Falling snow in background */}
+      <Snowfall count={70} />
+
       {/* Container wrapper for frame and arrows */}
       <div
-        className="relative flex items-center justify-center gap-20"
+        className="relative flex items-center justify-center gap-20 z-10"
         style={{
           opacity: imageLoaded ? 1 : 0,
           transition: 'opacity 0.5s ease-in-out',

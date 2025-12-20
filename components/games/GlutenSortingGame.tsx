@@ -54,31 +54,29 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
   const processedIdsRef = useRef<Set<string>>(new Set()); // Track clicked/processed ingredients
   const [showInstructions, setShowInstructions] = useState(true);
 
-  const INGREDIENTS_NEEDED = 25; // Total ingredients needed for pan dulce (increased for longer gameplay)
+  const INGREDIENTS_NEEDED = 20; // Total ingredients needed for pan dulce
   const MAX_ERRORS = 5; // Maximum errors allowed
 
-  // Music management
+  // Music management - kitchen-room plays after instructions close
   useEffect(() => {
     if (!showInstructions) {
-      // Game is active - play kitchen music
+      // Game is active - pause christmas-music and play kitchen-room
       audioManager.pause('christmas-music');
-      audioManager.play('kitchen-music', true);
+      audioManager.play('kitchen-room');
 
-      // Cleanup only when game is actually active
       return () => {
-        audioManager.stop('kitchen-music', true);
+        audioManager.stop('kitchen-room');
         audioManager.resume('christmas-music');
       };
     } else {
-      // Game is not active - ensure kitchen music is stopped
-      audioManager.stop('kitchen-music', true);
-      audioManager.resume('christmas-music');
+      // Ensure kitchen music is stopped when instructions are showing
+      audioManager.stop('kitchen-room');
     }
   }, [showInstructions]);
 
-  // Spawn ingredients
+  // Spawn ingredients - only when game is active (instructions closed)
   useEffect(() => {
-    if (gameOver || collected >= INGREDIENTS_NEEDED) return;
+    if (showInstructions || gameOver || collected >= INGREDIENTS_NEEDED) return;
 
     const interval = setInterval(() => {
       const randomIngredient = INGREDIENTS[Math.floor(Math.random() * INGREDIENTS.length)];
@@ -100,7 +98,7 @@ export default function GlutenSortingGame({ onComplete, onClose }: GlutenSorting
     }, spawnInterval);
 
     return () => clearInterval(interval);
-  }, [gameOver, collected, spawnInterval]);
+  }, [showInstructions, gameOver, collected, spawnInterval]);
 
   const handleIngredientClick = useCallback((ingredient: FallingIngredient) => {
     // Mark as processed to prevent onAnimationComplete from triggering

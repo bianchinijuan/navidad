@@ -18,103 +18,103 @@ interface Question {
 const QUESTIONS: Question[] = [
   {
     question: "¿En qué año se formó la banda Airbag?",
-    options: ["1995", "1999", "2003", "2007"],
+    options: ["1995", "1999", "2002", "2004", "2006"],
     correctIndex: 1
   },
   {
-    question: "¿De qué país es originaria la banda Airbag?",
-    options: ["Chile", "Uruguay", "Argentina", "España"],
-    correctIndex: 2
-  },
-  {
-    question: "¿Qué estilo musical caracteriza principalmente a Airbag?",
-    options: ["Rock progresivo", "Pop rock", "Heavy metal", "Folk"],
-    correctIndex: 0
-  },
-  {
-    question: "¿Cuántos integrantes conforman Airbag?",
-    options: ["2", "3", "4", "5"],
+    question: "¿De qué localidad de Buenos Aires provienen los hermanos Sardelli, integrantes de Airbag?",
+    options: ["La Plata", "Don Torcuato", "Mar del Plata", "Rosario", "Córdoba"],
     correctIndex: 1
   },
   {
-    question: "¿Cuál es el instrumento principal de Gastón Sardelli?",
-    options: ["Bajo", "Guitarra", "Batería", "Teclados"],
+    question: "¿Cuántos hermanos conforman el núcleo principal de Airbag?",
+    options: ["2", "3", "4", "5", "1"],
     correctIndex: 1
   },
   {
-    question: "¿Cuál fue el primer álbum de estudio de Airbag?",
-    options: ["Airbag", "Identidad", "Blanco y Negro", "Al Parecer Todo Ha Sido una Trampa"],
-    correctIndex: 0
+    question: "¿Cuál fue el título del álbum debut de Airbag?",
+    options: ["Blanco y Negro", "Libertad", "Airbag", "Vorágine", "Una hora a Tokyo"],
+    correctIndex: 2
   },
   {
-    question: "¿Qué canción de Airbag incluye la letra 'Todo está guardado en la memoria'?",
-    options: ["Colombina", "Diez Días Después", "Cae el Sol", "Nunca lo Olvides"],
+    question: "¿En qué año se lanzó el álbum Blanco y Negro?",
+    options: ["2002", "2006", "2008", "2010", "2012"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Qué instrumento toca principalmente Gastón Sardelli?",
+    options: ["Guitarra", "Teclados", "Batería", "Bajo", "Saxofón"],
     correctIndex: 1
   },
   {
-    question: "¿Quién es el bajista de Airbag?",
-    options: ["Patricio Sardelli", "Gastón Sardelli", "Guido Sardelli", "Martín Ruiz Díaz"],
-    correctIndex: 2
-  },
-  {
-    question: "¿Cuál es el nombre del álbum lanzado en 2016?",
-    options: ["Vivamos el Momento", "Una Hora a Tokyo", "Libertad o Miedo", "Vorágine"],
-    correctIndex: 2
-  },
-  {
-    question: "¿Qué canción incluye la frase 'No quiero verte caer'?",
-    options: ["Cae el Sol", "Colombina", "Será por Ti", "Nunca lo Olvides"],
-    correctIndex: 2
-  },
-  {
-    question: "¿En qué ciudad se formó Airbag?",
-    options: ["Buenos Aires", "Rosario", "Córdoba", "Mendoza"],
-    correctIndex: 0
-  },
-  {
-    question: "¿Quién es el baterista de Airbag?",
-    options: ["Gastón Sardelli", "Patricio Sardelli", "Guido Sardelli", "Cristian Prat"],
-    correctIndex: 1
-  },
-  {
-    question: "¿Qué álbum incluye la canción 'Colombina'?",
-    options: ["Airbag", "Identidad", "Al Parecer Todo Ha Sido una Trampa", "Una Hora a Tokyo"],
-    correctIndex: 2
-  },
-  {
-    question: "¿Cuál fue el álbum lanzado en 2020?",
-    options: ["Vorágine", "Libertad o Miedo", "Vivamos el Momento", "Abismo de Ilusión"],
+    question: "¿Cuál de estos no es un álbum de estudio de Airbag?",
+    options: ["Blanco y Negro", "Samsara", "Libertad", "Una hora a Tokyo", "Airbag"],
     correctIndex: 3
   },
   {
-    question: "¿Qué influencia musical principal tiene Airbag?",
-    options: ["The Beatles", "Pink Floyd", "Led Zeppelin", "The Rolling Stones"],
-    correctIndex: 1
-  },
-  {
-    question: "¿Cuántos álbumes de estudio ha lanzado Airbag hasta 2020?",
-    options: ["5", "6", "7", "8"],
+    question: "¿Cuál de estos fue un álbum que marcó una evolución más profunda en su sonido?",
+    options: ["Airbag", "Blanco y Negro", "Libertad", "Vorágine", "Mentira la Verdad"],
     correctIndex: 3
   },
   {
-    question: "¿Qué canción de Airbag fue usada en una película argentina?",
-    options: ["Diez Días Después", "Colombina", "Cae el Sol", "Nunca lo Olvides"],
+    question: "¿Cuál fue el primer sencillo de difusión del álbum Mentira la Verdad?",
+    options: ["Vivamos el Momento", "Solo Aquí", "Ya No Recuerdo", "Y Tú"],
+    correctIndex: 0
+  },
+  {
+    question: "¿Qué género describe mejor el estilo de Airbag?",
+    options: ["Jazz", "Reggaetón", "Rock / Hard rock", "Folklore", "Trap"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Cuál de estos roles cumple Patricio Sardelli en la banda?",
+    options: ["Bajista principal", "Solo manager", "Baterista de gira", "Guitarra principal y voz", "Tecladista exclusivo"],
+    correctIndex: 3
+  },
+  {
+    question: "¿En qué estudio grabaron su álbum debut Airbag?",
+    options: ["Abbey Road", "Estudio El Santito", "La Fabrique", "Estudios ION", "Estudio Panda"],
+    correctIndex: 3
+  },
+  {
+    question: "¿Qué hacían los hermanos Sardelli antes de convertirse en Airbag?",
+    options: ["Estudiaban medicina", "Participaban en competencias de skate", "Ensayaban covers en el garage familiar", "Fueron bailarines de tango profesional", "Tocaban folklore argentino"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Qué actividad musical tuvo Patricio Sardelli cuando era niño?",
+    options: ["Tocaba piano clásico", "Participó en el programa 'Grandes Valores del Tango'", "Era DJ en una radio escolar", "Fue percusionista de folklore", "Estudió ópera"],
     correctIndex: 1
   },
   {
-    question: "¿En qué año lanzaron el álbum 'Identidad'?",
-    options: ["2007", "2009", "2011", "2013"],
-    correctIndex: 1
+    question: "¿Qué sello discográfico ha acompañado a Airbag?",
+    options: ["Universal", "Sony", "Warner", "EMI", "Sony BMG"],
+    correctIndex: 4
   },
   {
-    question: "¿Qué hermanos conforman Airbag?",
-    options: ["Los Gieco", "Los Sardelli", "Los Calamaro", "Los Ciro"],
-    correctIndex: 1
+    question: "¿Cuál de los hermanos de Airbag tiene hijos?",
+    options: ["Patricio Sardelli", "Guido Sardelli", "Gastón Sardelli", "Ninguno de ellos", "Los tres hermanos"],
+    correctIndex: 0
   },
   {
-    question: "¿Cuál es una característica del sonido de Airbag?",
-    options: ["Guitarras distorsionadas", "Sonidos atmosféricos y progresivos", "Ritmos latinos", "Voces operísticas"],
-    correctIndex: 1
+    question: "¿Cuál de estos álbumes fue grabado fuera de Argentina?",
+    options: ["Airbag", "Libertad", "Vorágine", "Al parecer todo ha sido una trampa", "Blanco y Negro"],
+    correctIndex: 3
+  },
+  {
+    question: "¿Qué canción de Airbag fue versionada en Lollapalooza Argentina por Ana Mena?",
+    options: ["Por mil noches", "Vivamos el Momento", "Solo Aquí", "Cae el Sol"],
+    correctIndex: 3
+  },
+  {
+    question: "¿Dónde practicaban los hermanos Sardelli al principio antes de ser conocidos?",
+    options: ["En el sótano de un estudio profesional", "En clubes nocturnos", "En el garage de su casa familiar", "En salas de ensayo pagas", "En el jardín de una escuela secundaria"],
+    correctIndex: 2
+  },
+  {
+    question: "¿Cuál de estos conciertos fue un hito importante para Airbag en Argentina?",
+    options: ["Teatro Cervantes", "Estadio Obras Sanitarias", "Gran Rex varias veces", "Luna Park solamente", "Estadio Monumental único"],
+    correctIndex: 2
   }
 ];
 
@@ -131,19 +131,17 @@ export default function AirbagQuizGame({ onComplete, onClose }: AirbagQuizGamePr
   // Music management
   useEffect(() => {
     if (!showInstructions) {
-      // Game is active - play airbag music
+      // Game is active - pause christmas-music and play airbag-room
       audioManager.pause('christmas-music');
-      audioManager.play('airbag-music', true);
+      audioManager.play('airbag-room');
 
-      // Cleanup only when game is actually active
       return () => {
-        audioManager.stop('airbag-music', true);
+        audioManager.stop('airbag-room');
         audioManager.resume('christmas-music');
       };
     } else {
-      // Game is not active - ensure airbag music is stopped
-      audioManager.stop('airbag-music', true);
-      audioManager.resume('christmas-music');
+      // Ensure airbag music is stopped when instructions are showing
+      audioManager.stop('airbag-room');
     }
   }, [showInstructions]);
 

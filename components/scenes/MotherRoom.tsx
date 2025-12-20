@@ -6,6 +6,7 @@ import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
 import ZodiacElementGame from '../games/ZodiacElementGame';
+import Snowfall from '../effects/Snowfall';
 
 export default function MotherRoom() {
   const {
@@ -24,17 +25,7 @@ export default function MotherRoom() {
   // Mother room revela el número 2
   const roomNumber = 2;
 
-  useEffect(() => {
-    audioManager.play('hub-ambient', true);
-
-    return () => {
-      audioManager.stop('hub-ambient', true);
-    };
-  }, []);
-
   const handleToBrother = () => {
-    audioManager.stop('hub-ambient', true);
-    audioManager.play('door-open');
     setScene('brother');
   };
 
@@ -100,9 +91,12 @@ export default function MotherRoom() {
         }}
       />
 
+      {/* Falling snow in background */}
+      <Snowfall count={70} />
+
       {/* Container wrapper for frame and arrows */}
       <div
-        className="relative flex items-center justify-center gap-20"
+        className="relative flex items-center justify-center gap-20 z-10"
         style={{
           opacity: imageLoaded ? 1 : 0,
           transition: 'opacity 0.5s ease-in-out',

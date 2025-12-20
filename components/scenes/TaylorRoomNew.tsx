@@ -6,6 +6,7 @@ import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
 import SlidingPuzzle from '../games/SlidingPuzzle';
+import Snowfall from '../effects/Snowfall';
 
 export default function TaylorRoom() {
   const {
@@ -21,23 +22,11 @@ export default function TaylorRoom() {
 
   const isRoomCompleted = roomsCompleted.taylor;
 
-  useEffect(() => {
-    audioManager.play('hub-ambient', true);
-
-    return () => {
-      audioManager.stop('hub-ambient', true);
-    };
-  }, []);
-
   const handleToHub = () => {
-    audioManager.stop('hub-ambient', true);
-    audioManager.play('door-open');
     setScene('hub');
   };
 
   const handleToKitchen = () => {
-    audioManager.stop('hub-ambient', true);
-    audioManager.play('door-open');
     setScene('kitchen');
   };
 
@@ -93,9 +82,12 @@ export default function TaylorRoom() {
         }}
       />
 
+      {/* Falling snow in background */}
+      <Snowfall count={70} />
+
       {/* Container wrapper for frame and arrows */}
       <div
-        className="relative flex items-center justify-center gap-20"
+        className="relative flex items-center justify-center gap-20 z-10"
         style={{
           opacity: imageLoaded ? 1 : 0,
           transition: 'opacity 0.5s ease-in-out',

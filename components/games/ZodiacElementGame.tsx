@@ -62,19 +62,17 @@ export default function ZodiacElementGame({ onComplete, onClose }: ZodiacElement
   // Music management
   useEffect(() => {
     if (!showInstructions) {
-      // Game is active - play zodiac music
+      // Game is active - pause christmas-music and play zodiac-room
       audioManager.pause('christmas-music');
-      audioManager.play('zodiac-music', true);
+      audioManager.play('zodiac-room');
 
-      // Cleanup only when game is actually active
       return () => {
-        audioManager.stop('zodiac-music', true);
+        audioManager.stop('zodiac-room');
         audioManager.resume('christmas-music');
       };
     } else {
-      // Game is not active - ensure zodiac music is stopped
-      audioManager.stop('zodiac-music', true);
-      audioManager.resume('christmas-music');
+      // Ensure zodiac music is stopped when instructions are showing
+      audioManager.stop('zodiac-room');
     }
   }, [showInstructions]);
 

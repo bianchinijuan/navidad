@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
-import MusicEmojiGame from '../games/MusicEmojiGame';
+import LyricsFillGame from '../games/LyricsFillGame';
+import Snowfall from '../effects/Snowfall';
 
 export default function SisterRoom() {
   const {
@@ -25,17 +26,7 @@ export default function SisterRoom() {
   // Sister room reveals number 4
   const roomNumber = 4;
 
-  useEffect(() => {
-    audioManager.play('sister-music', true);
-
-    return () => {
-      audioManager.stop('sister-music', true);
-    };
-  }, []);
-
   const handleToAirbag = () => {
-    audioManager.stop('sister-music', true);
-    audioManager.play('door-open');
     setScene('airbag');
   };
 
@@ -101,9 +92,12 @@ export default function SisterRoom() {
         }}
       />
 
+      {/* Falling snow in background */}
+      <Snowfall count={70} />
+
       {/* Container wrapper for frame and arrows */}
       <div
-        className="relative flex items-center justify-center gap-20"
+        className="relative flex items-center justify-center gap-20 z-10"
         style={{
           opacity: imageLoaded ? 1 : 0,
           transition: 'opacity 0.5s ease-in-out',
@@ -215,10 +209,10 @@ export default function SisterRoom() {
         <div style={{ width: '64px', opacity: 0, pointerEvents: 'none' }} />
       </div>
 
-      {/* Music Emoji Game */}
+      {/* Lyrics Fill Game */}
       <AnimatePresence>
         {showGame && !isRoomCompleted && (
-          <MusicEmojiGame
+          <LyricsFillGame
             onComplete={handleGameComplete}
             onClose={handleCloseGame}
           />

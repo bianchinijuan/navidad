@@ -6,6 +6,7 @@ import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import NavigationArrow from '../shared/NavigationArrow';
 import AirbagQuizGame from '../games/AirbagQuizGame';
+import Snowfall from '../effects/Snowfall';
 
 export default function AirbagRoom() {
   const {
@@ -25,23 +26,11 @@ export default function AirbagRoom() {
   // Airbag room revela el número 3
   const roomNumber = 3;
 
-  useEffect(() => {
-    audioManager.play('hub-ambient', true);
-
-    return () => {
-      audioManager.stop('hub-ambient', true);
-    };
-  }, []);
-
   const handleToBedroom = () => {
-    audioManager.stop('hub-ambient', true);
-    audioManager.play('door-open');
     setScene('bedroom');
   };
 
   const handleToSister = () => {
-    audioManager.stop('hub-ambient', true);
-    audioManager.play('door-open');
     setScene('sister');
   };
 
@@ -107,9 +96,12 @@ export default function AirbagRoom() {
         }}
       />
 
+      {/* Falling snow in background */}
+      <Snowfall count={70} />
+
       {/* Contenedor wrapper para frame y flechas */}
       <div
-        className="relative flex items-center justify-center gap-20"
+        className="relative flex items-center justify-center gap-20 z-10"
         style={{
           opacity: imageLoaded ? 1 : 0,
           transition: 'opacity 0.5s ease-in-out',
