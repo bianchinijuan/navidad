@@ -171,7 +171,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   mainGiftUnlocked: false,
   giftOpened: false,
-  giftCombination: [1, 2, 3, 5, 7, 9], // 6-digit combination (future-room, mother, airbag, bedroom, kitchen, brother)
+  giftCombination: [2, 3, 4, 5, 7, 9], // 6-digit combination (future-room, mother, airbag, bedroom, kitchen, brother)
   revealedNumbers: [],
 
   dogFed: false,
