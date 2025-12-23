@@ -87,9 +87,9 @@ const QUESTIONS: Question[] = [
     correctIndex: 2
   },
   {
-    question: "¿Cuál fue el título del álbum debut de Airbag?",
-    options: ["Blanco y Negro", "Libertad", "Airbag", "Vorágine", "Una hora a Tokyo"],
-    correctIndex: 2
+    question: "¿De dónde es originaria la banda Airbag?",
+    options: ["Rosario", "Tandil", "Mar del Plata", "La Plata", "Don Torcuato"],
+    correctIndex: 4
   }
 ];
 
