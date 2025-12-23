@@ -298,11 +298,10 @@ export default function SisterRoom() {
                 width: '80vw',
               }}
             >
-              {/* TODO: Add reward image when user provides it */}
-              {/* Placeholder for now - user will provide reward image later */}
+              {/* Taylor Swift disk reward */}
               <img
-                src="/assets/sister/reward.webp"
-                alt="Sister Room Reward"
+                src="/assets/sister/taylor-disk.webp"
+                alt="Taylor Swift Disk"
                 loading="lazy"
                 style={{
                   width: '100%',
