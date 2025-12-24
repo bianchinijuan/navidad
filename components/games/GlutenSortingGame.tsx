@@ -35,8 +35,8 @@ const INGREDIENTS: Ingredient[] = [
   { id: '18', name: 'Sal', emoji: '🧂', isNeeded: false },
   { id: '19', name: 'Aceite', emoji: '🫒', isNeeded: false },
   { id: '20', name: 'Miel', emoji: '🍯', isNeeded: false },
-  { id: '21', name: 'Chocolate', emoji: '🍫', isNeeded: false },
-  { id: '22', name: 'Almendras', emoji: '🌰', isNeeded: false },
+  { id: '21', name: 'Limón', emoji: '🍋', isNeeded: false },
+  { id: '22', name: 'Naranja', emoji: '🍊', isNeeded: false },
   { id: '23', name: 'Canela', emoji: '🟤', isNeeded: false },
 ];
 

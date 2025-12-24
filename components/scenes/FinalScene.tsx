@@ -519,14 +519,15 @@ export default function FinalScene() {
         {showButton && (
           <motion.button
             onClick={handleBackToHub}
-            className="px-12 py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-xl font-bold rounded-full shadow-2xl border-4 border-amber-300 transition-all mb-24"
+            className="px-12 py-4 text-white text-xl font-bold rounded-lg shadow-lg border-2 transition-all mb-24"
+            style={{
+              background: 'linear-gradient(135deg, #8B1538 0%, #C41E3A 50%, #B8860B 100%)',
+              borderColor: 'rgba(255, 215, 0, 0.4)',
+            }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              boxShadow: '0 0 30px rgba(255, 215, 0, 0.6)',
-            }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             Volver al Hub
           </motion.button>
