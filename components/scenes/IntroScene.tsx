@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
+import { preloadImages, ROOM_IMAGES } from '@/lib/imagePreloader';
 import Snowfall from '../effects/Snowfall';
 
 export default function IntroScene() {
@@ -15,8 +16,16 @@ export default function IntroScene() {
     // Attempt autoplay (may be blocked by browser)
     audioManager.play('christmas-music');
 
+    // Start preloading images early for faster room navigation
+    const timer = setTimeout(() => {
+      preloadImages(ROOM_IMAGES).catch(() => {
+        // Silently fail - preloading is optional optimization
+      });
+    }, 2000);
+
     // Cleanup - don't stop music, let it continue throughout the game
     return () => {
+      clearTimeout(timer);
       // Don't stop music on unmount
     };
   }, []);

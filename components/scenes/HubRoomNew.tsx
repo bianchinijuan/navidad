@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
+import { preloadImages, ROOM_IMAGES } from '@/lib/imagePreloader';
 import NavigationArrow from '../shared/NavigationArrow';
 import CombinationLock from '../shared/CombinationLock';
 import Snowfall from '../effects/Snowfall';
@@ -70,6 +71,18 @@ export default function HubRoom() {
   const handleCloseLock = () => {
     setShowLock(false);
   };
+
+  // Preload room images in background for faster navigation
+  useEffect(() => {
+    // Start preloading after a short delay to not block initial render
+    const timer = setTimeout(() => {
+      preloadImages(ROOM_IMAGES).catch(() => {
+        // Silently fail - preloading is optional optimization
+      });
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div
