@@ -288,7 +288,7 @@ export default function FinalScene() {
                     padding: '40px 32px',
                     boxShadow: '0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
                     border: '2px solid rgba(255, 215, 0, 0.4)',
-                    minHeight: '140px',
+                    height: '160px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
