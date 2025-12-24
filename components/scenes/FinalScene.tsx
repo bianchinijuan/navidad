@@ -253,7 +253,7 @@ export default function FinalScene() {
 
         {/* Carrusel de tarjetas */}
         <motion.div
-          className="max-w-3xl w-full px-4"
+          className="max-w-xl w-full px-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.5, duration: 0.8 }}
@@ -269,24 +269,24 @@ export default function FinalScene() {
                 transition={{ duration: 0.5, type: "spring" }}
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 240, 0.95) 100%)',
-                  borderRadius: '20px',
-                  padding: '60px 40px',
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
-                  border: '3px solid rgba(255, 215, 0, 0.3)',
-                  minHeight: '200px',
+                  borderRadius: '16px',
+                  padding: '32px 28px',
+                  boxShadow: '0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+                  border: '2px solid rgba(255, 215, 0, 0.3)',
+                  minHeight: '120px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
                 <h2
-                  className="text-3xl md:text-5xl font-serif text-center"
+                  className="text-xl md:text-3xl font-serif text-center"
                   style={{
                     background: 'linear-gradient(135deg, #8B1538 0%, #C41E3A 50%, #8B1538 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     fontWeight: 'bold',
-                    letterSpacing: '1px',
+                    letterSpacing: '0.5px',
                     lineHeight: '1.4',
                   }}
                 >
