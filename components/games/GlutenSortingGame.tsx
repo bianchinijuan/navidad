@@ -24,14 +24,20 @@ const INGREDIENTS: Ingredient[] = [
   { id: '7', name: 'Arroz', emoji: '🍚', isNeeded: false },
   { id: '8', name: 'Papa', emoji: '🥔', isNeeded: false },
   { id: '9', name: 'Maíz', emoji: '🌽', isNeeded: false },
-  { id: '10', name: 'Carne', emoji: '🥩', isNeeded: false },
-  { id: '11', name: 'Pescado', emoji: '🐟', isNeeded: false },
-  { id: '12', name: 'Pollo', emoji: '🍗', isNeeded: false },
+  { id: '10', name: 'Tomate', emoji: '🍅', isNeeded: false },
+  { id: '11', name: 'Zanahoria', emoji: '🥕', isNeeded: false },
+  { id: '12', name: 'Ajo', emoji: '🧄', isNeeded: false },
   { id: '13', name: 'Queso', emoji: '🧀', isNeeded: false },
   { id: '14', name: 'Harina común', emoji: '🌾', isNeeded: false }, // ¡PELIGRO! Tiene gluten
-  { id: '15', name: 'Pan', emoji: '🍞', isNeeded: false },
-  { id: '16', name: 'Pasta', emoji: '🍝', isNeeded: false },
-  { id: '17', name: 'Pizza', emoji: '🍕', isNeeded: false },
+  { id: '15', name: 'Cebolla', emoji: '🧅', isNeeded: false },
+  { id: '16', name: 'Pimiento', emoji: '🫑', isNeeded: false },
+  { id: '17', name: 'Berenjena', emoji: '🍆', isNeeded: false },
+  { id: '18', name: 'Sal', emoji: '🧂', isNeeded: false },
+  { id: '19', name: 'Aceite', emoji: '🫒', isNeeded: false },
+  { id: '20', name: 'Miel', emoji: '🍯', isNeeded: false },
+  { id: '21', name: 'Chocolate', emoji: '🍫', isNeeded: false },
+  { id: '22', name: 'Almendras', emoji: '🌰', isNeeded: false },
+  { id: '23', name: 'Canela', emoji: '🟤', isNeeded: false },
 ];
 
 interface FallingIngredient extends Ingredient {

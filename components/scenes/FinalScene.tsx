@@ -253,52 +253,16 @@ export default function FinalScene() {
 
         {/* Carrusel de tarjetas */}
         <motion.div
-          className="max-w-xl w-full px-4"
+          className="max-w-2xl w-full px-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.5, duration: 0.8 }}
         >
-          <div className="relative">
-            {/* Tarjeta actual */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentCard}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5, type: "spring" }}
-                style={{
-                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 240, 0.95) 100%)',
-                  borderRadius: '16px',
-                  padding: '32px 28px',
-                  boxShadow: '0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
-                  border: '2px solid rgba(255, 215, 0, 0.3)',
-                  minHeight: '120px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <h2
-                  className="text-xl md:text-3xl font-serif text-center"
-                  style={{
-                    background: 'linear-gradient(135deg, #8B1538 0%, #C41E3A 50%, #8B1538 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    fontWeight: 'bold',
-                    letterSpacing: '0.5px',
-                    lineHeight: '1.4',
-                  }}
-                >
-                  {carouselCards[currentCard]}
-                </h2>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Botones de navegación */}
+          <div className="relative flex items-center gap-6">
+            {/* Botón izquierdo - fuera del cartel */}
             <button
               onClick={prevCard}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-red-900 rounded-full p-3 shadow-lg transition-all"
+              className="flex-shrink-0 bg-white/90 hover:bg-white text-red-900 rounded-full p-3 shadow-lg transition-all"
               style={{
                 border: '2px solid rgba(139, 21, 56, 0.3)',
               }}
@@ -308,9 +272,48 @@ export default function FinalScene() {
               </svg>
             </button>
 
+            {/* Tarjeta actual */}
+            <div className="flex-1">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentCard}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.5, type: "spring" }}
+                  style={{
+                    background: 'rgba(139, 21, 56, 0.35)',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '16px',
+                    padding: '40px 32px',
+                    boxShadow: '0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
+                    border: '2px solid rgba(255, 215, 0, 0.4)',
+                    minHeight: '140px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <h2
+                    className="text-xl md:text-3xl font-serif text-center"
+                    style={{
+                      color: '#FFF8F0',
+                      fontWeight: 'bold',
+                      letterSpacing: '0.5px',
+                      lineHeight: '1.4',
+                      textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                    }}
+                  >
+                    {carouselCards[currentCard]}
+                  </h2>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Botón derecho - fuera del cartel */}
             <button
               onClick={nextCard}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-red-900 rounded-full p-3 shadow-lg transition-all"
+              className="flex-shrink-0 bg-white/90 hover:bg-white text-red-900 rounded-full p-3 shadow-lg transition-all"
               style={{
                 border: '2px solid rgba(139, 21, 56, 0.3)',
               }}
@@ -319,24 +322,24 @@ export default function FinalScene() {
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </button>
+          </div>
 
-            {/* Indicadores de páginas */}
-            <div className="flex justify-center gap-2 mt-6">
-              {carouselCards.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentCard(index)}
-                  className="transition-all"
-                  style={{
-                    width: currentCard === index ? '32px' : '12px',
-                    height: '12px',
-                    borderRadius: '6px',
-                    backgroundColor: currentCard === index ? 'rgba(255, 215, 0, 0.9)' : 'rgba(255, 255, 255, 0.4)',
-                    border: '1px solid rgba(255, 215, 0, 0.5)',
-                  }}
-                />
-              ))}
-            </div>
+          {/* Indicadores de páginas */}
+          <div className="flex justify-center gap-2 mt-6">
+            {carouselCards.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentCard(index)}
+                className="transition-all"
+                style={{
+                  width: currentCard === index ? '32px' : '12px',
+                  height: '12px',
+                  borderRadius: '6px',
+                  backgroundColor: currentCard === index ? 'rgba(255, 215, 0, 0.9)' : 'rgba(255, 255, 255, 0.4)',
+                  border: '1px solid rgba(255, 215, 0, 0.5)',
+                }}
+              />
+            ))}
           </div>
         </motion.div>
 
