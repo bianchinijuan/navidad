@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { audioManager } from '@/lib/audioManager';
 import Confetti from 'react-confetti';
@@ -10,7 +10,14 @@ import { useWindowSize } from 'react-use';
 export default function FinalScene() {
   const { setScene } = useGameStore();
   const [showButton, setShowButton] = useState(false);
+  const [currentCard, setCurrentCard] = useState(0);
   const { width, height } = useWindowSize();
+
+  const carouselCards = [
+    "Yo libre y voluntariamente",
+    "Con pleno conocimiento de las causas y efectos",
+    "Confieso que..."
+  ];
 
   // Music management for final scene
   useEffect(() => {
@@ -34,6 +41,14 @@ export default function FinalScene() {
 
   const handleBackToHub = () => {
     setScene('hub');
+  };
+
+  const nextCard = () => {
+    setCurrentCard((prev) => (prev + 1) % carouselCards.length);
+  };
+
+  const prevCard = () => {
+    setCurrentCard((prev) => (prev - 1 + carouselCards.length) % carouselCards.length);
   };
 
   return (
@@ -234,6 +249,95 @@ export default function FinalScene() {
               margin: '20px auto 0',
             }}
           />
+        </motion.div>
+
+        {/* Carrusel de tarjetas */}
+        <motion.div
+          className="max-w-3xl w-full px-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.5, duration: 0.8 }}
+        >
+          <div className="relative">
+            {/* Tarjeta actual */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentCard}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5, type: "spring" }}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 240, 0.95) 100%)',
+                  borderRadius: '20px',
+                  padding: '60px 40px',
+                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+                  border: '3px solid rgba(255, 215, 0, 0.3)',
+                  minHeight: '200px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <h2
+                  className="text-3xl md:text-5xl font-serif text-center"
+                  style={{
+                    background: 'linear-gradient(135deg, #8B1538 0%, #C41E3A 50%, #8B1538 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    fontWeight: 'bold',
+                    letterSpacing: '1px',
+                    lineHeight: '1.4',
+                  }}
+                >
+                  {carouselCards[currentCard]}
+                </h2>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Botones de navegación */}
+            <button
+              onClick={prevCard}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-red-900 rounded-full p-3 shadow-lg transition-all"
+              style={{
+                border: '2px solid rgba(139, 21, 56, 0.3)',
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <button
+              onClick={nextCard}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-red-900 rounded-full p-3 shadow-lg transition-all"
+              style={{
+                border: '2px solid rgba(139, 21, 56, 0.3)',
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+
+            {/* Indicadores de páginas */}
+            <div className="flex justify-center gap-2 mt-6">
+              {carouselCards.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentCard(index)}
+                  className="transition-all"
+                  style={{
+                    width: currentCard === index ? '32px' : '12px',
+                    height: '12px',
+                    borderRadius: '6px',
+                    backgroundColor: currentCard === index ? 'rgba(255, 215, 0, 0.9)' : 'rgba(255, 255, 255, 0.4)',
+                    border: '1px solid rgba(255, 215, 0, 0.5)',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         {/* Galería de fotos estilo polaroid */}
